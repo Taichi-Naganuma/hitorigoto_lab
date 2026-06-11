@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI学習ロードマップ — あなた専用の学習計画をAIが設計 | ひとりごと研究所 購買部</title>
+<meta name="description" content="目標・現在地・使える時間を入力すると、AIがあなた専用の学習ロードマップを設計してPDFでお届け。¥1,480">
+<meta property="og:title" content="AI学習ロードマップ — あなた専用の学習計画">
+<meta property="og:description" content="何から始めて、何を捨てて、いつ何をやるか。迷う時間をゼロに。">
+<style>
+:root{--ink:#1a1f2e;--sub:#5a6377;--accent:#4f46e5;--bg:#fafaf8;--card:#ffffff;--line:#e6e4de;--soft:#eef0ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.9}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+nav{padding:20px 0;font-size:13px}
+nav a{color:var(--sub);text-decoration:none}
+header{padding:32px 0 40px;text-align:center}
+h1{font-size:clamp(24px,5vw,34px);font-weight:700;line-height:1.5}
+.lead{margin-top:16px;color:var(--sub);font-size:15px;text-align:left}
+.price-box{background:var(--card);border:2px solid var(--accent);border-radius:14px;padding:28px;text-align:center;margin:32px 0}
+.price{font-size:32px;font-weight:700;color:var(--accent)}
+.price small{font-size:14px;color:var(--sub);font-weight:400}
+.btn{display:inline-block;margin-top:16px;background:var(--accent);color:#fff;text-decoration:none;padding:14px 40px;border-radius:8px;font-size:16px;font-weight:600}
+.btn.disabled{background:#a8aabf;cursor:default}
+.note{font-size:12px;color:var(--sub);margin-top:12px}
+h2{font-size:19px;margin:48px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
+ul.deliver{list-style:none}
+ul.deliver li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px;font-size:14px}
+ul.deliver li b{display:block;margin-bottom:2px}
+.steps{counter-reset:s}
+.steps div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:10px;font-size:14px;counter-increment:s;position:relative;padding-left:52px}
+.steps div::before{content:counter(s);position:absolute;left:18px;top:16px;width:22px;height:22px;border-radius:50%;background:var(--soft);color:var(--accent);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.target{background:var(--soft);border-radius:12px;padding:20px 24px;font-size:14px}
+.target li{margin-left:20px;margin-bottom:4px}
+dl.faq dt{font-weight:700;font-size:14px;margin-top:18px}
+dl.faq dt::before{content:"Q. ";color:var(--accent)}
+dl.faq dd{font-size:14px;color:var(--sub);margin-top:4px}
+.ai-note{font-size:12px;color:var(--sub);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin-top:32px}
+footer{border-top:1px solid var(--line);margin-top:64px;padding:32px 0;text-align:center;font-size:13px;color:var(--sub)}
+footer a{color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="index.html">← ひとりごと研究所 購買部</a></nav>
+
+<header>
+  <h1>独学の最大の敵は、<br>「何をやるか迷う時間」。</h1>
+  <p class="lead">英語、資格、プログラミング、副業スキル — 始めようとして、教材を調べるだけで日が暮れたことはありませんか。このサービスは、あなたの目標・現在地・使える時間の3つだけを聞いて、<b>AIがあなた専用の学習ロードマップを設計し、PDFでお届けします</b>。</p>
+</header>
+
+<div class="price-box">
+  <div class="price">¥1,480 <small>（税込）</small></div>
+  <!-- STRIPE_PAYMENT_LINK_HERE: 決済リンク発行後、下のhrefを差し替え・disabledクラスを外す -->
+  <a class="btn disabled" href="#">準備中（まもなく販売開始）</a>
+  <p class="note">決済はStripeの安全な決済ページで行われます。カード情報が当店に渡ることはありません。</p>
+</div>
+
+<h2>届くもの</h2>
+<ul class="deliver">
+  <li><b>🫧 あなたの状況の受け取り</b>まず、あなたが申告した目標・現在地・制約を「こう理解しました」と言葉にして返します。前提がずれたまま設計しないため——そして、あなたの目標を一般論で片付けないため。</li>
+  <li><b>📍 現在地→目標の全体地図</b>ゴールまでに何が必要で、いま何が足りないかの構造図。</li>
+  <li><b>🗓 週次プラン</b>あなたが申告した「週に使える時間」に収まる、現実的な週ごとのやることリスト。</li>
+  <li><b>✂️ やらないことリスト</b>あなたの目標には不要な教材・寄り道を明示。迷いを先に断ちます。</li>
+  <li><b>⚠️ つまずきポイントの先回り</b>同じ目標の学習者が脱落しやすい地点と、その回避策。</li>
+  <li><b>✅ 進捗チェックリスト</b>「ここまで来たら次へ」が一目でわかる節目の一覧。</li>
+</ul>
+
+<h2>しくみ</h2>
+<div class="steps">
+  <div>購入画面で3つの質問に答えます（目標 / 現在のレベル / 週に使える時間）</div>
+  <div>AIがあなたの回答だけをもとに、一点もののロードマップを設計します</div>
+  <div>24時間以内（通常は数分）に、ご入力のメールアドレスへPDFが届きます</div>
+</div>
+
+<h2>こんな人のために作りました</h2>
+<div class="target">
+  <ul>
+    <li>勉強を始めたいが、何から手をつけるべきか分からない</li>
+    <li>教材や学習法を調べる時間がもったいないと感じる</li>
+    <li>仕事や家庭と両立できる「現実的な計画」が欲しい</li>
+    <li>一度挫折した分野に、今度は計画を持って再挑戦したい</li>
+  </ul>
+</div>
+
+<h2>よくある質問</h2>
+<dl class="faq">
+  <dt>どんな目標でも対応できますか？</dt>
+  <dd>語学・資格・プログラミング・ビジネススキルなど、独学で到達可能な学習目標を想定しています。内容が専門的すぎる等で十分な品質のロードマップを設計できないと判断した場合は、全額返金します。</dd>
+  <dt>無料のAIチャットと何が違うのですか？</dt>
+  <dd>チャットは聞けば答えますが、何を聞くかはあなた任せです。本商品は、あなたの状況を「こう受け取りました」と確認したうえで、学習設計に特化した設問・構成・チェックリストの型に沿って、迷いが残らない「あなた宛ての完成品の計画書」として納品します。汎用の正解ではなく、いまのあなたに宛てた一点ものです。</dd>
+  <dt>返品・返金はできますか？</dt>
+  <dd>デジタル商品の性質上、納品後の返品はお受けできません。ただし、生成内容に不備がある場合は無償で再生成、または全額返金で対応します。お問い合わせください。</dd>
+  <dt>届かない場合は？</dt>
+  <dd>迷惑メールフォルダをご確認のうえ、24時間を過ぎても届かない場合はお問い合わせください。確認して再送します。</dd>
+</dl>
+
+<p class="ai-note">本商品はAIが生成するデジタルコンテンツです。内容は入力情報に基づき自動設計され、お届け後の学習成果を保証するものではありません。</p>
+
+<footer>
+  <p><a href="tokushoho.html">特定商取引法に基づく表記</a> ｜ <a href="index.html">トップへ</a></p>
+  <p style="margin-top:8px">お問い合わせ: 【メールアドレス】</p>
+  <p style="margin-top:8px">© 2026 ひとりごと研究所</p>
+</footer>
+</div>
+</body>
+</html>
