@@ -102,5 +102,25 @@ footer a{color:var(--sub)}
   <p style="margin-top:8px">© 2026 Hitorigoto Lab</p>
 </footer>
 </div>
+<script>
+/* 集客チャネル帰属: ?utm_source / ?ch / ?ref を Stripe checkout の client_reference_id に渡す
+   （Stripe 注文側で読めるので、どの集客チャネルが売ったかを後から帰属できる）。 */
+(function () {
+  try {
+    var p = new URLSearchParams(location.search);
+    var src = p.get('utm_source') || p.get('ch') || p.get('ref');
+    if (!src) return;
+    src = src.replace(/[^a-zA-Z0-9_\-]/g, '').slice(0, 40);
+    if (!src) return;
+    document.querySelectorAll('a[href*="buy.stripe.com"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        u.searchParams.set('client_reference_id', src);
+        a.href = u.toString();
+      } catch (e) {}
+    });
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
