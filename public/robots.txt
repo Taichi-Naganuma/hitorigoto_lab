@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hitorigotolab.mananect.com/sitemap-index.xml

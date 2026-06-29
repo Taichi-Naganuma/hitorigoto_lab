@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects. Query strings (?utm_source=…) are preserved automatically,
+# so the channel-attribution chain survives every hop.
+# Legacy flat .html paths -> new locale URLs (live ads / Stripe deep links depend on these).
+/                            /ja/                          302
+/index.html                  /ja/                          301
+/ai-learning-roadmap.html    /ja/ai-learning-roadmap/      301
+/presentation-deck.html      /en/ai-deck-studio/           301
+/tokushoho.html              /ja/tokushoho/                301

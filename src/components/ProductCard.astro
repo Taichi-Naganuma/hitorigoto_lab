@@ -1,0 +1,20 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  title: string;
+  price: string;
+  description: string;
+  href: string;
+  cta: string;
+}
+
+const { title, price, description, href, cta } = Astro.props;
+---
+
+<div class="card">
+  <h2>{title}</h2>
+  <div class="price">{price}</div>
+  <p>{description}</p>
+  <Button href={href}>{cta}</Button>
+</div>

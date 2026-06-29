@@ -1,0 +1,17 @@
+---
+interface Props {
+  href?: string;
+}
+
+const { href } = Astro.props;
+const hasEnd = Astro.slots.has('end');
+---
+
+<nav class:list={[{ 'with-lang': hasEnd }]}>
+  <span class="nav-start">
+    {href ? <a href={href}><slot /></a> : <slot />}
+  </span>
+  {hasEnd && (
+    <span class="nav-end"><slot name="end" /></span>
+  )}
+</nav>

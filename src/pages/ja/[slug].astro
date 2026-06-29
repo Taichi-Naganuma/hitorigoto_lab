@@ -1,0 +1,28 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductPage from '../../components/ProductPage.astro';
+import { getProductPaths } from '../../lib/products';
+import { useTranslations } from '../../i18n/ui';
+
+export async function getStaticPaths() {
+  return getProductPaths('ja');
+}
+
+const locale = 'ja';
+const { product } = Astro.props;
+const d = product.data;
+const t = useTranslations(locale);
+const homeUrl = getRelativeLocaleUrl(locale, '/');
+---
+
+<BaseLayout
+  locale={locale}
+  variant="product"
+  title={d.title}
+  description={d.description}
+  ogTitle={d.ogTitle}
+  ogDescription={d.ogDescription}
+>
+  <ProductPage locale={locale} product={d} navHref={homeUrl} navLabel={t('nav.back')} />
+</BaseLayout>

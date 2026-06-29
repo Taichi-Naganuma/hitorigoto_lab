@@ -1,0 +1,15 @@
+---
+interface Props {
+  logo: string;
+  headline: string;
+  lead: string;
+}
+
+const { logo, headline, lead } = Astro.props;
+---
+
+<header>
+  <div class="logo">{logo}</div>
+  <h1 set:html={headline} />
+  <p class="lead" set:html={lead} />
+</header>

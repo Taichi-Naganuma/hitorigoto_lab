@@ -1,0 +1,39 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import LangSwitcher from '../../components/LangSwitcher.astro';
+
+const locale = 'ja';
+const homeUrl = getRelativeLocaleUrl(locale, '/');
+---
+
+<BaseLayout
+  locale={locale}
+  variant="legal"
+  title="特定商取引法に基づく表記 | ひとりごと研究所 購買部"
+  noindex={true}
+  showFooter={false}
+>
+  <Nav href={homeUrl}>
+    ← ひとりごと研究所 購買部
+    <LangSwitcher slot="end" locale={locale} />
+  </Nav>
+  <h1>特定商取引法に基づく表記</h1>
+  <table>
+    <tr><th>販売業者</th><td>長沼　汰一（屋号: ひとりごと研究所）</td></tr>
+    <tr><th>運営責任者</th><td>長沼　汰一</td></tr>
+    <tr><th>所在地</th><td>※ご請求があった場合、遅滞なく開示いたします。</td></tr>
+    <tr><th>電話番号</th><td>※ご請求があった場合、遅滞なく開示いたします。お問い合わせはメールにてお願いいたします。</td></tr>
+    <tr><th>メールアドレス</th><td>bookstore1308@gmail.com</td></tr>
+    <tr><th>販売URL</th><td>https://hitorigotolab.mananect.com</td></tr>
+    <tr><th>販売価格</th><td>各商品ページに税込価格で表示しています。</td></tr>
+    <tr><th>商品代金以外の必要料金</th><td>なし（インターネット接続にかかる通信費はお客様のご負担となります）。</td></tr>
+    <tr><th>お支払い方法</th><td>クレジットカード決済（Stripe）</td></tr>
+    <tr><th>お支払い時期</th><td>ご注文時にお支払いが確定します。</td></tr>
+    <tr><th>商品の引渡し時期</th><td>決済完了後、24時間以内（通常は数分以内）に、ご入力いただいたメールアドレスへ納品物（PDF等のデジタルデータ）をお送りします。</td></tr>
+    <tr><th>返品・キャンセル</th><td>デジタル商品の性質上、納品後の返品・キャンセルはお受けできません。ただし、生成内容に不備がある場合は、無償での再生成または全額返金にて対応いたします。メールにてお問い合わせください。</td></tr>
+    <tr><th>動作環境</th><td>PDFファイルを閲覧できる環境（スマートフォン・PC等）</td></tr>
+    <tr><th>特記事項</th><td>本店の商品はAIにより自動生成されるデジタルコンテンツです。生成物の内容は入力情報に基づき毎回異なり、学習成果等を保証するものではありません。</td></tr>
+  </table>
+</BaseLayout>

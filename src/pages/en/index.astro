@@ -1,0 +1,54 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import LangSwitcher from '../../components/LangSwitcher.astro';
+import { getHome, getProductsByLocale } from '../../lib/products';
+
+const locale = 'en';
+const home = await getHome(locale);
+const products = await getProductsByLocale(locale);
+const h = home.data;
+---
+
+<BaseLayout
+  locale={locale}
+  variant="home"
+  title={h.title}
+  description={h.description}
+  ogTitle={h.ogTitle}
+  ogDescription={h.ogDescription}
+>
+  <div class="topbar"><LangSwitcher locale={locale} /></div>
+  <Header logo={h.logo} headline={h.headline} lead={h.lead} />
+
+  <SectionTitle>{h.productsTitle}</SectionTitle>
+  {products.map((p) => (
+    <ProductCard
+      title={p.data.card.title}
+      price={p.data.card.price}
+      description={p.data.card.blurb}
+      href={getRelativeLocaleUrl(locale, `/${p.data.slug}/`)}
+      cta={p.data.card.cta}
+    />
+  ))}
+
+  <SectionTitle>{h.howTitle}</SectionTitle>
+  <div class="how">
+    {h.how.map((step, i) => (
+      <div><b>{i + 1}</b> {step}</div>
+    ))}
+  </div>
+
+  {h.about && (
+    <>
+      <SectionTitle>{h.about.title}</SectionTitle>
+      <div class="card">
+        <h2>{h.about.heading}</h2>
+        <p set:html={h.about.body} />
+      </div>
+    </>
+  )}
+</BaseLayout>

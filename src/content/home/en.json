@@ -1,0 +1,22 @@
+{
+  "locale": "en",
+  "title": "Hitorigoto Lab — every order, made for you by AI",
+  "description": "The Hitorigoto Lab storefront. There's no stock — the moment you order, AI builds a one-off from your input and delivers it to you.",
+  "ogTitle": "Hitorigoto Lab",
+  "ogDescription": "Every order, made for you by AI.",
+  "logo": "Hitorigoto Lab",
+  "headline": "You bring the intent.<br>AI makes it, just for you.",
+  "lead": "\"Where do I even start?\" — we take that small, easily-lost thought seriously. There's no stock here. The moment you order, AI builds a one-off from your input and sends it straight to your inbox.",
+  "productsTitle": "Products",
+  "howTitle": "How it works",
+  "how": [
+    "Answer a few questions at checkout",
+    "AI designs a one-off from your answers alone",
+    "Delivered by email within 24 hours (usually minutes)"
+  ],
+  "about": {
+    "title": "About the lab",
+    "heading": "Why everything is \"made for you\"",
+    "body": "Off-the-shelf answers aren't addressed to you. We start by restating what you told us — \"here's what we understood\" — and then quietly build a one-off made for you, right now. No cheerleading, no rankings, no diagnoses. Just an answer addressed to you."
+  }
+}

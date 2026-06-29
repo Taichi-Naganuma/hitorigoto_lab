@@ -1,0 +1,39 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import LangSwitcher from '../../components/LangSwitcher.astro';
+
+const locale = 'en';
+const homeUrl = getRelativeLocaleUrl(locale, '/');
+---
+
+<BaseLayout
+  locale={locale}
+  variant="legal"
+  title="Commercial disclosure | Hitorigoto Lab"
+  noindex={true}
+  showFooter={false}
+>
+  <Nav href={homeUrl}>
+    ← Hitorigoto Lab
+    <LangSwitcher slot="end" locale={locale} />
+  </Nav>
+  <h1>Commercial disclosure</h1>
+  <table>
+    <tr><th>Seller</th><td>Taichi Naganuma (trade name: Hitorigoto Lab)</td></tr>
+    <tr><th>Operations manager</th><td>Taichi Naganuma</td></tr>
+    <tr><th>Address</th><td>Disclosed without delay upon request.</td></tr>
+    <tr><th>Phone</th><td>Disclosed without delay upon request. Please contact us by email.</td></tr>
+    <tr><th>Email</th><td>bookstore1308@gmail.com</td></tr>
+    <tr><th>Store URL</th><td>https://hitorigotolab.mananect.com</td></tr>
+    <tr><th>Price</th><td>Shown on each product page.</td></tr>
+    <tr><th>Fees beyond the product price</th><td>None (you are responsible for your own internet connection charges).</td></tr>
+    <tr><th>Payment method</th><td>Credit card (Stripe)</td></tr>
+    <tr><th>Payment timing</th><td>Charged at the time of order.</td></tr>
+    <tr><th>Delivery</th><td>Within 24 hours of payment (usually within minutes), the deliverable (digital data such as a PDF or .pptx) is sent to the email address you provide at checkout.</td></tr>
+    <tr><th>Returns / cancellation</th><td>Because these are digital products, we cannot accept returns or cancellations after delivery. If the generated content has a genuine problem, we will regenerate it free of charge or refund you in full. Please contact us by email.</td></tr>
+    <tr><th>System requirements</th><td>An environment that can open PDF and PowerPoint files (smartphone, PC, etc.).</td></tr>
+    <tr><th>Notes</th><td>Our products are AI-generated digital content. Output varies with the information you provide and does not guarantee specific outcomes.</td></tr>
+  </table>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  priceDisplay: string;
+  priceNote?: string;
+  cta: string;
+  ctaNote: string;
+  stripeLink: string;
+}
+
+const { priceDisplay, priceNote, cta, ctaNote, stripeLink } = Astro.props;
+---
+
+<div class="price-box">
+  <div class="price">{priceDisplay} {priceNote && <small>{priceNote}</small>}</div>
+  <Button href={stripeLink}>{cta}</Button>
+  <p class="note">{ctaNote}</p>
+</div>

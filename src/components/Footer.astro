@@ -1,0 +1,31 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  variant?: string;
+}
+
+const { locale, variant } = Astro.props;
+const t = useTranslations(locale);
+const homeUrl = getRelativeLocaleUrl(locale, '/');
+const legalUrl =
+  locale === 'ja'
+    ? getRelativeLocaleUrl('ja', '/tokushoho/')
+    : getRelativeLocaleUrl('en', '/legal/');
+---
+
+<footer>
+  <p>
+    <a href={legalUrl}>{t('footer.legal')}</a>
+    {variant !== 'home' && (
+      <>
+        <span set:html={` ${t('footer.sep')} `} />
+        <a href={homeUrl}>{t('footer.top')}</a>
+      </>
+    )}
+  </p>
+  <p style="margin-top:8px">{t('footer.contact')}: bookstore1308@gmail.com</p>
+  <p style="margin-top:8px">{t('footer.copyright')}</p>
+</footer>

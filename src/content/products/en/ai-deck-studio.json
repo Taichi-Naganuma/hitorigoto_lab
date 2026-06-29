@@ -1,0 +1,50 @@
+{
+  "locale": "en",
+  "slug": "ai-deck-studio",
+  "title": "AI Deck Studio — a custom presentation, designed by AI | Hitorigoto Lab",
+  "description": "Tell us the goal, the audience, and the key points. AI designs a custom presentation from the structure up and delivers an editable PowerPoint (.pptx) and PDF to your inbox. $29.",
+  "ogTitle": "AI Deck Studio — a custom presentation, designed by AI",
+  "ogDescription": "You have the message. We build the deck. Editable .pptx + PDF, delivered by email.",
+  "headline": "You have the message.<br>You just don't have the deck.",
+  "lead": "For sales pitches, talks, and internal updates — you know what you want to say, but turning it into slides eats your whole day. Tell us three things — <b>the goal, the audience, and the key points</b> — and AI designs a custom presentation from the structure up, delivered as an <b>editable PowerPoint (.pptx) and a PDF</b>, straight to your inbox.",
+  "price": 29,
+  "currency": "USD",
+  "priceDisplay": "$29",
+  "priceNote": "(USD)",
+  "cta": "Order now — start your custom deck →",
+  "ctaNote": "Payment is handled on Stripe's secure checkout. Your card details never touch our servers.",
+  "stripeLink": "https://buy.stripe.com/fZu9AUdd32Sz9uLa8X5Ne01",
+  "card": {
+    "title": "📊 AI Deck Studio",
+    "blurb": "Tell us the goal, the audience, and the key points. AI designs a custom presentation from the structure up and delivers an editable PowerPoint (.pptx) and PDF to your inbox.",
+    "cta": "Learn more →",
+    "price": "$29"
+  },
+  "deliver": [
+    { "title": "🫧 We mirror your intent first", "body": "We restate your goal, audience, and key points back to you — \"here's what we understood\" — so we never build on a wrong premise, and never water your message down to generic advice." },
+    { "title": "🧭 Story-first structure", "body": "Cover → problem/context → proposal → proof → the ask → next step. We design the logical flow that carries your audience to \"yes\" before filling in slides." },
+    { "title": "📊 A one-off deck", "body": "One message per slide. Headings that state the point. Tight bullets. Around 10–14 slides." },
+    { "title": "✏️ Editable PowerPoint (.pptx)", "body": "Yours to tweak — wording, order, styling — right up to showtime." },
+    { "title": "📄 Shareable PDF", "body": "Ready to send or print, included." },
+    { "title": "🗣 Speaker notes", "body": "What to actually say on each slide." }
+  ],
+  "steps": [
+    "Answer 3 questions at checkout (the purpose & setting / who the audience is / the key points to include).",
+    "AI designs a one-off deck from your answers — structure first, then the slides.",
+    "Within 24 hours (usually minutes), the .pptx and PDF arrive at the email you used at checkout."
+  ],
+  "target": [
+    "Salespeople who rebuild proposal decks from scratch every time",
+    "Founders who need a pitch-deck draft, fast",
+    "Speakers who want a first cut for a talk or webinar",
+    "Anyone who needs an internal update or report deck in a hurry"
+  ],
+  "faq": [
+    { "q": "What kinds of decks can you handle?", "a": "Sales proposals, product overviews, pitch decks, talks/webinars, internal updates and reports — any business deck that communicates through narrative and structured points. If a brief needs heavy custom illustration or strict brand-design specs we can't meet the quality bar, we refund in full." },
+    { "q": "What file format do I get? Can I edit it?", "a": "An editable PowerPoint (.pptx) plus a shareable PDF. The .pptx is fully editable — change the wording, order, and styling yourself." },
+    { "q": "How is this different from free AI chat?", "a": "Chat answers whatever you ask, but the structure and polish are on you. This restates your goal and audience, then builds to the format of a real deck — story arc, one-message-per-slide, speaker notes — and delivers a finished, ready-to-present file. Not a generic answer; a deck made for your specific talk." },
+    { "q": "What's your refund policy?", "a": "Because this is a digital product, we can't accept returns after delivery. But if the result has a genuine problem, we'll regenerate it for free or refund you in full. Just reply to the delivery email." },
+    { "q": "What if it doesn't arrive?", "a": "Check your spam folder first. If it's been more than 24 hours, email us and we'll confirm and resend." }
+  ],
+  "aiNote": "This is an AI-generated digital product. Content is designed automatically from the information you provide, and we don't guarantee specific outcomes after delivery."
+}

@@ -1,0 +1,16 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const other: Locale = locale === 'ja' ? 'en' : 'ja';
+const t = useTranslations(locale);
+// Safe fallback: link to the other locale's home (always exists), avoiding 404s.
+const href = getRelativeLocaleUrl(other, '/');
+---
+
+<a class="lang-switch" href={href} hreflang={other} lang={other}>{t('lang.switch')}</a>

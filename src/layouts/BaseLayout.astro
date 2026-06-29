@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import StripeAttribution from '../components/StripeAttribution.astro';
+
+interface Props {
+  locale: 'ja' | 'en';
+  title: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  variant?: 'home' | 'product' | 'legal';
+  noindex?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  locale,
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  variant = 'product',
+  noindex = false,
+  showFooter = true,
+} = Astro.props;
+
+const og = { title: ogTitle ?? title, description: ogDescription ?? description };
+---
+
+<!DOCTYPE html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:title" content={og.title} />
+    {og.description && <meta property="og:description" content={og.description} />}
+  </head>
+  <body class={variant}>
+    <div class="wrap">
+      <slot />
+      {showFooter && <Footer locale={locale} variant={variant} />}
+    </div>
+    <StripeAttribution />
+  </body>
+</html>

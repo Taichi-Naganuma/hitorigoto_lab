@@ -1,0 +1,66 @@
+---
+import Nav from './Nav.astro';
+import LangSwitcher from './LangSwitcher.astro';
+import PriceBox from './PriceBox.astro';
+import DeliverList from './DeliverList.astro';
+import Steps from './Steps.astro';
+import Target from './Target.astro';
+import Faq from './Faq.astro';
+import AiNote from './AiNote.astro';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  product: {
+    headline: string;
+    lead: string;
+    priceDisplay: string;
+    priceNote?: string;
+    cta: string;
+    ctaNote: string;
+    stripeLink: string;
+    deliver: { title: string; body: string }[];
+    steps: string[];
+    target: string[];
+    faq: { q: string; a: string }[];
+    aiNote: string;
+  };
+  navHref?: string;
+  navLabel: string;
+}
+
+const { locale, product, navHref, navLabel } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<Nav href={navHref}>
+  {navLabel}
+  <LangSwitcher slot="end" locale={locale} />
+</Nav>
+
+<header>
+  <h1 set:html={product.headline} />
+  <p class="lead" set:html={product.lead} />
+</header>
+
+<PriceBox
+  priceDisplay={product.priceDisplay}
+  priceNote={product.priceNote}
+  cta={product.cta}
+  ctaNote={product.ctaNote}
+  stripeLink={product.stripeLink}
+/>
+
+<h2>{t('product.deliver')}</h2>
+<DeliverList items={product.deliver} />
+
+<h2>{t('product.steps')}</h2>
+<Steps items={product.steps} />
+
+<h2>{t('product.target')}</h2>
+<Target items={product.target} />
+
+<h2>{t('product.faq')}</h2>
+<Faq items={product.faq} />
+
+<AiNote text={product.aiNote} />

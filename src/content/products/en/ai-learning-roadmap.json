@@ -1,0 +1,50 @@
+{
+  "locale": "en",
+  "slug": "ai-learning-roadmap",
+  "draft": true,
+  "title": "AI Learning Roadmap — your personal study plan, designed by AI | Hitorigoto Lab",
+  "description": "Tell us your goal, your starting point, and the time you have. AI designs a study roadmap made just for you and delivers it as a PDF.",
+  "ogTitle": "AI Learning Roadmap — a study plan made for you",
+  "ogDescription": "What to start with, what to skip, when to do what. Zero time wasted deciding.",
+  "headline": "The hardest part of self-study<br>is deciding what to do.",
+  "lead": "English, certifications, programming, a new skill for side income — have you ever set out to start, only to lose the whole day just researching materials? This service asks only three things — your goal, where you are now, and the time you can spare — and <b>AI designs a study roadmap made just for you and delivers it as a PDF</b>.",
+  "price": 19,
+  "currency": "USD",
+  "priceDisplay": "$19",
+  "priceNote": "(USD)",
+  "cta": "Order now — start your custom roadmap →",
+  "ctaNote": "Payment is handled on Stripe's secure checkout. Your card details never touch our servers.",
+  "stripeLink": "https://buy.stripe.com/PLACEHOLDER-replace-with-en-roadmap-link",
+  "card": {
+    "title": "📍 AI Learning Roadmap",
+    "blurb": "Tell us your goal, your current level, and the time you can spare, and AI designs a study roadmap made just for you, delivered as a PDF by email. What to start with, what to skip, when to do what — zero time wasted deciding.",
+    "cta": "Learn more →",
+    "price": "$19"
+  },
+  "deliver": [
+    { "title": "🫧 We mirror your situation first", "body": "We restate the goal, starting point, and constraints you gave us — \"here's what we understood\" — so we never design on a wrong premise, and never reduce your goal to generic advice." },
+    { "title": "📍 A map from where you are to your goal", "body": "A structural overview of what it takes to reach the goal, and what's missing right now." },
+    { "title": "🗓 A weekly plan", "body": "A realistic, week-by-week to-do list that fits the weekly time you said you have." },
+    { "title": "✂️ A \"don't-do\" list", "body": "The materials and detours your goal doesn't need, named explicitly — so we cut the hesitation up front." },
+    { "title": "⚠️ Pitfalls, handled in advance", "body": "Where learners with the same goal tend to drop off, and how to avoid it." },
+    { "title": "✅ A progress checklist", "body": "The milestones that tell you, at a glance, \"once you're here, move on.\"" }
+  ],
+  "steps": [
+    "Answer 3 questions at checkout (your goal / your current level / the time you can spare each week).",
+    "AI designs a one-off roadmap from your answers alone.",
+    "Within 24 hours (usually minutes), the PDF arrives at the email you used at checkout."
+  ],
+  "target": [
+    "You want to start studying but don't know where to begin",
+    "You feel researching materials and methods is a waste of time",
+    "You want a realistic plan that fits around work and family",
+    "You want to retry a field you once gave up on — this time with a plan"
+  ],
+  "faq": [
+    { "q": "Can you handle any goal?", "a": "We assume self-study goals that are achievable on your own — languages, certifications, programming, business skills, and the like. If a topic is too specialized for us to design a quality roadmap, we refund in full." },
+    { "q": "How is this different from free AI chat?", "a": "Chat answers whatever you ask, but what to ask is up to you. This product first confirms your situation — \"here's what we understood\" — then delivers a finished plan addressed to you, following a format built for study design: the right questions, structure, and checklists, so no hesitation remains. Not a generic answer; a one-off made for you, right now." },
+    { "q": "What's your refund policy?", "a": "Because this is a digital product, we can't accept returns after delivery. But if the generated content has a problem, we'll regenerate it for free or refund you in full. Just contact us." },
+    { "q": "What if it doesn't arrive?", "a": "Check your spam folder first. If it's been more than 24 hours, contact us and we'll confirm and resend." }
+  ],
+  "aiNote": "This is an AI-generated digital product. Content is designed automatically from the information you provide, and we don't guarantee specific learning outcomes after delivery."
+}
