@@ -5,7 +5,7 @@ import Header from '../../components/Header.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import LangSwitcher from '../../components/LangSwitcher.astro';
-import { getHome, getProductsByLocale } from '../../lib/products';
+import { getHome, getProductsByLocale, productSlug } from '../../lib/products';
 
 const locale = 'en';
 const home = await getHome(locale);
@@ -30,7 +30,7 @@ const h = home.data;
       title={p.data.card.title}
       price={p.data.card.price}
       description={p.data.card.blurb}
-      href={getRelativeLocaleUrl(locale, `/${p.data.slug}/`)}
+      href={getRelativeLocaleUrl(locale, `/${productSlug(p.id)}/`)}
       cta={p.data.card.cta}
     />
   ))}

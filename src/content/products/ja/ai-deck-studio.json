@@ -1,25 +1,23 @@
 {
   "locale": "ja",
-  "slug": "ai-deck-studio",
-  "draft": true,
   "title": "AI Deck Studio — あなたのプレゼン資料をAIが設計 | ひとりごと研究所 購買部",
   "description": "目的・聞き手・伝えたい要点を入力すると、AIが構成からプレゼンを設計し、編集可能なPowerPoint(.pptx)とPDFでお届け。",
   "ogTitle": "AI Deck Studio — あなたのプレゼンをAIが設計",
   "ogDescription": "伝えたいことはある。あとはスライドにするだけ。編集可能な.pptx + PDFをメールでお届け。",
   "headline": "伝えたいことは、ある。<br>足りないのは、スライドだけ。",
   "lead": "営業提案、登壇、社内報告 — 言いたいことは分かっているのに、スライドにする作業で一日が溶ける。<b>目的・聞き手・伝えたい要点</b>の3つを教えてください。AIが構成から一点もののプレゼンを設計し、<b>編集可能なPowerPoint(.pptx)とPDF</b>にしてメールへお届けします。",
-  "price": 3900,
+  "price": 2980,
   "currency": "JPY",
-  "priceDisplay": "¥3,900",
+  "priceDisplay": "¥2,980",
   "priceNote": "（税込）",
   "cta": "購入する → あなた専用のスライド生成を開始",
   "ctaNote": "決済はStripeの安全な決済ページで行われます。カード情報が当店に渡ることはありません。",
-  "stripeLink": "https://buy.stripe.com/PLACEHOLDER-replace-with-ja-deck-link",
+  "stripeLink": "https://buy.stripe.com/dRmcN6c8Z1Ov8qHch55Ne03",
   "card": {
     "title": "📊 AI Deck Studio",
     "blurb": "目的・聞き手・伝えたい要点を入力すると、AIが構成からプレゼンを設計し、編集可能なPowerPoint(.pptx)とPDFでお届けします。",
     "cta": "詳しく見る →",
-    "price": "¥3,900（税込）"
+    "price": "¥2,980（税込）"
   },
   "deliver": [
     { "title": "🫧 まず、あなたの意図を受け取る", "body": "あなたの目的・聞き手・要点を「こう理解しました」と言葉にして返します。前提がずれたまま作らないため——そして、あなたのメッセージを一般論で薄めないため。" },

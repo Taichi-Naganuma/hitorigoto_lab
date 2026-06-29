@@ -8,7 +8,6 @@ const products = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/products' }),
   schema: z.object({
     locale: z.enum(['ja', 'en']),
-    slug: z.string(),
     title: z.string(), // <title>
     description: z.string(), // meta description
     ogTitle: z.string().optional(), // og:title (falls back to title)

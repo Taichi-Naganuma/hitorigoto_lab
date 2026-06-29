@@ -1,25 +1,23 @@
 {
   "locale": "en",
-  "slug": "ai-learning-roadmap",
-  "draft": true,
   "title": "AI Learning Roadmap — your personal study plan, designed by AI | Hitorigoto Lab",
   "description": "Tell us your goal, your starting point, and the time you have. AI designs a study roadmap made just for you and delivers it as a PDF.",
   "ogTitle": "AI Learning Roadmap — a study plan made for you",
   "ogDescription": "What to start with, what to skip, when to do what. Zero time wasted deciding.",
   "headline": "The hardest part of self-study<br>is deciding what to do.",
   "lead": "English, certifications, programming, a new skill for side income — have you ever set out to start, only to lose the whole day just researching materials? This service asks only three things — your goal, where you are now, and the time you can spare — and <b>AI designs a study roadmap made just for you and delivers it as a PDF</b>.",
-  "price": 19,
+  "price": 29,
   "currency": "USD",
-  "priceDisplay": "$19",
+  "priceDisplay": "$29",
   "priceNote": "(USD)",
   "cta": "Order now — start your custom roadmap →",
   "ctaNote": "Payment is handled on Stripe's secure checkout. Your card details never touch our servers.",
-  "stripeLink": "https://buy.stripe.com/PLACEHOLDER-replace-with-en-roadmap-link",
+  "stripeLink": "https://buy.stripe.com/8x28wQ0qh9gX0Yfa8X5Ne02",
   "card": {
     "title": "📍 AI Learning Roadmap",
     "blurb": "Tell us your goal, your current level, and the time you can spare, and AI designs a study roadmap made just for you, delivered as a PDF by email. What to start with, what to skip, when to do what — zero time wasted deciding.",
     "cta": "Learn more →",
-    "price": "$19"
+    "price": "$29"
   },
   "deliver": [
     { "title": "🫧 We mirror your situation first", "body": "We restate the goal, starting point, and constraints you gave us — \"here's what we understood\" — so we never design on a wrong premise, and never reduce your goal to generic advice." },
