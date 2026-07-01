@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// GEO 記事の詳細ルート。内部リンクは /articles/<slug>/（ロケール非依存＝生成記事のリンク形に一致）。
+// draft:true は除外（承認後 deploy で false になった記事だけ公開＝公開ゲート）。
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const site = 'https://hitorigotolab.mananect.com';
+const url = `${site}/articles/${entry.id}/`;
+const pub = d.pubDate instanceof Date ? d.pubDate : new Date(d.pubDate);
+const upd = d.updated ? (d.updated instanceof Date ? d.updated : new Date(d.updated)) : pub;
+
+// GEO: 記事の抽出可能性を上げる Article 構造化データ（AI検索の被引用を狙う）。
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  description: d.description,
+  inLanguage: 'ja',
+  datePublished: pub.toISOString(),
+  dateModified: upd.toISOString(),
+  articleSection: d.category,
+  mainEntityOfPage: url,
+  author: { '@type': 'Organization', name: 'hitorigotolab', url: site },
+  publisher: { '@type': 'Organization', name: 'hitorigotolab', url: site },
+};
+---
+
+<BaseLayout locale="ja" variant="product" title={d.title} description={d.description} jsonLd={[articleLd]}>
+  <article class="article">
+    <p class="crumb"><a href="/articles/">← 記事一覧</a></p>
+    <h1>{d.title}</h1>
+    <p class="meta">{d.category} ・ {pub.toISOString().slice(0, 10)} 更新</p>
+    <div class="body"><Content /></div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  .crumb { font-size: 14px; margin: 0 0 8px; }
+  .article h1 { font-size: 28px; line-height: 1.35; margin: 8px 0 4px; }
+  .meta { color: #64748b; font-size: 13px; margin: 0 0 24px; }
+  .body :global(h2) { font-size: 21px; margin: 32px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .body :global(h3) { font-size: 17px; margin: 22px 0 8px; }
+  .body :global(p) { line-height: 1.85; margin: 12px 0; }
+  .body :global(ul), .body :global(ol) { line-height: 1.85; padding-left: 1.4em; }
+  .body :global(table) { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
+  .body :global(th), .body :global(td) { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; }
+  .body :global(th) { background: #f1f5f9; }
+  .body :global(a) { color: #2563eb; }
+</style>

@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// GEO 記事の一覧（内部リンク＝トピッククラスタの起点・クロール可能性/回遊を上げる）。
+const articles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
+---
+
+<BaseLayout
+  locale="ja"
+  variant="product"
+  title="記事一覧 | hitorigotolab"
+  description="AIスライド・提案資料の作成、AI学習ロードマップの選び方や比較ガイド。"
+>
+  <section class="list">
+    <h1>記事一覧</h1>
+    {articles.length === 0 && <p class="empty">記事は準備中です。</p>}
+    <ul>
+      {articles.map((a) => (
+        <li>
+          <a href={`/articles/${a.id}/`}>{a.data.title}</a>
+          <span class="c">{a.data.category}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .list { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  .list h1 { font-size: 26px; margin-bottom: 20px; }
+  .list .empty { color: #64748b; }
+  .list ul { list-style: none; padding: 0; margin: 0; }
+  .list li { padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .list a { color: #2563eb; font-size: 16px; text-decoration: none; }
+  .list a:hover { text-decoration: underline; }
+  .list .c { color: #94a3b8; font-size: 12px; white-space: nowrap; }
+</style>

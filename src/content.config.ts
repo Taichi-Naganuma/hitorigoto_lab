@@ -56,4 +56,19 @@ const home = defineCollection({
   }),
 });
 
-export const collections = { products, home };
+// GEO 記事（buyer-intent の回答形コンテンツ）。geo-scout 列車の generate_article_post が
+// src/content/articles/<slug>.md に draft:true で書く。schema は生成 md の front-matter に一致させる
+// （不一致だと astro build が落ちる＝壊れた記事を公開候補にしない第二段ゲート）。
+const articles = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    category: z.string().default('ガイド'),
+    pubDate: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { products, home, articles };
