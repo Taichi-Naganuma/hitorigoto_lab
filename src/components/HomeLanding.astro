@@ -2,6 +2,7 @@
 // 合成ホーム: 新デザイン言語（丸太見出し/eyebrow/グラデ境界線ホバー）を狭幅ストアに着せる。
 // 内容は home.json + products のまま保持。捏造数値は置かない（床・誠実）。
 import LangSwitcher from './LangSwitcher.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
 interface ProductItem { title: string; price: string; blurb: string; cta: string; href: string; }
 interface Props {
@@ -14,11 +15,12 @@ const isJa = locale === 'ja';
 const eyebrow = isJa ? 'ひとりごと研究所 · AIが自律運営' : 'Hitorigoto Lab · Autonomously run by AI';
 const seeProducts = isJa ? '商品を見る' : 'See the products';
 const readAbout = isJa ? '研究所について' : 'About the lab';
+const homeUrl = getRelativeLocaleUrl(locale, '/');
 ---
 
 <div class="landing">
   <div class="masthead">
-    <span class="brand">{h.logo}</span>
+    <a class="brand" href={homeUrl} aria-label={isJa ? 'トップへ' : 'Home'}>{h.logo}</a>
     <LangSwitcher locale={locale} />
   </div>
 
@@ -78,25 +80,31 @@ const readAbout = isJa ? '研究所について' : 'About the lab';
     --lp-grad-a:#22d3ee; --lp-grad-b:#8b5cf6;  /* ホバー境界線の flourish */
     --lp-round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif;
     color:var(--lp-ink);
-    /* 微グラデ地（狭幅でも上品に） */
     margin:0 -20px; padding:0 20px;
+  }
+  /* 背景を強く: home 全面に鮮明オーロラ（色を濃く・base に青みを残して消えないように） */
+  :global(body.home){
     background:
-      radial-gradient(60% 32% at 14% 0%, rgba(0,149,246,.07), transparent 60%),
-      radial-gradient(46% 26% at 96% 4%, rgba(139,92,246,.06), transparent 62%),
-      linear-gradient(180deg,#f3f6fd 0%, #fafbfe 42%, var(--lp-card,#fff) 100%);
+      radial-gradient(58% 40% at 4% -4%, rgba(0,149,246,.20), transparent 58%),
+      radial-gradient(52% 36% at 100% 3%, rgba(139,92,246,.16), transparent 58%),
+      radial-gradient(60% 32% at 96% 102%, rgba(34,211,238,.13), transparent 60%),
+      linear-gradient(180deg,#e6edfe 0%, #edf2fd 50%, #eef3fd 100%);
+    background-repeat:no-repeat;
   }
 
   .masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 6px}
-  .masthead .brand{font-family:var(--lp-round);font-weight:800;font-size:14px;letter-spacing:.01em;color:var(--lp-ink)}
+  .masthead .brand{font-family:var(--lp-round);font-weight:800;font-size:14px;letter-spacing:.01em;color:var(--lp-ink);text-decoration:none;transition:color .15s ease}
+  .masthead a.brand:hover{color:var(--lp-accent-ink)}
 
   /* hero */
   .hero{padding:34px 0 8px}
   .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--lp-round);font-weight:800;
-    font-size:11.5px;letter-spacing:.06em;color:var(--lp-accent-ink);
-    background:rgba(0,149,246,.09);border:1px solid rgba(0,149,246,.22);padding:.34rem .7rem;border-radius:999px}
+    font-size:12.5px;letter-spacing:.05em;color:var(--lp-accent-ink);
+    background:rgba(0,149,246,.12);border:1px solid rgba(0,149,246,.30);padding:.4rem .85rem;border-radius:999px;
+    box-shadow:0 4px 14px -8px rgba(0,149,246,.5)}
   .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
-  .lp-h1{font-family:var(--lp-round);font-weight:800;letter-spacing:-.02em;line-height:1.24;
-    font-size:clamp(29px,6.2vw,42px);margin:16px 0 0;text-wrap:balance;color:var(--lp-ink)}
+  .lp-h1{font-family:var(--lp-round);font-weight:800;letter-spacing:-.025em;line-height:1.2;
+    font-size:clamp(32px,7vw,48px);margin:18px 0 0;text-wrap:balance;color:var(--lp-ink)}
   .lp-lead{margin:14px 0 0;color:var(--lp-ink2);font-size:15.5px;line-height:1.85;max-width:40ch}
   .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
   .lp-btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--lp-round);font-weight:800;
@@ -117,8 +125,8 @@ const readAbout = isJa ? '研究所について' : 'About the lab';
   /* product cards — hover でシアン→パープルの境界線が浮く */
   .cards{display:flex;flex-direction:column;gap:12px}
   .pcard{position:relative;display:block;background:var(--lp-card);border:1px solid var(--lp-line);
-    border-radius:18px;padding:20px 22px;text-decoration:none;color:inherit;isolation:isolate;
-    box-shadow:0 1px 2px rgba(20,23,31,.04);
+    border-radius:18px;padding:22px 24px;text-decoration:none;color:inherit;isolation:isolate;
+    box-shadow:0 3px 10px -4px rgba(20,30,80,.12);
     transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
   .pcard::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.6px;z-index:2;pointer-events:none;
     background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b));opacity:0;transition:opacity .28s ease;
