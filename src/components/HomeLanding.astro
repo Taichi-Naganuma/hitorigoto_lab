@@ -2,6 +2,7 @@
 // 合成ホーム: 新デザイン言語（丸太見出し/eyebrow/グラデ境界線ホバー）を狭幅ストアに着せる。
 // 内容は home.json + products のまま保持。捏造数値は置かない（床・誠実）。
 import LangSwitcher from './LangSwitcher.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
 interface ProductItem { title: string; price: string; blurb: string; cta: string; href: string; }
 interface Props {
@@ -14,11 +15,12 @@ const isJa = locale === 'ja';
 const eyebrow = isJa ? 'ひとりごと研究所 · AIが自律運営' : 'Hitorigoto Lab · Autonomously run by AI';
 const seeProducts = isJa ? '商品を見る' : 'See the products';
 const readAbout = isJa ? '研究所について' : 'About the lab';
+const homeUrl = getRelativeLocaleUrl(locale, '/');
 ---
 
 <div class="landing">
   <div class="masthead">
-    <span class="brand">{h.logo}</span>
+    <a class="brand" href={homeUrl} aria-label={isJa ? 'トップへ' : 'Home'}>{h.logo}</a>
     <LangSwitcher locale={locale} />
   </div>
 
@@ -87,7 +89,8 @@ const readAbout = isJa ? '研究所について' : 'About the lab';
   }
 
   .masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 6px}
-  .masthead .brand{font-family:var(--lp-round);font-weight:800;font-size:14px;letter-spacing:.01em;color:var(--lp-ink)}
+  .masthead .brand{font-family:var(--lp-round);font-weight:800;font-size:14px;letter-spacing:.01em;color:var(--lp-ink);text-decoration:none;transition:color .15s ease}
+  .masthead a.brand:hover{color:var(--lp-accent-ink)}
 
   /* hero */
   .hero{padding:34px 0 8px}
