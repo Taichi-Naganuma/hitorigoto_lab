@@ -1,0 +1,153 @@
+---
+// 合成ホーム: 新デザイン言語（丸太見出し/eyebrow/グラデ境界線ホバー）を狭幅ストアに着せる。
+// 内容は home.json + products のまま保持。捏造数値は置かない（床・誠実）。
+import LangSwitcher from './LangSwitcher.astro';
+
+interface ProductItem { title: string; price: string; blurb: string; cta: string; href: string; }
+interface Props {
+  locale: 'ja' | 'en';
+  h: any;
+  products: ProductItem[];
+}
+const { locale, h, products } = Astro.props;
+const isJa = locale === 'ja';
+const eyebrow = isJa ? 'ひとりごと研究所 · AIが自律運営' : 'Hitorigoto Lab · Autonomously run by AI';
+const seeProducts = isJa ? '商品を見る' : 'See the products';
+const readAbout = isJa ? '研究所について' : 'About the lab';
+---
+
+<div class="landing">
+  <div class="masthead">
+    <span class="brand">{h.logo}</span>
+    <LangSwitcher locale={locale} />
+  </div>
+
+  <section class="hero">
+    <span class="eyebrow"><span class="dot"></span>{eyebrow}</span>
+    <h1 class="lp-h1" set:html={h.headline} />
+    <p class="lp-lead">{h.lead}</p>
+    <div class="cta-row">
+      <a class="lp-btn primary" href="#products">{seeProducts}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      {h.about && <a class="lp-btn ghost" href="#about">{readAbout}</a>}
+    </div>
+  </section>
+
+  <section id="products" class="block">
+    <div class="eyebrow-sec">{h.productsTitle}</div>
+    <div class="cards">
+      {products.map((p) => (
+        <a class="pcard" href={p.href}>
+          <div class="pc-title">{p.title}</div>
+          {p.price && <div class="pc-price">{p.price}</div>}
+          <p class="pc-blurb">{p.blurb}</p>
+          <span class="pc-cta">{p.cta}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="eyebrow-sec">{h.howTitle}</div>
+    <ol class="steps">
+      {h.how.map((step: string) => (<li>{step}</li>))}
+    </ol>
+  </section>
+
+  {h.about && (
+    <section id="about" class="block">
+      <div class="eyebrow-sec">{h.about.title}</div>
+      <div class="about-card">
+        <h2 class="about-h">{h.about.heading}</h2>
+        <p class="about-body" set:html={h.about.body} />
+      </div>
+    </section>
+  )}
+</div>
+
+<style>
+  /* すべて .landing にスコープ（Astro scoped）— 他ページ(product/legal/article)には波及しない */
+  .landing{
+    --lp-ink:#14171f; --lp-ink2:#39414f; --lp-sub:#6a707c; --lp-faint:#9aa0ac;
+    --lp-line:#e6e8ee; --lp-line2:#d3d7e0; --lp-card:#ffffff;
+    --lp-accent:#0095f6;              /* サイト既存の青を維持（全ページ coherence） */
+    --lp-accent-ink:#0077c8;
+    --lp-grad-a:#22d3ee; --lp-grad-b:#8b5cf6;  /* ホバー境界線の flourish */
+    --lp-round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif;
+    color:var(--lp-ink);
+    /* 微グラデ地（狭幅でも上品に） */
+    margin:0 -20px; padding:0 20px;
+    background:
+      radial-gradient(60% 32% at 14% 0%, rgba(0,149,246,.07), transparent 60%),
+      radial-gradient(46% 26% at 96% 4%, rgba(139,92,246,.06), transparent 62%),
+      linear-gradient(180deg,#f3f6fd 0%, #fafbfe 42%, var(--lp-card,#fff) 100%);
+  }
+
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 6px}
+  .masthead .brand{font-family:var(--lp-round);font-weight:800;font-size:14px;letter-spacing:.01em;color:var(--lp-ink)}
+
+  /* hero */
+  .hero{padding:34px 0 8px}
+  .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--lp-round);font-weight:800;
+    font-size:11.5px;letter-spacing:.06em;color:var(--lp-accent-ink);
+    background:rgba(0,149,246,.09);border:1px solid rgba(0,149,246,.22);padding:.34rem .7rem;border-radius:999px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
+  .lp-h1{font-family:var(--lp-round);font-weight:800;letter-spacing:-.02em;line-height:1.24;
+    font-size:clamp(29px,6.2vw,42px);margin:16px 0 0;text-wrap:balance;color:var(--lp-ink)}
+  .lp-lead{margin:14px 0 0;color:var(--lp-ink2);font-size:15.5px;line-height:1.85;max-width:40ch}
+  .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .lp-btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--lp-round);font-weight:800;
+    font-size:14.5px;text-decoration:none;border-radius:999px;line-height:1;padding:.72rem 1.2rem;
+    border:1px solid transparent;transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease}
+  .lp-btn svg{width:15px;height:15px;transition:transform .16s ease}
+  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(0,149,246,.55)}
+  .lp-btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px -6px rgba(0,149,246,.55)}
+  .lp-btn.primary:hover svg{transform:translateX(3px)}
+  .lp-btn.ghost{background:#fff;color:var(--lp-ink);border-color:var(--lp-line2)}
+  .lp-btn.ghost:hover{transform:translateY(-1px);border-color:var(--lp-accent);color:var(--lp-accent-ink)}
+
+  /* section eyebrow label */
+  .block{margin-top:40px}
+  .eyebrow-sec{font-family:var(--lp-round);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:800;color:var(--lp-faint);margin-bottom:14px}
+
+  /* product cards — hover でシアン→パープルの境界線が浮く */
+  .cards{display:flex;flex-direction:column;gap:12px}
+  .pcard{position:relative;display:block;background:var(--lp-card);border:1px solid var(--lp-line);
+    border-radius:18px;padding:20px 22px;text-decoration:none;color:inherit;isolation:isolate;
+    box-shadow:0 1px 2px rgba(20,23,31,.04);
+    transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
+  .pcard::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.6px;z-index:2;pointer-events:none;
+    background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b));opacity:0;transition:opacity .28s ease;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+  .pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(20,30,80,.28)}
+  .pcard:hover::before{opacity:1}
+  .pc-title{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--lp-ink)}
+  .pc-price{font-family:var(--lp-round);font-weight:800;font-size:16px;color:var(--lp-ink);margin-top:6px}
+  .pc-blurb{font-size:14px;color:var(--lp-sub);line-height:1.7;margin-top:8px}
+  .pc-cta{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--lp-round);font-weight:800;
+    font-size:13.5px;color:var(--lp-accent-ink);margin-top:12px}
+  .pc-cta svg{width:14px;height:14px;transition:transform .16s ease}
+  .pcard:hover .pc-cta svg{transform:translateX(3px)}
+
+  /* steps */
+  .steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+  .steps li{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);border-radius:14px;
+    padding:15px 18px 15px 54px;font-size:14px;line-height:1.7;color:var(--lp-ink2);counter-increment:s}
+  .steps li::before{content:counter(s);position:absolute;left:15px;top:13px;width:26px;height:26px;border-radius:50%;
+    font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--lp-accent),#4f7cff)}
+
+  /* about */
+  .about-card{background:var(--lp-card);border:1px solid var(--lp-line);border-radius:18px;padding:24px}
+  .about-h{font-family:var(--lp-round);font-weight:800;font-size:18px;letter-spacing:-.01em;color:var(--lp-ink)}
+  .about-body{margin-top:8px;font-size:14.5px;color:var(--lp-ink2);line-height:1.85}
+
+  @media (prefers-reduced-motion:reduce){
+    .pcard,.lp-btn,.pcard::before,.lp-btn svg{transition:none}
+  }
+</style>
