@@ -60,3 +60,25 @@
 ## 3. 手続き
 - 本ファイル（写し）の改訂は**人間が正本を直接改訂 → ここへ写す**。機械は書けない。
 - 変更 PR はオーナーの明示承認なしにマージしない（`INVARIANTS.md` と同じ掟）。**auto-merge しない**。
+
+## 4. 品質フロア（トップ/os 同等以上を「床」にする・受入基準）— 写し
+
+> 正本は my-portfolio `Trains/docs/design/DESIGN-INVARIANTS.md §4`＋設計
+> `Trains/docs/design/planned/quality-floor-standard-design.md §3`（床の一次定義）。食い違ったら正本が正。
+
+§1 が「壊してはいけない顔」、§2 が「誰が何を触れてよいか」であるのに対し、本章は
+**トップ（`HomeLanding`）＋os（`OsLanding`/`OsSubPage`）＋現行 `ProductPage` の品質を、新規着地の「床」とする**受入基準。
+**build 緑は床の合否ではない**（空 FAQ・薄い deliver・プレースホルダ Stripe・多色化 token でも astro build は緑になる）。
+
+- **4-1 単一の床・二面適用**: 床は 1 つ。craft（人間の新規ページ）も機械（`src/content/**`＋`src/styles/tokens.css` 値）も
+  **同一基準**で効く。本章は機械の権限を増やさない（触れる面は §2 のまま）。
+- **4-2 機械可検査ゲート**: `scripts/quality-floor-check.mjs`。CI（`astro-build.yml`）と Node 実装レーンの第三段で走る。
+  **既定 warn-only**（`QUALITY_FLOOR_ENFORCE=0`＝挙動ゼロ差）、オーナー点火で block。**block の歯は機械が触る面**
+  （token 整合＝accent 単色/全面ライト/キー不増減、content 完全性＝必須スキーマ/プレースホルダ）**に集約**。生 hex 直書き等の
+  craft ヒントは warn（機械は `*.astro` を触らない）。
+- **4-3 助言 LLM（`QUALITY_FLOOR_JUDGE`）は非ブロッキング**: スコアで自動マージしない（`auto_approve` 強制 false を侵さない）。
+- **4-4 改訂は人間が正本を直接改訂 → ここへ写す**（機械は書けない）。
+- **4-5 craft の Definition of Done（新商品の器）**: `ProductPage` 経由・fx 署名（`.fx-rise`/`.fx-ring`/グラデラベル）継承・
+  セクション網羅（hero/buy/deliver/steps/target/faq/ai-note/backlink）・`content/products/<locale>/<slug>.json` が必須スキーマ＋
+  最小 richness・生色ハードコード回避＋`@media` レスポンシブ/reduced-motion・`npm run build` 緑＋`npm run quality-floor` 緑・
+  帰属（`/l/`・`utm_content`・`StripeAttribution`）非破壊。

@@ -31,3 +31,14 @@ jobs:
         run: npm ci
       - name: Build (astro build)
         run: npm run build
+      # 第三段ゲート＝品質フロア（トップ/os 同等以上）。正本設計: my-portfolio
+      # Trains/docs/design/planned/quality-floor-standard-design.md §5-a。
+      # 既定 warn-only（continue-on-error かつ QUALITY_FLOOR_ENFORCE 未設定=exit0 で二重に非ブロッキング＝挙動ゼロ差）。
+      # 点火（QF-6）: continue-on-error を外し env に QUALITY_FLOOR_ENFORCE=1 を与える（＋checkout を fetch-depth:0 に）。
+      - name: Quality floor (warn-only)
+        run: |
+          git fetch --no-tags --depth=1 origin main || true
+          npm run quality-floor
+        env:
+          QUALITY_FLOOR_BASE: origin/main
+        continue-on-error: true
