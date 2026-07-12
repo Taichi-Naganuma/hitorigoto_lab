@@ -95,6 +95,8 @@ const otherUrl = Astro.url.pathname.replace(new RegExp(`^/${locale}/`), `/${othe
         entries.forEach(function (e) { e.target.classList.toggle('in', e.isIntersecting); });
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
       targets.forEach(function (el) { io.observe(el); });
+      // 安全網: observer が一度も発火しない環境では 1.6s 後に全て表示（隠れっぱなし防止）。
+      setTimeout(function () { if (!root.querySelector('.in')) targets.forEach(function (el) { el.classList.add('in'); }); }, 1600);
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
