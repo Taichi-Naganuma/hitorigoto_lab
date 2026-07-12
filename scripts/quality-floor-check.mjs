@@ -139,9 +139,9 @@ export function checkProductJson(file, obj) {
   if (!/Stripe|安全/i.test(obj.ctaNote || "")) r3.push("ctaNoteにStripe/安全");
   if (r3.length) out.push(f("C3", "warn", `${file}: 信頼/安全の内容 = ${r3.join(", ")}`));
 
-  // C4 プレースホルダ/不正 Stripe
-  if (!/^https:\/\/buy\.stripe\.com\//.test(obj.stripeLink || "")) {
-    out.push(f("C4", "block", `${file}: stripeLink が buy.stripe.com でない（${obj.stripeLink ?? "未定義"}）`));
+  // C4 プレースホルダ/不正な決済リンク（Stripe or Lemon Squeezy の checkout URL・CK-6 で多provider化）。
+  if (!/^https:\/\/(buy\.stripe\.com|[a-z0-9-]+\.lemonsqueezy\.com)\//.test(obj.stripeLink || "")) {
+    out.push(f("C4", "block", `${file}: stripeLink が buy.stripe.com/*.lemonsqueezy.com でない（${obj.stripeLink ?? "未定義"}）`));
   }
   const blob = JSON.stringify(obj);
   const ph = blob.match(/TODO|lorem|ダミー|placeholder|未定|xxx/i);

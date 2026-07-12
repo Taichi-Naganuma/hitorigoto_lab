@@ -85,6 +85,11 @@ test("C4: stripeLink 不正で block", () => {
   assert.ok(ids(checkProductJson(PRODUCT, obj)).includes("C4"));
 });
 
+test("C4: Lemon Squeezy の checkout URL は通る（多provider・CK-6）", () => {
+  const obj = JSON.parse(read(PRODUCT)); obj.stripeLink = "https://mystore.lemonsqueezy.com/checkout/abc";
+  assert.ok(!ids(checkProductJson(PRODUCT, obj)).includes("C4"));  // block しない
+});
+
 test("C4: プレースホルダで block", () => {
   const obj = JSON.parse(read(PRODUCT)); obj.lead = "TODO ここに説明";
   assert.ok(ids(checkProductJson(PRODUCT, obj)).includes("C4"));

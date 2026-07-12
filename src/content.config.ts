@@ -1,6 +1,18 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+// 決済リンク（checkout）の第二段ゲート＝Stripe(buy.stripe.com) か Lemon Squeezy(*.lemonsqueezy.com) の
+// ホスト済み checkout URL のみ許可（多provider化・CK-6）。現行 stripeLink は buy.stripe.com ゆえ従来どおり通る。
+const payLinkSchema = z
+  .string()
+  .url()
+  .refine(
+    (u) =>
+      /^https:\/\/buy\.stripe\.com\//.test(u) ||
+      /^https:\/\/[a-z0-9-]+\.lemonsqueezy\.com\//.test(u),
+    { message: 'checkout URL は buy.stripe.com または *.lemonsqueezy.com である必要があります' },
+  );
+
 // products: one JSON per product per locale at products/<locale>/<slug>.json
 // The Zod schema doubles as the validation gate for AI-generated LPs (第二段):
 // a malformed entry fails `astro build` loudly rather than shipping a broken page.
@@ -21,7 +33,8 @@ const products = defineCollection({
     priceNote: z.string().optional(), // small note, e.g. "（税込）" / "(USD)"
     cta: z.string(), // button label (AB target)
     ctaNote: z.string(),
-    stripeLink: z.string().url().startsWith('https://buy.stripe.com/'), // gate
+    stripeLink: payLinkSchema, // gate（Stripe or Lemon Squeezy・名は歴史的に stripeLink）
+    payProvider: z.enum(['stripe', 'lemonsqueezy']).optional(), // 決済provider（省略時は URL ホストで判別）
     // 任意の第2プラン（例: mioca=フルドラフト＋数字診断を1ページに）。単一プラン商品は両方省略＝価格ボックス1つ（従来どおり）。
     planLabel: z.string().optional(), // 複数プラン時に主プライスの上に出すラベル
     plan2: z
@@ -32,7 +45,7 @@ const products = defineCollection({
         priceNote: z.string().optional(),
         cta: z.string(),
         ctaNote: z.string(),
-        stripeLink: z.string().url().startsWith('https://buy.stripe.com/'), // gate
+        stripeLink: payLinkSchema, // gate（Stripe or Lemon Squeezy）
       })
       .optional(),
     card: z.object({
