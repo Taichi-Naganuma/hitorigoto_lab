@@ -1,0 +1,54 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   tokens.css — デザイントークン（サイト唯一の真実源）
+   ---------------------------------------------------------------------------
+   自走OS（Mioca）が自分のサイトを改善するとき、機械が触ってよい「見た目」の面は
+   このファイルだけ（＝一次値の単一真実源）。コンポーネントの scoped CSS は必ず
+   var(--token) を参照し、色/フォント/角丸をハードコードしない。
+   正本の掟: my-portfolio `Trains/docs/design/DESIGN-INVARIANTS.md`（憲法）＋
+             `Trains/docs/design/planned/os-site-improvement-division-of-labor.md` §3-1。
+   憲法（機械が起案しても棄却される面）: アクセントは電光ブルー1色（多色化しない）／
+     ホバー境界線はシアン→パープル／全面ライト／角丸・OS連想グリッド。
+   ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── ブランド憲法プリミティブ（DESIGN-INVARIANTS §1・機械が最も触る面） ── */
+  --accent: #0095f6;        /* §1-2 アクセント＝電光ブルー1色（多色化しない） */
+  --accent-ink: #0077c8;    /* アクセント濃色（テキスト/ホバー/リンク） */
+  --edge-cyan: #22d3ee;     /* §1-2 ホバー境界線 シアン */
+  --edge-purple: #8b5cf6;   /* §1-2 ホバー境界線 パープル */
+  --edge-grad: linear-gradient(120deg, var(--edge-cyan), var(--edge-purple));
+  --round-face: "SF Pro Rounded", "Hiragino Maru Gothic ProN", "Segoe UI Rounded", "Meiryo", "Noto Sans JP", system-ui, -apple-system, sans-serif; /* §1-4 丸系見出し */
+
+  /* ── 全面ライトの中立色（§1-1・購買部/記事/凡例の土台） ── */
+  --ink: #262626;   /* 本文（near-black） */
+  --sub: #737373;   /* 副次テキスト */
+  --line: #dbdbdb;  /* ヘアライン境界 */
+  --bg: #fafafa;    /* ページ背景 */
+  --card: #ffffff;  /* カード面 */
+  --soft: #f7f7f8;  /* 微弱な塗り */
+  --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic", system-ui, sans-serif;
+  --font-en: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+
+  /* ── LP/OS 面の ink スケール（全面ライト上の濃い見出し系） ── */
+  --lp-ink: #14171f; --lp-ink2: #39414f; --lp-sub: #6a707c; --lp-faint: #9aa0ac;
+  --lp-line: #e6e8ee; --lp-line2: #d3d7e0; --lp-card: #ffffff; --lp-soft: #f5f7fb;
+
+  /* ── 角丸（§1-4 OS連想の丸み） ── */
+  --r-pill: 999px;  /* ピル（ボタン/バッジ/eyebrow） */
+  --r-card: 18px;   /* カード面（機能/料金/o-card） */
+
+  /* ── モーション（下から浮上リビール・試作由来） ── */
+  --stagger: 85ms;                              /* リビールの段差 */
+  --rise-ease: cubic-bezier(.2, .86, .28, 1.12); /* 軽いオーバーシュート */
+
+  /* ── エイリアス（既存 var 参照を壊さない・canonical へ委譲） ────────────────
+     コンポーネント側は歴史的に --lp-* / --fx-* を参照している。真実源を一箇所に
+     保つため、これらは canonical プリミティブへの別名にする（同一計算値）。 */
+  --lp-accent: var(--accent); --lp-accent-ink: var(--accent-ink);
+  --lp-grad-a: var(--edge-cyan); --lp-grad-b: var(--edge-purple);
+  --lp-grad: var(--edge-grad); --lp-round: var(--round-face);
+
+  --fx-accent: var(--accent); --fx-accent-ink: var(--accent-ink);
+  --fx-grad-a: var(--edge-cyan); --fx-grad-b: var(--edge-purple);
+  --fx-grad: var(--edge-grad); --fx-round: var(--round-face);
+}

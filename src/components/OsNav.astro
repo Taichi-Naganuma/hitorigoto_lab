@@ -44,33 +44,34 @@ const otherUrl = Astro.url.pathname.replace(new RegExp(`^/${locale}/`), `/${othe
 </header>
 
 <style>
+  /* 色/フォント/角丸は tokens.css を参照（--lp-* は canonical のエイリアス）。ハードコードしない。 */
   .os-nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:20px;padding:14px 20px;margin:0 -20px;
-    font-family:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,sans-serif;
+    font-family:var(--round-face);
     background:rgba(240,244,253,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
     border-bottom:1px solid rgba(30,52,130,.06)}
-  .brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#14171f}
+  .brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--lp-ink)}
   .brand-glyph{width:22px;height:22px;border-radius:7px;flex:none;
-    background:radial-gradient(circle at 32% 30%, #fff 0 2px, transparent 3px),linear-gradient(135deg,#0095f6,#4f7cff);
+    background:radial-gradient(circle at 32% 30%, #fff 0 2px, transparent 3px),linear-gradient(135deg,var(--accent),#4f7cff);
     box-shadow:0 4px 12px -4px rgba(0,149,246,.6);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
   .brand:hover .brand-glyph{transform:rotate(12deg) scale(1.06)}
   .brand-name{font-weight:800;font-size:17px;letter-spacing:-.01em}
-  .brand-status{font-weight:800;font-size:10.5px;letter-spacing:.05em;color:#6a707c;background:#fff;
-    border:1px solid #d3d7e0;padding:.18rem .5rem;border-radius:999px;margin-left:2px}
+  .brand-status{font-weight:800;font-size:10.5px;letter-spacing:.05em;color:var(--lp-sub);background:var(--lp-card);
+    border:1px solid var(--lp-line2);padding:.18rem .5rem;border-radius:var(--r-pill);margin-left:2px}
   .nav-links{display:flex;gap:22px;margin-left:8px}
-  .nav-links a{position:relative;font-weight:700;font-size:13.5px;color:#39414f;text-decoration:none;transition:color .15s ease}
+  .nav-links a{position:relative;font-weight:700;font-size:13.5px;color:var(--lp-ink2);text-decoration:none;transition:color .15s ease}
   .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;border-radius:2px;
-    background:linear-gradient(120deg,#22d3ee,#8b5cf6);transition:right .25s ease}
-  .nav-links a:hover,.nav-links a.on{color:#0077c8}
+    background:var(--edge-grad);transition:right .25s ease}
+  .nav-links a:hover,.nav-links a.on{color:var(--accent-ink)}
   .nav-links a:hover::after,.nav-links a.on::after{right:0}
-  .store-link{margin-left:4px;padding:.3rem .72rem;border:1px solid #d3d7e0;border-radius:999px;font-size:12.5px;color:#6a707c;transition:border-color .15s ease,color .15s ease}
+  .store-link{margin-left:4px;padding:.3rem .72rem;border:1px solid var(--lp-line2);border-radius:var(--r-pill);font-size:12.5px;color:var(--lp-sub);transition:border-color .15s ease,color .15s ease}
   .store-link::after{display:none}
-  .store-link:hover{border-color:#0095f6;color:#0077c8}
+  .store-link:hover{border-color:var(--accent);color:var(--accent-ink)}
   .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-  .lang{color:#6a707c;text-decoration:none;font-size:12.5px;font-weight:700;padding:6px 14px;border:1px solid #d3d7e0;
-    border-radius:999px;transition:color .15s ease,border-color .15s ease}
-  .lang:hover{color:#14171f;border-color:#14171f}
-  .nav-cta{font-weight:800;font-size:13px;text-decoration:none;color:#fff;background:#0095f6;padding:.55rem .95rem;
-    border-radius:999px;white-space:nowrap;box-shadow:0 4px 14px -5px rgba(0,149,246,.55);
+  .lang{color:var(--lp-sub);text-decoration:none;font-size:12.5px;font-weight:700;padding:6px 14px;border:1px solid var(--lp-line2);
+    border-radius:var(--r-pill);transition:color .15s ease,border-color .15s ease}
+  .lang:hover{color:var(--lp-ink);border-color:var(--lp-ink)}
+  .nav-cta{font-weight:800;font-size:13px;text-decoration:none;color:#fff;background:var(--accent);padding:.55rem .95rem;
+    border-radius:var(--r-pill);white-space:nowrap;box-shadow:0 4px 14px -5px rgba(0,149,246,.55);
     transition:transform .16s ease,box-shadow .16s ease}
   .nav-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(0,149,246,.55),0 6px 20px -8px rgba(139,92,246,.5)}
   .nav-cta.soon{background:#bcd7ee;cursor:default}
