@@ -44,6 +44,11 @@ const orgLd = {
   brand: { '@type': 'Brand', name: 'Mioca' },
 };
 const allLd = [orgLd, ...jsonLd];
+
+// タブ/ブックマークのアイコン（顔ごと）: /os/(Mioca LP)=周回リング、それ以外(購買部/記事)=研究所の吹き出し。
+const favicon = variant === 'os' ? '/mioca.svg' : '/favicon.svg';
+const icon32 = variant === 'os' ? '/mioca-32.png' : '/favicon-32.png';
+const appleIcon = variant === 'os' ? '/apple-touch-icon-mioca.png' : '/apple-touch-icon.png';
 ---
 
 <!DOCTYPE html>
@@ -51,6 +56,10 @@ const allLd = [orgLd, ...jsonLd];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <link rel="icon" type="image/png" sizes="32x32" href={icon32} />
+    <link rel="apple-touch-icon" href={appleIcon} />
+    <meta name="theme-color" content="#0095f6" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {noindex && <meta name="robots" content="noindex" />}
