@@ -91,9 +91,15 @@ const otherUrl = Astro.url.pathname.replace(new RegExp(`^/${locale}/`), `/${othe
         var sibs = el.parentNode ? el.parentNode.children : [el];
         el.style.setProperty('--ri', Array.prototype.indexOf.call(sibs, el) % 8);
       });
+      // 入ったら .in を付けて浮上、**完全に画面外へ出たときだけ**外す（＝リビール中の位置変化で
+      // observer が再発火→アニメ再起動する無限ループを防ぐ。iframe でも安定・再入毎に再生）。
+      var vh = function () { return window.innerHeight || document.documentElement.clientHeight; };
       var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { e.target.classList.toggle('in', e.isIntersecting); });
-      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); }
+          else { var r = e.boundingClientRect; if (r.bottom <= 4 || r.top >= vh() - 4) e.target.classList.remove('in'); }
+        });
+      }, { threshold: 0.15 });
       targets.forEach(function (el) { io.observe(el); });
       // 安全網: observer が一度も発火しない環境では 1.6s 後に全て表示（隠れっぱなし防止）。
       setTimeout(function () { if (!root.querySelector('.in')) targets.forEach(function (el) { el.classList.add('in'); }); }, 1600);

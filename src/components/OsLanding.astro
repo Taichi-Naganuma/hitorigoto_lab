@@ -171,7 +171,8 @@ const capIcons = [
   :global(body.os .wrap){ max-width:1080px; position:relative; z-index:1; }
 
   @keyframes borderspin{to{--a:360deg}}
-  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  /* 下から浮かびあがる＋軽いオーバーシュート＋わずかに拡大＝ページをめくる度にわくわく */
+  @keyframes rise{0%{opacity:0;transform:translateY(46px) scale(.94)}55%{opacity:1}100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
   @keyframes shimmer{to{background-position:220% 0}}
 
@@ -321,8 +322,8 @@ const capIcons = [
   .os-landing.reveal-on .hero-copy > *,.os-landing.reveal-on .console,.os-landing.reveal-on .sec-label,
   .os-landing.reveal-on .sec-h,.os-landing.reveal-on .sec-lead,.os-landing.reveal-on .capcard,
   .os-landing.reveal-on .steps li,.os-landing.reveal-on .price-card,.os-landing.reveal-on .proof-card,
-  .os-landing.reveal-on .faq dt,.os-landing.reveal-on .faq dd,.os-landing.reveal-on .closing{opacity:0;transform:translateY(20px)}
-  .os-landing.reveal-on .in{animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--ri,0)*65ms)}
+  .os-landing.reveal-on .faq dt,.os-landing.reveal-on .faq dd,.os-landing.reveal-on .closing{opacity:0;transform:translateY(46px) scale(.94)}
+  .os-landing.reveal-on .in{animation:rise .66s cubic-bezier(.2,.86,.28,1.12) forwards;animation-delay:calc(var(--ri,0)*85ms)}
 
   @media (prefers-reduced-motion:reduce){
     .console::before,.capcard::before,.price-card::before,.closing::before,.eyebrow::before,

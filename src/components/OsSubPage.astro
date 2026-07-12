@@ -120,7 +120,8 @@ const backLabel = isJa ? '概要（LP）' : 'Overview';
   :global(body.os .wrap){ max-width:1080px; position:relative; z-index:1; }
 
   @keyframes borderspin{to{--a:360deg}}
-  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  /* 下から浮かびあがる＋軽いオーバーシュート＋わずかに拡大＝ページをめくる度にわくわく */
+  @keyframes rise{0%{opacity:0;transform:translateY(46px) scale(.94)}55%{opacity:1}100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
   .lp-btn{position:relative;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--lp-round);font-weight:800;
@@ -210,8 +211,8 @@ const backLabel = isJa ? '概要（LP）' : 'Overview';
   /* reveal（再入毎に再生） */
   .os-page.reveal-on .o-hero > *,.os-page.reveal-on .sec-label,.os-page.reveal-on .sec-h,.os-page.reveal-on .sec-lead,
   .os-page.reveal-on .o-card,.os-page.reveal-on .o-steps li,.os-page.reveal-on .o-points li,
-  .os-page.reveal-on .o-note,.os-page.reveal-on .o-closing{opacity:0;transform:translateY(20px)}
-  .os-page.reveal-on .in{animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--ri,0)*65ms)}
+  .os-page.reveal-on .o-note,.os-page.reveal-on .o-closing{opacity:0;transform:translateY(46px) scale(.94)}
+  .os-page.reveal-on .in{animation:rise .66s cubic-bezier(.2,.86,.28,1.12) forwards;animation-delay:calc(var(--ri,0)*85ms)}
 
   @media (prefers-reduced-motion:reduce){
     .o-card::before,.o-closing::before,.eyebrow::before,.eyebrow .dot{animation:none}
