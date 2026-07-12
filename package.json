@@ -8,7 +8,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && npx --yes wrangler deploy"
+    "deploy": "astro build && npx --yes wrangler deploy",
+    "quality-floor": "node scripts/quality-floor-check.mjs",
+    "test:quality-floor": "node --test test/quality-floor.test.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",
