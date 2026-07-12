@@ -14,11 +14,19 @@ const legalUrl =
   locale === 'ja'
     ? getRelativeLocaleUrl('ja', '/tokushoho/')
     : getRelativeLocaleUrl('en', '/legal/');
+// Privacy Policy は現状 EN のみ（GDPR 対応・ja/privacy 未整備）。EN のときだけリンクを出す。
+const privacyUrl = locale === 'en' ? getRelativeLocaleUrl('en', '/privacy/') : null;
 ---
 
 <footer>
   <p>
     <a href={legalUrl}>{t('footer.legal')}</a>
+    {privacyUrl && (
+      <>
+        <span set:html={` ${t('footer.sep')} `} />
+        <a href={privacyUrl}>{t('footer.privacy')}</a>
+      </>
+    )}
     {variant !== 'home' && (
       <>
         <span set:html={` ${t('footer.sep')} `} />
