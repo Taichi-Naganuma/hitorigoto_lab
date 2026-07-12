@@ -1,0 +1,38 @@
+{
+  "locale": "en",
+  "page": "how",
+  "title": "How it works — Mioca autonomous business OS (coming soon)",
+  "description": "How Mioca runs unattended: read the market, propose a move, build, get approval where it matters, ship, measure, and rewrite itself — the same loop, over and over.",
+  "ogTitle": "How Mioca works — the loop that runs unattended",
+  "eyebrow": "HOW IT WORKS",
+  "heading": "How it keeps running, unattended",
+  "lead": "Mioca runs the same loop: read the market, propose a move, build, get approval where it matters, ship, measure, and rewrite itself.",
+  "blocks": [
+    {
+      "label": "THE LOOP",
+      "heading": "The 7-step loop",
+      "steps": [
+        { "title": "Read the market and the response", "body": "Observe what's wanted and which moves worked." },
+        { "title": "Propose the next move", "body": "Form a hypothesis from what it observed and decide what to do next. It doesn't wait to be told." },
+        { "title": "Generate the deliverable", "body": "Write the articles, landing pages, and posts. If quality falls short of the bar, it redoes them." },
+        { "title": "Wait for approval where it matters", "body": "High-risk actions — publishing, shipping, charging — proceed only after a human approves." },
+        { "title": "Ship what's approved", "body": "Distribute to each channel in a form whose reach can be measured." },
+        { "title": "Measure and record", "body": "Count reach, clicks, outcomes. Log when, what, and why." },
+        { "title": "Rewrite the strategy", "body": "Fold in what worked and what didn't, and update the strategy itself. Not learning — revision." }
+      ]
+    },
+    {
+      "label": "PROOF",
+      "heading": "You can check the work, after the fact",
+      "points": [
+        "Decisions and shipments are logged — when, what, and why",
+        "Deliverables are signed, so tampering is detectable",
+        "Deterministic steps return the same output for the same input",
+        "Numbers written by the LLM are never shown (tallies come from the ledger)"
+      ],
+      "note": "* Coming soon. After launch, this measurement is replaced by real data from the internal ledger."
+    }
+  ],
+  "ctaHeading": "Join the waitlist",
+  "ctaBody": "We'll tell you first when it opens. Indicative pricing goes to the waitlist first, too."
+}

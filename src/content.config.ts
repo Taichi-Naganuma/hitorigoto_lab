@@ -109,6 +109,34 @@ const os = defineCollection({
   }),
 });
 
+// os_pages: 自走OS「Mioca」の専用ページ（機能/しくみ/料金）。os_pages/<locale>/<slug>.json。
+// LP と同じ Zod ゲート。blocks は cards/steps/points/note を任意に持てる柔軟構造（各ページで使い分け）。
+const osPages = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/os_pages' }),
+  schema: z.object({
+    locale: z.enum(['ja', 'en']),
+    page: z.enum(['features', 'how', 'pricing']), // glob loader は "slug"/"id" フィールドを id 扱いする→衝突回避で "page"
+    title: z.string(),
+    description: z.string(),
+    ogTitle: z.string().optional(),
+    ogDescription: z.string().optional(),
+    eyebrow: z.string(),
+    heading: z.string(),
+    lead: z.string(),
+    blocks: z.array(z.object({
+      label: z.string().optional(),
+      heading: z.string().optional(),
+      lead: z.string().optional(),
+      cards: z.array(z.object({ title: z.string(), body: z.string(), tag: z.string().optional() })).optional(),
+      steps: z.array(z.object({ title: z.string(), body: z.string() })).optional(),
+      points: z.array(z.string()).optional(),
+      note: z.string().optional(),
+    })),
+    ctaHeading: z.string(),
+    ctaBody: z.string(),
+  }),
+});
+
 // GEO 記事（buyer-intent の回答形コンテンツ）。geo-scout 列車の generate_article_post が
 // src/content/articles/<slug>.md に draft:true で書く。schema は生成 md の front-matter に一致させる
 // （不一致だと astro build が落ちる＝壊れた記事を公開候補にしない第二段ゲート）。
@@ -124,4 +152,4 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { products, home, os, articles };
+export const collections = { products, home, os, osPages, articles };

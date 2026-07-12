@@ -1,0 +1,37 @@
+{
+  "locale": "en",
+  "page": "features",
+  "title": "Features — Mioca autonomous business OS (coming soon)",
+  "description": "What Mioca does: runs acquisition, support, delivery, and improvement with decisions, proves it deterministically, and keeps control through an approval gate. Coming soon.",
+  "ogTitle": "Mioca features — executes autonomously, proves deterministically, stays under control",
+  "eyebrow": "FEATURES",
+  "heading": "What the autonomous OS actually does",
+  "lead": "Mioca runs decisions-with-execution, not just tasks. Here's the breakdown — only what it can actually do, no exaggeration.",
+  "blocks": [
+    {
+      "cards": [
+        { "title": "Executes autonomously", "body": "From acquisition to support, delivery, and improvement, it proposes the next move and — once approved — carries it out. You just hand it the goal.", "tag": "Solo: hands-off · Team: automated operations" },
+        { "title": "Proves it deterministically", "body": "Every number can be recomputed from the same input, signed for tamper-detection. Hand your results straight to an audit.", "tag": "Solo: peace of mind · Team: audit & governance" },
+        { "title": "Stays under control", "body": "High-risk actions — publishing, shipping, charging — always pass a human approval gate. Even running itself, control stays in your hands.", "tag": "Solo: no runaway · Team: internal controls" }
+      ]
+    },
+    {
+      "label": "SCOPE",
+      "heading": "Where it works (channels)",
+      "points": [
+        "Generating and shipping articles, landing pages, and social posts",
+        "Syncing inventory and product info",
+        "First-line replies to inquiries",
+        "Adjusting listings and prices (all via the approval gate)"
+      ],
+      "note": "Channels expand over time. Anything law or terms require a human for — account creation, identity verification — stays with a human, never the machine."
+    },
+    {
+      "label": "HONESTY",
+      "heading": "When it can't, it says so",
+      "lead": "Low-confidence output is held for a human, not published. It never invents numbers. Since it's pre-launch, the figures shown on the landing page are illustrations."
+    }
+  ],
+  "ctaHeading": "Join the waitlist",
+  "ctaBody": "We'll tell you first when it opens. Indicative pricing goes to the waitlist first, too."
+}

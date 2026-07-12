@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import OsSubPage from '../../../components/OsSubPage.astro';
+import { getOsPage } from '../../../lib/os';
+
+const locale = 'ja';
+const d = await getOsPage(locale, 'how');
+---
+
+<BaseLayout locale={locale} variant="os" title={d.title} description={d.description} ogTitle={d.ogTitle} ogDescription={d.ogDescription}>
+  <OsSubPage locale={locale} d={d} />
+</BaseLayout>

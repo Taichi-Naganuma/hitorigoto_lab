@@ -1,0 +1,35 @@
+{
+  "locale": "en",
+  "page": "pricing",
+  "title": "Pricing — Mioca autonomous business OS (coming soon)",
+  "description": "Mioca pricing is being set. It's not for sale yet — no checkout on this page. Waitlist members get indicative pricing before it's finalized.",
+  "ogTitle": "Mioca pricing — being set (waitlist members get indicative pricing first)",
+  "eyebrow": "PRICING",
+  "heading": "Pricing is being set",
+  "lead": "It's not for sale yet — so there's no checkout on this page. Pricing is still being decided, and waitlist members get indicative pricing before it's finalized.",
+  "blocks": [
+    {
+      "label": "APPROACH",
+      "heading": "How we're thinking about it",
+      "lead": "Priced to match the execution you no longer have to do yourself.",
+      "points": [
+        "Indicative pricing goes to the waitlist first",
+        "No checkout until launch (this is a floor)",
+        "We won't put invented figures here"
+      ]
+    },
+    {
+      "label": "PLANS",
+      "heading": "Plans (planned)",
+      "cards": [
+        { "title": "Solo", "body": "Hands-off for a one-person business. The loop, the approval gate, the measurement.", "tag": "Indicative: TBD" },
+        { "title": "Team", "body": "Automated operations with internal controls. Deterministic records you can audit.", "tag": "Indicative: TBD" }
+      ]
+    },
+    {
+      "note": "* Plan names, amounts, and timing are all being finalized. Confirmed details go to the waitlist first."
+    }
+  ],
+  "ctaHeading": "Join the waitlist",
+  "ctaBody": "We'll tell you first when it opens. Indicative pricing goes to the waitlist first, too."
+}
