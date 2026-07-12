@@ -1,15 +1,6 @@
-/* ── Design tokens (Instagram-inspired: clean neutral + signature gradient) ─ */
-:root {
-  --ink: #262626;    /* primary text (near-black) */
-  --sub: #737373;    /* secondary text (gray) */
-  --line: #dbdbdb;   /* hairline borders */
-  --bg: #fafafa;     /* page background */
-  --card: #ffffff;   /* card surface */
-  --soft: #f7f7f8;   /* subtle fill */
-  --accent: #0095f6; /* Instagram blue (single accent) */
-  --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic", system-ui, sans-serif;
-  --font-en: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
-}
+/* ── Design tokens は src/styles/tokens.css（唯一の真実源）へ集約 ──────────
+   --ink/--sub/--line/--bg/--card/--soft/--accent/--font-ja/--font-en は tokens.css
+   の :root で定義。ここではハードコードしない（機械の見た目編集面を1ファイルに保つ）。 */
 
 /* ── Reset ─────────────────────────────────────────────────────────────── */
 * { margin: 0; padding: 0; box-sizing: border-box; }

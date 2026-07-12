@@ -4,12 +4,8 @@
 
 @property --a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 
-:root {
-  --fx-accent: #0095f6; --fx-accent-ink: #0077c8;
-  --fx-grad-a: #22d3ee; --fx-grad-b: #8b5cf6;
-  --fx-grad: linear-gradient(120deg, var(--fx-grad-a), var(--fx-grad-b));
-  --fx-round: "SF Pro Rounded", "Hiragino Maru Gothic ProN", "Segoe UI Rounded", "Meiryo", "Noto Sans JP", system-ui, -apple-system, sans-serif;
-}
+/* --fx-accent/--fx-grad-a/-b/--fx-round は src/styles/tokens.css の :root で
+   canonical プリミティブへのエイリアスとして定義（唯一の真実源）。ここでは定義しない。 */
 
 @keyframes fxSpin { to { --a: 360deg; } }
 @keyframes fxRise { 0% { opacity: 0; transform: translateY(46px) scale(.94); } 55% { opacity: 1; } 100% { opacity: 1; transform: none; } }
@@ -54,7 +50,7 @@ body.fx-bg .wrap { position: relative; z-index: 1; }
 /* 下から浮かびあがるリビール（html.fx-on は BaseLayout の head script が付与＝ちらつき防止・
    reduced-motion / no-JS では付与されない＝常時可視の床）。.in は observer が付け外し（再入毎に再生）。 */
 html.fx-on .fx-rise { opacity: 0; transform: translateY(46px) scale(.94); }
-html.fx-on .fx-rise.in { animation: fxRise .66s cubic-bezier(.2, .86, .28, 1.12) forwards; animation-delay: calc(var(--ri, 0) * 85ms); }
+html.fx-on .fx-rise.in { animation: fxRise .66s var(--rise-ease) forwards; animation-delay: calc(var(--ri, 0) * var(--stagger)); }
 
 @media (prefers-reduced-motion: reduce) {
   .fx-ring::before { animation: none; }
