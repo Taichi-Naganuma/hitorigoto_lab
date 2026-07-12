@@ -75,10 +75,25 @@ const os = defineCollection({
     ctaPrimary: z.string(), // 先行登録ボタン
     ctaSecondary: z.string(), // アンカー（できることを見る）
     waitlistNote: z.string(), // 「まだ販売していない・決済導線なし」の正直表記（床）
-    capTitle: z.string(),
-    caps: z.array(z.object({ title: z.string(), body: z.string() })), // 主役＝能力
+    chips: z.array(z.string()), // ヒーロー下のトラスト・チップ（署名/決定論/介入）
+    console: z.object({ // ヒーロー右の「自律実行ログ」＝動作イメージ（明示ラベル・数字は本番実データではない）
+      title: z.string(),
+      tag: z.string(), // "動作イメージ" ラベル（誠実＝ライブ実データと誤認させない）
+      rows: z.array(z.object({ text: z.string(), time: z.string(), state: z.string().optional() })),
+      foot: z.string(),
+    }),
+    capTitle: z.string(), // section eyebrow（FEATURES · 機能）
+    capHeading: z.string(),
+    capLead: z.string(),
+    caps: z.array(z.object({ // 主役＝能力（試作 Features 準拠：icon＋番号は index 由来・個人/法人タグ）
+      title: z.string(),
+      body: z.string(),
+      personal: z.string(), // 個人ユースケース
+      corporate: z.string(), // 法人ユースケース
+    })),
     howTitle: z.string(),
     how: z.array(z.string()), // 自走ループのステップ
+    proofLabel: z.string(), // LIVE TELEMETRY · 無人運転の証拠
     proofTitle: z.string(),
     proof: z.object({
       heading: z.string(),

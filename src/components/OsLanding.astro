@@ -1,8 +1,7 @@
 ---
-// 自走OS「Mioca」の準備中/先行登録(waitlist)LP。
-// デザインは HomeLanding の言語（丸見出し/eyebrow/グラデ境界線ホバー/全面オーロラ）を継承。
-// 主役＝模倣困難な能力（無人で事業が回る）。誠実（署名・限界の正直表記）は控えめな担保に置く。
-// まだ販売しない＝決済導線を出さない・料金は「準備中」・捏造数値ゼロ（床）。
+// 自走OS「Mioca」の準備中/先行登録LP。関連試作（自走OS LPヒーロー／Features）に追従。
+// 主役＝運転してる感（ヒーロー右のライブ・コンソール＝動作イメージと明示）。誠実は担保として並走。
+// まだ販売しない＝決済導線なし・料金は「準備中」・捏造数値を live として出さない（コンソールは動作イメージ明示）。
 import LangSwitcher from './LangSwitcher.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { useTranslations, type Locale } from '../i18n/ui';
@@ -16,63 +15,115 @@ const isJa = locale === 'ja';
 const t = useTranslations(locale);
 const homeUrl = getRelativeLocaleUrl(locale, '/');
 
-// ── 先行登録の受付先（Tally）─────────────────────────────────────────────
+// ── 先行登録の受付先（Tally）───────────────────────────────────────────────
 // オーナー: ここに Tally フォームの URL を入れると、先行登録 CTA が有効化されます。
 // 空のあいだは「準備中」表示のまま（＝リンク切れを出さない・床/誠実）。
 const WAITLIST_URL = '';
 const waitlistOn = WAITLIST_URL.trim().length > 0;
 const soonLabel = isJa ? '先行登録（準備中）' : 'Waitlist — opening soon';
-const arrow =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+const nav = isJa
+  ? [{ l: '機能', h: '#cap' }, { l: 'しくみ', h: '#how' }, { l: '料金', h: '#pricing' }, { l: 'よくある質問', h: '#faq' }]
+  : [{ l: 'Features', h: '#cap' }, { l: 'How', h: '#how' }, { l: 'Pricing', h: '#pricing' }, { l: 'FAQ', h: '#faq' }];
+
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const iconCheck = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+const iconRun = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.22-8.56"/></svg>';
+// Features 3枚のアイコン（試作準拠: 実行/署名/承認ゲート）
+const capIcons = [
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4.5 13.5H12l-1 8.5 8.5-11.5H12z"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M16.5 11l2 2 4-4"/></svg>',
+];
 ---
 
 <div class="os-landing">
-  <div class="masthead">
-    <a class="back" href={homeUrl}>{t('nav.back')}</a>
-    <LangSwitcher locale={locale} />
-  </div>
+  <header class="nav">
+    <a class="brand" href={homeUrl} aria-label={d.brand}>
+      <span class="brand-glyph"></span><span class="brand-name">{d.brand}</span>
+      <span class="brand-status">{d.status}</span>
+    </a>
+    <nav class="nav-links" aria-label="section">
+      {nav.map((n) => <a href={n.h}>{n.l}</a>)}
+    </nav>
+    <div class="nav-right">
+      <LangSwitcher locale={locale} />
+      {waitlistOn ? (
+        <a class="lp-btn primary sm" href={WAITLIST_URL} target="_blank" rel="noopener">{d.ctaPrimary}</a>
+      ) : (
+        <span class="lp-btn primary sm is-soon" aria-disabled="true">{soonLabel}</span>
+      )}
+    </div>
+  </header>
 
   <section class="hero">
-    <div class="eyebrow-row">
+    <div class="hero-copy">
       <span class="eyebrow"><span class="dot"></span>{d.eyebrow}</span>
-      <span class="status-chip">{d.status}</span>
+      <h1 class="lp-h1" set:html={d.headline} />
+      <p class="lp-lead">{d.lead}</p>
+      <div class="cta-row">
+        {waitlistOn ? (
+          <a class="lp-btn primary" href={WAITLIST_URL} target="_blank" rel="noopener">{d.ctaPrimary}<Fragment set:html={arrow} /></a>
+        ) : (
+          <span class="lp-btn primary is-soon" aria-disabled="true">{soonLabel}</span>
+        )}
+        <a class="lp-btn ghost" href="#cap">{d.ctaSecondary}</a>
+      </div>
+      <ul class="chips">
+        {d.chips.map((c: string) => (<li>{c}</li>))}
+      </ul>
+      <p class="waitlist-note">{d.waitlistNote}</p>
     </div>
-    <h1 class="lp-h1" set:html={d.headline} />
-    <p class="lp-lead">{d.lead}</p>
-    <div class="cta-row">
-      {waitlistOn ? (
-        <a class="lp-btn primary" href={WAITLIST_URL} target="_blank" rel="noopener">
-          {d.ctaPrimary}<Fragment set:html={arrow} />
-        </a>
-      ) : (
-        <span class="lp-btn primary is-soon" aria-disabled="true">{soonLabel}</span>
-      )}
-      <a class="lp-btn ghost" href="#cap">{d.ctaSecondary}</a>
-    </div>
-    <p class="waitlist-note">{d.waitlistNote}</p>
+
+    <aside class="console" aria-label={d.console.title}>
+      <div class="con-head">
+        <span class="con-title">{d.console.title}</span>
+        <span class="con-tag">{d.console.tag}</span>
+      </div>
+      <ul class="con-rows">
+        {d.console.rows.map((r: { text: string; time: string; state?: string }) => (
+          <li class={r.state === 'running' ? 'run' : 'done'}>
+            <span class="con-ico"><Fragment set:html={r.state === 'running' ? iconRun : iconCheck} /></span>
+            <span class="con-text">{r.text}</span>
+            <span class="con-time">{r.time}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="con-foot">{d.console.foot}</p>
+    </aside>
   </section>
 
-  <section id="cap" class="block">
-    <div class="eyebrow-sec">{d.capTitle}</div>
-    <div class="cards">
-      {d.caps.map((c: { title: string; body: string }) => (
+  <section id="cap" class="block features">
+    <div class="sec-label">{d.capTitle}</div>
+    <h2 class="sec-h" set:html={d.capHeading} />
+    <p class="sec-lead">{d.capLead}</p>
+    <div class="cap-grid">
+      {d.caps.map((c: { title: string; body: string; personal: string; corporate: string }, i: number) => (
         <div class="capcard">
+          <div class="cap-top">
+            <span class="cap-ico"><Fragment set:html={capIcons[i % capIcons.length]} /></span>
+            <span class="cap-num">{String(i + 1).padStart(2, '0')}</span>
+          </div>
           <div class="cap-title">{c.title}</div>
           <p class="cap-body">{c.body}</p>
+          <div class="cap-tags">
+            <span class="tag p">{c.personal}</span>
+            <span class="tag c">{c.corporate}</span>
+          </div>
         </div>
       ))}
     </div>
   </section>
 
-  <section class="block">
-    <div class="eyebrow-sec">{d.howTitle}</div>
+  <section id="how" class="block">
+    <div class="sec-label">{d.howTitle}</div>
     <ol class="steps">
       {d.how.map((step: string) => (<li>{step}</li>))}
     </ol>
   </section>
 
-  <section class="block">
-    <div class="eyebrow-sec">{d.pricingTitle}</div>
+  <section id="pricing" class="block">
+    <div class="sec-label">{d.pricingTitle}</div>
     <div class="price-card">
       <div class="plan">{d.pricing.plan}</div>
       <div class="price">{d.pricing.price}</div>
@@ -80,10 +131,11 @@ const arrow =
     </div>
   </section>
 
-  <section class="block proof">
-    <div class="eyebrow-sec">{d.proofTitle}</div>
+  <section class="block telemetry">
+    <div class="sec-label">{d.proofLabel}</div>
+    <h2 class="sec-h">{d.proofTitle}</h2>
     <div class="proof-card">
-      <div class="proof-h">{d.proof.heading}</div>
+      <p class="proof-caveat">{d.proof.heading}</p>
       <p class="proof-body">{d.proof.body}</p>
       <ul class="proof-points">
         {d.proof.points.map((p: string) => (<li>{p}</li>))}
@@ -91,8 +143,8 @@ const arrow =
     </div>
   </section>
 
-  <section class="block">
-    <div class="eyebrow-sec">{d.faqTitle}</div>
+  <section id="faq" class="block">
+    <div class="sec-label">{d.faqTitle}</div>
     <dl class="faq">
       {d.faq.map((f: { q: string; a: string }) => (
         <>
@@ -107,9 +159,7 @@ const arrow =
     <h2 class="closing-h">{d.closingTitle}</h2>
     <p class="closing-body">{d.closingBody}</p>
     {waitlistOn ? (
-      <a class="lp-btn primary" href={WAITLIST_URL} target="_blank" rel="noopener">
-        {d.ctaPrimary}<Fragment set:html={arrow} />
-      </a>
+      <a class="lp-btn primary" href={WAITLIST_URL} target="_blank" rel="noopener">{d.ctaPrimary}<Fragment set:html={arrow} /></a>
     ) : (
       <span class="lp-btn primary is-soon" aria-disabled="true">{soonLabel}</span>
     )}
@@ -117,70 +167,117 @@ const arrow =
 </div>
 
 <style>
-  /* すべて .os-landing にスコープ（Astro scoped）。HomeLanding と同じトークンで coherence。 */
   .os-landing{
     --lp-ink:#14171f; --lp-ink2:#39414f; --lp-sub:#6a707c; --lp-faint:#9aa0ac;
-    --lp-line:#e6e8ee; --lp-line2:#d3d7e0; --lp-card:#ffffff;
-    --lp-accent:#0095f6;              /* サイト既存の青を維持（全ページ coherence） */
-    --lp-accent-ink:#0077c8;
-    --lp-grad-a:#22d3ee; --lp-grad-b:#8b5cf6;  /* ホバー境界線の flourish */
+    --lp-line:#e6e8ee; --lp-line2:#d3d7e0; --lp-card:#ffffff; --lp-soft:#f5f7fb;
+    --lp-accent:#0095f6; --lp-accent-ink:#0077c8;
+    --lp-grad-a:#22d3ee; --lp-grad-b:#8b5cf6;
     --lp-round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif;
     color:var(--lp-ink);
-    margin:0 -20px; padding:0 20px;
   }
-  /* 背景：home と同じ鮮明オーロラを os 面にも（統一感） */
+  /* 背景：全面ライトのオーロラ＋OS連想グリッド（graph-paper） */
   :global(body.os){
     background:
-      radial-gradient(58% 40% at 4% -4%, rgba(0,149,246,.20), transparent 58%),
-      radial-gradient(52% 36% at 100% 3%, rgba(139,92,246,.16), transparent 58%),
-      radial-gradient(60% 32% at 96% 102%, rgba(34,211,238,.13), transparent 60%),
-      linear-gradient(180deg,#e6edfe 0%, #edf2fd 50%, #eef3fd 100%);
-    background-repeat:no-repeat;
+      radial-gradient(56% 40% at 2% -6%, rgba(0,149,246,.20), transparent 56%),
+      radial-gradient(50% 36% at 100% 0%, rgba(139,92,246,.15), transparent 58%),
+      radial-gradient(60% 34% at 98% 104%, rgba(34,211,238,.12), transparent 60%),
+      linear-gradient(180deg,#e8eefe 0%, #eef2fd 52%, #eff3fd 100%);
+    background-repeat:no-repeat; background-attachment:fixed;
   }
-  :global(body.os .wrap){ max-width:720px; }
+  :global(body.os)::before{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(30,52,130,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,52,130,.05) 1px, transparent 1px);
+    background-size:42px 42px;
+    -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
+            mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
+  }
+  :global(body.os .wrap){ max-width:1080px; position:relative; z-index:1; }
 
-  .masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 6px}
-  .masthead .back{font-size:13px;letter-spacing:.01em;color:var(--lp-sub);text-decoration:none;transition:color .15s ease}
-  .masthead a.back:hover{color:var(--lp-accent-ink)}
+  /* ── nav ─────────────────────────────────────────── */
+  .nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:20px;
+    padding:14px 0;margin:0 -20px;padding-left:20px;padding-right:20px;
+    background:rgba(240,244,253,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(30,52,130,.06)}
+  .brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--lp-ink)}
+  .brand-glyph{width:22px;height:22px;border-radius:7px;flex:none;
+    background:radial-gradient(circle at 32% 30%, #fff 0 2px, transparent 3px),linear-gradient(135deg,var(--lp-accent),#4f7cff);
+    box-shadow:0 4px 12px -4px rgba(0,149,246,.6)}
+  .brand-name{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em}
+  .brand-status{font-family:var(--lp-round);font-weight:800;font-size:10.5px;letter-spacing:.05em;color:var(--lp-sub);
+    background:#fff;border:1px solid var(--lp-line2);padding:.18rem .5rem;border-radius:999px;margin-left:2px}
+  .nav-links{display:flex;gap:22px;margin-left:8px}
+  .nav-links a{font-family:var(--lp-round);font-weight:700;font-size:13.5px;color:var(--lp-ink2);text-decoration:none;transition:color .15s ease}
+  .nav-links a:hover{color:var(--lp-accent-ink)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
 
-  /* ── hero ─────────────────────────────────────────── */
-  .hero{padding:30px 0 8px}
-  .eyebrow-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  /* ── buttons ─────────────────────────────────────── */
+  .lp-btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--lp-round);font-weight:800;
+    font-size:14.5px;text-decoration:none;border-radius:999px;line-height:1;padding:.72rem 1.2rem;
+    border:1px solid transparent;white-space:nowrap;
+    transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease}
+  .lp-btn.sm{font-size:13px;padding:.55rem .95rem}
+  .lp-btn :global(svg){width:15px;height:15px;transition:transform .16s ease}
+  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(0,149,246,.55)}
+  .lp-btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px -6px rgba(0,149,246,.55)}
+  .lp-btn.primary:hover :global(svg){transform:translateX(3px)}
+  .lp-btn.primary.is-soon{background:#bcd7ee;color:#fff;box-shadow:none;cursor:default}
+  .lp-btn.primary.is-soon:hover{transform:none;box-shadow:none}
+  .lp-btn.ghost{background:#fff;color:var(--lp-ink);border-color:var(--lp-line2)}
+  .lp-btn.ghost:hover{transform:translateY(-1px);border-color:var(--lp-accent);color:var(--lp-accent-ink)}
+
+  /* ── hero ────────────────────────────────────────── */
+  .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:44px;align-items:center;padding:52px 0 40px}
   .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--lp-round);font-weight:800;
     font-size:12.5px;letter-spacing:.05em;color:var(--lp-accent-ink);
     background:rgba(0,149,246,.12);border:1px solid rgba(0,149,246,.30);padding:.4rem .85rem;border-radius:999px;
     box-shadow:0 4px 14px -8px rgba(0,149,246,.5)}
   .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
-  .status-chip{display:inline-flex;align-items:center;font-family:var(--lp-round);font-weight:800;font-size:11.5px;
-    letter-spacing:.06em;color:var(--lp-sub);background:#fff;border:1px solid var(--lp-line2);
-    padding:.34rem .7rem;border-radius:999px}
-  .lp-h1{font-family:var(--lp-round);font-weight:800;letter-spacing:-.025em;line-height:1.18;
-    font-size:clamp(32px,7vw,48px);margin:18px 0 0;text-wrap:balance;color:var(--lp-ink)}
-  .lp-lead{margin:14px 0 0;color:var(--lp-ink2);font-size:15.5px;line-height:1.85;max-width:44ch}
-  .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-  .lp-btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--lp-round);font-weight:800;
-    font-size:14.5px;text-decoration:none;border-radius:999px;line-height:1;padding:.72rem 1.2rem;
-    border:1px solid transparent;transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease}
-  .lp-btn :global(svg){width:15px;height:15px;transition:transform .16s ease}
-  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(0,149,246,.55)}
-  .lp-btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px -6px rgba(0,149,246,.55)}
-  .lp-btn.primary:hover :global(svg){transform:translateX(3px)}
-  .lp-btn.primary.is-soon{background:#bfd9ee;color:#fff;box-shadow:none;cursor:default}
-  .lp-btn.primary.is-soon:hover{transform:none;box-shadow:none}
-  .lp-btn.ghost{background:#fff;color:var(--lp-ink);border-color:var(--lp-line2)}
-  .lp-btn.ghost:hover{transform:translateY(-1px);border-color:var(--lp-accent);color:var(--lp-accent-ink)}
-  .waitlist-note{margin:12px 0 0;font-size:12.5px;line-height:1.65;color:var(--lp-sub);max-width:46ch}
+  .lp-h1{font-family:var(--lp-round);font-weight:800;letter-spacing:-.025em;line-height:1.16;
+    font-size:clamp(34px,5.4vw,52px);margin:18px 0 0;text-wrap:balance;color:var(--lp-ink)}
+  .lp-h1 :global(br){}
+  .lp-lead{margin:16px 0 0;color:var(--lp-ink2);font-size:16px;line-height:1.85;max-width:46ch}
+  .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;margin:20px 0 0;padding:0}
+  .chips li{position:relative;padding-left:18px;font-family:var(--lp-round);font-weight:700;font-size:12.5px;color:var(--lp-sub)}
+  .chips li::before{content:"";position:absolute;left:2px;top:.42em;width:7px;height:7px;border-radius:50%;
+    background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
+  .waitlist-note{margin:16px 0 0;font-size:12.5px;line-height:1.65;color:var(--lp-sub);max-width:48ch}
 
-  /* ── section label ────────────────────────────────── */
-  .block{margin-top:40px}
-  .eyebrow-sec{font-family:var(--lp-round);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-    font-weight:800;color:var(--lp-faint);margin-bottom:14px}
+  /* console = 動作イメージ */
+  .console{background:var(--lp-card);border:1px solid var(--lp-line);border-radius:20px;padding:20px 20px 16px;
+    box-shadow:0 22px 50px -26px rgba(20,30,80,.4),0 3px 10px -4px rgba(20,30,80,.12)}
+  .con-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--lp-line)}
+  .con-title{font-family:var(--lp-round);font-weight:800;font-size:14px;color:var(--lp-ink)}
+  .con-tag{font-family:var(--lp-round);font-weight:800;font-size:10.5px;letter-spacing:.04em;color:var(--lp-accent-ink);
+    background:rgba(0,149,246,.10);border:1px solid rgba(0,149,246,.26);padding:.2rem .55rem;border-radius:999px}
+  .con-rows{list-style:none;margin:6px 0 0;padding:0}
+  .con-rows li{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid #f0f2f7}
+  .con-rows li:last-child{border-bottom:none}
+  .con-ico{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .con-ico :global(svg){width:13px;height:13px}
+  .con-rows li.done .con-ico{background:rgba(0,149,246,.12);color:var(--lp-accent-ink)}
+  .con-rows li.run .con-ico{background:var(--lp-soft);color:var(--lp-sub)}
+  .con-rows li.run .con-ico :global(svg){animation:spin 1.6s linear infinite}
+  .con-text{flex:1;font-size:13.5px;color:var(--lp-ink2);line-height:1.35}
+  .con-time{font-family:var(--lp-round);font-weight:700;font-size:12px;color:var(--lp-faint);white-space:nowrap}
+  .con-rows li.run .con-time{color:var(--lp-accent-ink)}
+  .con-foot{margin:14px 0 0;font-size:11px;line-height:1.55;color:var(--lp-faint)}
+  @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* ── capability cards（主役）— hover でシアン→パープルの境界線 ── */
-  .cards{display:flex;flex-direction:column;gap:12px}
-  .capcard{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);
-    border-radius:18px;padding:22px 24px;isolation:isolate;
-    box-shadow:0 3px 10px -4px rgba(20,30,80,.12);
+  /* ── section scaffolding ─────────────────────────── */
+  .block{margin-top:64px}
+  .sec-label{font-family:var(--lp-round);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:800;color:var(--lp-accent-ink);margin-bottom:12px}
+  .sec-h{font-family:var(--lp-round);font-weight:800;letter-spacing:-.02em;line-height:1.2;
+    font-size:clamp(24px,3.6vw,34px);color:var(--lp-ink)}
+  .sec-lead{margin:12px 0 0;color:var(--lp-ink2);font-size:15px;line-height:1.8;max-width:52ch}
+
+  /* features grid */
+  .features .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+  .capcard{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);border-radius:18px;
+    padding:22px 22px 20px;isolation:isolate;box-shadow:0 3px 10px -4px rgba(20,30,80,.12);
     transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
   .capcard::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.6px;z-index:2;pointer-events:none;
     background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b));opacity:0;transition:opacity .28s ease;
@@ -188,44 +285,66 @@ const arrow =
             mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
   .capcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(20,30,80,.28)}
   .capcard:hover::before{opacity:1}
+  .cap-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .cap-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,rgba(0,149,246,.14),rgba(139,92,246,.14));color:var(--lp-accent-ink)}
+  .cap-ico :global(svg){width:22px;height:22px}
+  .cap-num{font-family:var(--lp-round);font-weight:800;font-size:13px;color:var(--lp-faint)}
   .cap-title{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--lp-ink)}
-  .cap-body{font-size:14px;color:var(--lp-sub);line-height:1.7;margin-top:8px}
+  .cap-body{font-size:13.5px;color:var(--lp-sub);line-height:1.75;margin-top:8px}
+  .cap-tags{margin-top:16px;padding-top:14px;border-top:1px solid var(--lp-line);display:flex;flex-direction:column;gap:6px}
+  .cap-tags .tag{position:relative;padding-left:16px;font-family:var(--lp-round);font-weight:700;font-size:12.5px}
+  .cap-tags .tag::before{content:"";position:absolute;left:2px;top:.42em;width:7px;height:7px;border-radius:50%}
+  .cap-tags .tag.p{color:var(--lp-accent-ink)}
+  .cap-tags .tag.p::before{background:var(--lp-accent)}
+  .cap-tags .tag.c{color:#7c4ddc}
+  .cap-tags .tag.c::before{background:var(--lp-grad-b)}
 
-  /* ── steps（自走ループ）── */
-  .steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+  /* steps */
+  .steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
   .steps li{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);border-radius:14px;
-    padding:15px 18px 15px 54px;font-size:14px;line-height:1.7;color:var(--lp-ink2);counter-increment:s}
-  .steps li::before{content:counter(s);position:absolute;left:15px;top:13px;width:26px;height:26px;border-radius:50%;
-    font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,var(--lp-accent),#4f7cff)}
+    padding:15px 18px 15px 54px;font-size:14px;line-height:1.6;color:var(--lp-ink2);counter-increment:s}
+  .steps li::before{content:counter(s);position:absolute;left:15px;top:50%;transform:translateY(-50%);
+    width:26px;height:26px;border-radius:50%;font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;
+    display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--lp-accent),#4f7cff)}
 
-  /* ── pricing（準備中・決済導線なし）── */
-  .price-card{background:var(--lp-card);border:1px solid var(--lp-line);border-radius:18px;padding:26px 24px;text-align:center}
+  /* pricing */
+  .price-card{background:var(--lp-card);border:1px solid var(--lp-line);border-radius:18px;padding:28px 24px;text-align:center;max-width:520px}
   .price-card .plan{font-family:var(--lp-round);font-weight:800;font-size:13px;letter-spacing:.05em;color:var(--lp-accent-ink)}
   .price-card .price{font-family:var(--lp-round);font-weight:800;font-size:30px;letter-spacing:-.01em;color:var(--lp-ink);margin-top:6px}
-  .price-card .price-note{font-size:13px;color:var(--lp-sub);line-height:1.7;margin-top:12px;max-width:48ch;margin-left:auto;margin-right:auto}
+  .price-card .price-note{font-size:13px;color:var(--lp-sub);line-height:1.7;margin-top:12px}
 
-  /* ── transparency（誠実＝控えめな担保・脚注階層）── */
-  .proof-card{background:var(--lp-soft,#f5f7fb);border:1px solid var(--lp-line);border-radius:16px;padding:20px 22px}
-  .proof-h{font-family:var(--lp-round);font-weight:800;font-size:14.5px;color:var(--lp-ink2);letter-spacing:-.01em}
-  .proof-body{font-size:13px;color:var(--lp-sub);line-height:1.75;margin-top:6px}
-  .proof-points{list-style:none;margin:12px 0 0;display:flex;flex-direction:column;gap:7px}
+  /* telemetry / transparency */
+  .proof-card{background:var(--lp-soft);border:1px solid var(--lp-line);border-radius:16px;padding:22px 24px;margin-top:20px;max-width:720px}
+  .proof-caveat{font-family:var(--lp-round);font-weight:700;font-size:12.5px;color:var(--lp-accent-ink);
+    background:rgba(0,149,246,.08);border:1px solid rgba(0,149,246,.2);border-radius:10px;padding:8px 12px;line-height:1.55}
+  .proof-body{font-size:14px;color:var(--lp-ink2);line-height:1.8;margin-top:14px}
+  .proof-points{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
   .proof-points li{position:relative;padding-left:20px;font-size:12.5px;line-height:1.6;color:var(--lp-sub)}
   .proof-points li::before{content:"";position:absolute;left:2px;top:.52em;width:6px;height:6px;border-radius:50%;
     background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
 
-  /* ── faq ── */
+  /* faq */
+  .faq{max-width:760px}
   .faq dt{font-family:var(--lp-round);font-weight:800;font-size:14.5px;margin-top:20px;color:var(--lp-ink);letter-spacing:-.01em}
   .faq dt::before{content:"Q. ";color:var(--lp-accent-ink)}
   .faq dd{font-size:14px;color:var(--lp-sub);margin-top:5px;line-height:1.7}
 
-  /* ── closing CTA ── */
-  .closing{margin-top:48px;text-align:center;background:var(--lp-card);border:1px solid var(--lp-line);
-    border-radius:20px;padding:34px 24px;box-shadow:0 3px 10px -4px rgba(20,30,80,.12)}
-  .closing-h{font-family:var(--lp-round);font-weight:800;font-size:20px;letter-spacing:-.01em;color:var(--lp-ink)}
-  .closing-body{font-size:14px;color:var(--lp-sub);line-height:1.7;margin:8px 0 18px}
+  /* closing */
+  .closing{margin-top:72px;margin-bottom:8px;text-align:center;background:var(--lp-card);border:1px solid var(--lp-line);
+    border-radius:22px;padding:44px 24px;box-shadow:0 20px 50px -30px rgba(20,30,80,.4),0 3px 10px -4px rgba(20,30,80,.12)}
+  .closing-h{font-family:var(--lp-round);font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--lp-ink)}
+  .closing-body{font-size:14px;color:var(--lp-sub);line-height:1.7;margin:8px 0 20px}
 
+  /* ── responsive ─────────────────────────────────── */
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr;gap:28px;padding:36px 0 28px}
+    .nav-links{display:none}
+    .features .cap-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .proof-points{grid-template-columns:1fr}
+  }
   @media (prefers-reduced-motion:reduce){
-    .capcard,.lp-btn,.capcard::before,.lp-btn :global(svg){transition:none}
+    .capcard,.lp-btn,.capcard::before,.lp-btn :global(svg),.con-rows li.run .con-ico :global(svg){transition:none;animation:none}
   }
 </style>

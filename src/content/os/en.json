@@ -1,30 +1,50 @@
 {
   "locale": "en",
-  "title": "Mioca — the AI that keeps your business running (coming soon)",
-  "description": "Mioca reads the market, proposes the next move, builds the deliverable, waits for your approval, ships, measures the result, and rewrites itself — running the loop unattended. Waitlist opening soon.",
-  "ogTitle": "Mioca — a business that runs itself",
-  "ogDescription": "From proposing to shipping, measuring, and revising. Let go, and the business keeps moving.",
+  "title": "Mioca — let go, and the business keeps running (coming soon)",
+  "description": "An unattended business OS. Mioca decides and executes across acquisition, support, delivery, and improvement. Numbers measured deterministically, published with tamper-evident signatures. Waitlist opening soon.",
+  "ogTitle": "Mioca — a business OS that runs itself",
+  "ogDescription": "Let go of the wheel, the business keeps running. From proposing to shipping, measuring, and revising.",
   "brand": "Mioca",
-  "eyebrow": "Mioca · the AI that keeps a business running",
+  "eyebrow": "the business OS that runs unattended",
   "status": "Coming soon",
-  "headline": "Let go of the wheel,<br>the business keeps moving.",
-  "lead": "Mioca reads the market, proposes the next move, builds the deliverable, waits for your approval, ships it, measures what happened, and rewrites itself. You set the direction and approve the few calls that matter. The machine runs the rest.",
+  "headline": "Let go of the wheel,<br>the business keeps running.",
+  "lead": "Mioca decides and executes across acquisition, support, delivery, and improvement. You touch it only a little each week. Every number is measured deterministically and published with a tamper-evident signature.",
   "ctaPrimary": "Join the waitlist",
   "ctaSecondary": "See what it does",
   "waitlistNote": "Not for sale yet. There's no checkout on this page. Join the waitlist and we'll tell you first when it opens — and share indicative pricing before anyone else.",
-  "capTitle": "What it does",
+  "chips": ["Tamper-evident signatures", "Deterministic metrics", "Minimal human touch"],
+  "console": {
+    "title": "Autonomous activity",
+    "tag": "Sample",
+    "rows": [
+      { "text": "Published 3 articles", "time": "09:12", "state": "done" },
+      { "text": "Synced inventory", "time": "11:40", "state": "done" },
+      { "text": "Answered 12 inquiries", "time": "14:05", "state": "done" },
+      { "text": "Optimizing listing prices", "time": "live", "state": "running" }
+    ],
+    "foot": "* This is an illustration (coming soon). After launch, this shows real data from the internal ledger."
+  },
+  "capTitle": "FEATURES",
+  "capHeading": "Start as one person.<br>Grow into your core OS.",
+  "capLead": "Today, for one person's hands-off. Tomorrow, as an organization's backbone. The same system grows with you.",
   "caps": [
     {
-      "title": "Decides the next move",
-      "body": "It reads data on the market and on what's working, then proposes what to do next. It forms a hypothesis and acts — it doesn't wait to be told."
+      "title": "Executes autonomously",
+      "body": "From acquisition to support, delivery, and improvement, Mioca decides and acts. You just hand it the goal.",
+      "personal": "Solo: hands-off",
+      "corporate": "Team: automated operations"
     },
     {
-      "title": "Builds, ships, measures",
-      "body": "It generates the deliverables — articles, landing pages, posts — ships them after approval, and measures reach and clicks to inform the next call."
+      "title": "Proves it deterministically",
+      "body": "Every number is reproducible from the same input and signed for tamper-detection. Hand your results straight to an audit.",
+      "personal": "Solo: peace of mind",
+      "corporate": "Team: audit & governance"
     },
     {
-      "title": "Sees the result, rewrites itself",
-      "body": "What worked and what didn't goes into a ledger, and the strategy itself gets rewritten. Not \"learning\" — revision. A little sharper each round."
+      "title": "Stays under control",
+      "body": "High-risk actions always pass a human approval gate. Even running itself, control stays in your hands.",
+      "personal": "Solo: no runaway",
+      "corporate": "Team: internal controls"
     }
   ],
   "howTitle": "How the loop runs",
@@ -37,10 +57,11 @@
     "Measure the result and record it",
     "Rewrite the strategy, then go again"
   ],
-  "proofTitle": "On transparency",
+  "proofLabel": "LIVE TELEMETRY · Proof of unattended operation",
+  "proofTitle": "See it running, as it runs.",
   "proof": {
-    "heading": "You can check the work, after the fact",
-    "body": "Because it runs on its own, it doesn't hide what it did. Every decision and deliverable is signed and logged, so you can verify it later. When it can't do something, it says so.",
+    "heading": "* Coming soon: this is replaced by real ledger data after launch. For now, it explains the mechanism.",
+    "body": "Every number is tallied deterministically from the internal ledger. The LLM writes none of it. Recompute the signature from the same input and anyone can detect tampering.",
     "points": [
       "Decisions and shipments are logged — when, what, and why",
       "Deliverables are signed, so tampering is detectable",
