@@ -5,8 +5,13 @@
   "observability": {
     "enabled": true
   },
+  // /l/* はチャネル帰属のインタースティシャル（worker/index.js 参照）。ここには asset が無いので
+  // worker を先に通す。それ以外は従来どおり静的 assets + _redirects を配信。
+  "main": "worker/index.js",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/l/*"]
   },
   "compatibility_flags": [
     "nodejs_compat"
