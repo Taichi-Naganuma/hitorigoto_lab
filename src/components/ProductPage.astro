@@ -17,6 +17,15 @@ interface Props {
     cta: string;
     ctaNote: string;
     stripeLink: string;
+    planLabel?: string;
+    plan2?: {
+      label: string;
+      priceDisplay: string;
+      priceNote?: string;
+      cta: string;
+      ctaNote: string;
+      stripeLink: string;
+    };
     deliver: { title: string; body: string }[];
     steps: string[];
     target: string[];
@@ -62,14 +71,37 @@ const back =
     <p class="plp-lead fx-rise" set:html={product.lead} />
   </section>
 
-  <div class="buy fx-ring fx-rise" style="--fxw:2.4px;--fxo:.55;--fxs:9s">
-    <div class="buy-price">
-      {product.priceDisplay}
-      {product.priceNote && <small>{product.priceNote}</small>}
+  {product.plan2 ? (
+    <div class="plans fx-rise">
+      <div class="plan-card fx-ring" style="--fxw:2.2px;--fxo:.5;--fxs:9s">
+        {product.planLabel && <div class="plan-label">{product.planLabel}</div>}
+        <div class="buy-price">
+          {product.priceDisplay}
+          {product.priceNote && <small>{product.priceNote}</small>}
+        </div>
+        <a class="buy-btn" href={product.stripeLink}>{product.cta}<Fragment set:html={arrow} /></a>
+        <p class="buy-note">{product.ctaNote}</p>
+      </div>
+      <div class="plan-card fx-ring" style="--fxw:2.2px;--fxo:.5;--fxs:11s">
+        <div class="plan-label">{product.plan2.label}</div>
+        <div class="buy-price">
+          {product.plan2.priceDisplay}
+          {product.plan2.priceNote && <small>{product.plan2.priceNote}</small>}
+        </div>
+        <a class="buy-btn" href={product.plan2.stripeLink}>{product.plan2.cta}<Fragment set:html={arrow} /></a>
+        <p class="buy-note">{product.plan2.ctaNote}</p>
+      </div>
     </div>
-    <a class="buy-btn" href={product.stripeLink}>{product.cta}<Fragment set:html={arrow} /></a>
-    <p class="buy-note">{product.ctaNote}</p>
-  </div>
+  ) : (
+    <div class="buy fx-ring fx-rise" style="--fxw:2.4px;--fxo:.55;--fxs:9s">
+      <div class="buy-price">
+        {product.priceDisplay}
+        {product.priceNote && <small>{product.priceNote}</small>}
+      </div>
+      <a class="buy-btn" href={product.stripeLink}>{product.cta}<Fragment set:html={arrow} /></a>
+      <p class="buy-note">{product.ctaNote}</p>
+    </div>
+  )}
 
   <section class="block">
     <div class="sec-label fx-rise">{t('product.deliver')}</div>
@@ -159,6 +191,16 @@ const back =
   .buy-btn:hover :global(svg) { transform: translateX(3px); }
   .buy-note { margin: 14px auto 0; font-size: 12.5px; line-height: 1.65; color: var(--lp-sub); max-width: 42ch; }
 
+  /* 複数プラン（例: mioca フルドラフト＋数字診断） */
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0 8px; align-items: stretch; }
+  .plan-card { position: relative; background: var(--lp-card); border-radius: 20px; padding: 26px 22px 24px; text-align: center;
+    display: flex; flex-direction: column;
+    box-shadow: 0 20px 48px -26px rgba(40, 30, 120, .42), 0 3px 10px -4px rgba(20, 30, 80, .12); }
+  .plan-label { font-family: var(--lp-round); font-weight: 800; font-size: 13.5px; color: var(--lp-accent-ink); letter-spacing: -.01em; margin-bottom: 12px; }
+  .plan-card .buy-price { font-size: 30px; }
+  .plan-card .buy-btn { width: 100%; justify-content: center; font-size: 14px; padding: .85rem 1rem; }
+  .plan-card .buy-note { margin-top: auto; padding-top: 12px; max-width: none; }
+
   /* ── sections ─────────────────────────────────────────── */
   .block { margin-top: 48px; }
   .sec-label { font-family: var(--lp-round); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 800;
@@ -211,6 +253,7 @@ const back =
 
   @media (max-width: 560px) {
     .deliver-grid { grid-template-columns: 1fr; }
+    .plans { grid-template-columns: 1fr; }
     .masthead { flex-wrap: wrap; }
   }
   @media (prefers-reduced-motion: reduce) {
