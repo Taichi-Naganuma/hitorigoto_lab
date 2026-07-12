@@ -15,9 +15,13 @@ const isJa = locale === 'ja';
 const t = useTranslations(locale);
 const homeUrl = getRelativeLocaleUrl(locale, '/');
 
-// ── 先行登録の受付先（Tally）───────────────────────────────────────────────
-// オーナー提供の Tally 先行登録フォーム。空にすると CTA は「準備中」表示に戻る（床）。
-const WAITLIST_URL = 'https://tally.so/r/VLAPeM';
+// ── 先行登録の受付先（Tally・言語別）─────────────────────────────────────
+// オーナー提供の Tally 先行登録フォーム（ja / en で別フォーム）。空にすると CTA は「準備中」表示に戻る（床）。
+const WAITLIST_URLS: Record<Locale, string> = {
+  ja: 'https://tally.so/r/VLAPeM',
+  en: 'https://tally.so/r/XxkopY',
+};
+const WAITLIST_URL = WAITLIST_URLS[locale] ?? '';
 const waitlistOn = WAITLIST_URL.trim().length > 0;
 const soonLabel = isJa ? '先行登録（準備中）' : 'Waitlist — opening soon';
 
