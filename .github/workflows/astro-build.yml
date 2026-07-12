@@ -1,0 +1,33 @@
+# Node CI — astro build を PR ゲートにする（自走OS サイト改善「分業」の第二段ゲート）。
+# 正本: my-portfolio Trains/docs/design/planned/os-site-improvement-division-of-labor.md §4-4。
+# 目的: Cloudflare Workers Builds は main push で即デプロイするため、その手前（PR 段）で
+#       `npm run build`（= astro build）の緑を server-side の真実にする。緑が出るまでオーナーは
+#       マージしない運用（private+無料は branch protection 不可のため運用規約で担保・auto-merge しない）。
+# 対象: main への全 PR（機械レーンの feat/lp-auto-* を含む）。手動実行も可。
+name: astro build
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astro-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies (locked)
+        run: npm ci
+      - name: Build (astro build)
+        run: npm run build
