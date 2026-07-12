@@ -95,6 +95,21 @@ const capIcons = [
     </ol>
   </section>
 
+  {d.about && (
+    <section class="block about-os">
+      <div class="sec-label">{d.about.label}</div>
+      <h2 class="sec-h" set:html={d.about.heading} />
+      <div class="about-prose">
+        {d.about.body.map((p: string) => (<p set:html={p} />))}
+      </div>
+      {d.about.points && (
+        <ul class="about-points">
+          {d.about.points.map((pt: string) => (<li>{pt}</li>))}
+        </ul>
+      )}
+    </section>
+  )}
+
   <section id="pricing" class="block">
     <div class="sec-label">{d.pricingTitle}</div>
     <div class="price-card">
@@ -296,6 +311,13 @@ const capIcons = [
   .proof-points{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
   .proof-points li{position:relative;padding-left:20px;font-size:12.5px;line-height:1.6;color:var(--lp-sub)}
   .proof-points li::before{content:"";position:absolute;left:2px;top:.52em;width:6px;height:6px;border-radius:50%;background:var(--lp-grad)}
+
+  .about-os .about-prose{margin-top:18px;max-width:760px}
+  .about-os .about-prose p{font-size:14.5px;color:var(--lp-ink2);line-height:1.9;margin-top:14px}
+  .about-os .about-prose p:first-child{margin-top:0}
+  .about-os .about-points{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:9px;max-width:640px}
+  .about-os .about-points li{position:relative;padding-left:22px;font-family:var(--lp-round);font-weight:600;font-size:13.5px;line-height:1.7;color:var(--lp-ink2)}
+  .about-os .about-points li::before{content:"";position:absolute;left:4px;top:.58em;width:8px;height:8px;border-radius:50%;background:var(--lp-grad)}
 
   .faq{max-width:760px}
   .faq dt{font-family:var(--lp-round);font-weight:800;font-size:14.5px;margin-top:20px;color:var(--lp-ink);letter-spacing:-.01em}

@@ -1,7 +1,7 @@
 {
   "locale": "en",
   "title": "Mioca — let go, and the business keeps running (coming soon)",
-  "description": "An unattended business OS. Mioca decides and executes across acquisition, support, delivery, and improvement. Numbers measured deterministically, published with tamper-evident signatures. Waitlist opening soon.",
+  "description": "An unattended business OS — Mioca (澪火). It decides and executes across acquisition, support, delivery, and improvement. Numbers measured deterministically, published with tamper-evident signatures. Waitlist opening soon.",
   "ogTitle": "Mioca — a business OS that runs itself",
   "ogDescription": "Let go of the wheel, the business keeps running. From proposing to shipping, measuring, and revising.",
   "brand": "Mioca",
@@ -9,6 +9,20 @@
   "status": "Coming soon",
   "headline": "Let go of the wheel,<br>the business keeps running.",
   "lead": "Mioca decides and executes across acquisition, support, delivery, and improvement. You touch it only a little each week. Every number is measured deterministically and published with a tamper-evident signature.",
+  "about": {
+    "label": "ABOUT · Mioca (澪火)",
+    "heading": "Mioca — an autonomous business OS that runs unattended.",
+    "body": [
+      "Mioca is an autonomous OS built to take on the role of the operator itself. Acquisition, support, delivery, improvement — the work people used to do by hand — Mioca observes, forms a hypothesis, decides, and executes on its own. You hand it a goal; that's all. Let go of the wheel, and the business keeps running.",
+      "In Japanese the name is written 澪火. Mio (澪) is the wake a boat leaves on the water — the path already traveled, which becomes the marker for the course ahead. Bi (火), fire, is the energy that keeps it moving without going out. Even on a night no one is watching, it holds its course and keeps going. That's the posture the name carries.",
+      "We don't promise flashy, do-everything magic — only what it can actually do, stated honestly. Every number is measured deterministically and published with a tamper-evident signature, and every high-risk action passes a human approval gate. We'd rather be \"correct and slow\" than \"fast and fake\" — that, we think, is what it takes for an OS to be trusted while it runs unattended."
+    ],
+    "points": [
+      "It takes on the real work — acquisition, support, delivery, improvement",
+      "Humans only set direction and approve high-risk actions",
+      "Numbers are measured deterministically and published signed (tamper-evident)"
+    ]
+  },
   "ctaPrimary": "Join the waitlist",
   "ctaSecondary": "See what it does",
   "waitlistNote": "Not for sale yet. There's no checkout on this page. Join the waitlist and we'll tell you first when it opens — and share indicative pricing before anyone else.",
