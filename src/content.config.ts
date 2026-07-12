@@ -56,6 +56,44 @@ const home = defineCollection({
   }),
 });
 
+// os: 自走OS「Mioca」の準備中/先行登録(waitlist)LP。1ロケール1JSON（os/<locale>.json）。
+// products と同じく Zod schema が第二段ゲート＝将来 AI が LP コピーを改訂しても、
+// 壊れた JSON は astro build が落として公開候補にしない。まだ販売しない＝価格/決済フィールドは持たない（床・誠実）。
+const os = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/content/os' }),
+  schema: z.object({
+    locale: z.enum(['ja', 'en']),
+    title: z.string(), // <title>
+    description: z.string(), // meta description
+    ogTitle: z.string().optional(),
+    ogDescription: z.string().optional(),
+    brand: z.string(), // "Mioca"
+    eyebrow: z.string(), // hero の小見出しピル
+    status: z.string(), // "準備中" / "Coming soon"（バッジ）
+    headline: z.string(), // h1 — inline <br>/<b> allowed
+    lead: z.string(),
+    ctaPrimary: z.string(), // 先行登録ボタン
+    ctaSecondary: z.string(), // アンカー（できることを見る）
+    waitlistNote: z.string(), // 「まだ販売していない・決済導線なし」の正直表記（床）
+    capTitle: z.string(),
+    caps: z.array(z.object({ title: z.string(), body: z.string() })), // 主役＝能力
+    howTitle: z.string(),
+    how: z.array(z.string()), // 自走ループのステップ
+    proofTitle: z.string(),
+    proof: z.object({
+      heading: z.string(),
+      body: z.string(),
+      points: z.array(z.string()),
+    }), // 誠実は table stakes＝控えめな担保（脚注階層）
+    pricingTitle: z.string(),
+    pricing: z.object({ plan: z.string(), price: z.string(), note: z.string() }), // price は「準備中」＝捏造数値を置かない
+    faqTitle: z.string(),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })),
+    closingTitle: z.string(),
+    closingBody: z.string(),
+  }),
+});
+
 // GEO 記事（buyer-intent の回答形コンテンツ）。geo-scout 列車の generate_article_post が
 // src/content/articles/<slug>.md に draft:true で書く。schema は生成 md の front-matter に一致させる
 // （不一致だと astro build が落ちる＝壊れた記事を公開候補にしない第二段ゲート）。
@@ -71,4 +109,4 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { products, home, articles };
+export const collections = { products, home, os, articles };

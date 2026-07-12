@@ -1,0 +1,231 @@
+---
+// 自走OS「Mioca」の準備中/先行登録(waitlist)LP。
+// デザインは HomeLanding の言語（丸見出し/eyebrow/グラデ境界線ホバー/全面オーロラ）を継承。
+// 主役＝模倣困難な能力（無人で事業が回る）。誠実（署名・限界の正直表記）は控えめな担保に置く。
+// まだ販売しない＝決済導線を出さない・料金は「準備中」・捏造数値ゼロ（床）。
+import LangSwitcher from './LangSwitcher.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  d: any; // os collection entry data
+}
+const { locale, d } = Astro.props;
+const isJa = locale === 'ja';
+const t = useTranslations(locale);
+const homeUrl = getRelativeLocaleUrl(locale, '/');
+
+// ── 先行登録の受付先（Tally）─────────────────────────────────────────────
+// オーナー: ここに Tally フォームの URL を入れると、先行登録 CTA が有効化されます。
+// 空のあいだは「準備中」表示のまま（＝リンク切れを出さない・床/誠実）。
+const WAITLIST_URL = '';
+const waitlistOn = WAITLIST_URL.trim().length > 0;
+const soonLabel = isJa ? '先行登録（準備中）' : 'Waitlist — opening soon';
+const arrow =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+---
+
+<div class="os-landing">
+  <div class="masthead">
+    <a class="back" href={homeUrl}>{t('nav.back')}</a>
+    <LangSwitcher locale={locale} />
+  </div>
+
+  <section class="hero">
+    <div class="eyebrow-row">
+      <span class="eyebrow"><span class="dot"></span>{d.eyebrow}</span>
+      <span class="status-chip">{d.status}</span>
+    </div>
+    <h1 class="lp-h1" set:html={d.headline} />
+    <p class="lp-lead">{d.lead}</p>
+    <div class="cta-row">
+      {waitlistOn ? (
+        <a class="lp-btn primary" href={WAITLIST_URL} target="_blank" rel="noopener">
+          {d.ctaPrimary}<Fragment set:html={arrow} />
+        </a>
+      ) : (
+        <span class="lp-btn primary is-soon" aria-disabled="true">{soonLabel}</span>
+      )}
+      <a class="lp-btn ghost" href="#cap">{d.ctaSecondary}</a>
+    </div>
+    <p class="waitlist-note">{d.waitlistNote}</p>
+  </section>
+
+  <section id="cap" class="block">
+    <div class="eyebrow-sec">{d.capTitle}</div>
+    <div class="cards">
+      {d.caps.map((c: { title: string; body: string }) => (
+        <div class="capcard">
+          <div class="cap-title">{c.title}</div>
+          <p class="cap-body">{c.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="eyebrow-sec">{d.howTitle}</div>
+    <ol class="steps">
+      {d.how.map((step: string) => (<li>{step}</li>))}
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="eyebrow-sec">{d.pricingTitle}</div>
+    <div class="price-card">
+      <div class="plan">{d.pricing.plan}</div>
+      <div class="price">{d.pricing.price}</div>
+      <p class="price-note">{d.pricing.note}</p>
+    </div>
+  </section>
+
+  <section class="block proof">
+    <div class="eyebrow-sec">{d.proofTitle}</div>
+    <div class="proof-card">
+      <div class="proof-h">{d.proof.heading}</div>
+      <p class="proof-body">{d.proof.body}</p>
+      <ul class="proof-points">
+        {d.proof.points.map((p: string) => (<li>{p}</li>))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="eyebrow-sec">{d.faqTitle}</div>
+    <dl class="faq">
+      {d.faq.map((f: { q: string; a: string }) => (
+        <>
+          <dt>{f.q}</dt>
+          <dd>{f.a}</dd>
+        </>
+      ))}
+    </dl>
+  </section>
+
+  <section class="closing">
+    <h2 class="closing-h">{d.closingTitle}</h2>
+    <p class="closing-body">{d.closingBody}</p>
+    {waitlistOn ? (
+      <a class="lp-btn primary" href={WAITLIST_URL} target="_blank" rel="noopener">
+        {d.ctaPrimary}<Fragment set:html={arrow} />
+      </a>
+    ) : (
+      <span class="lp-btn primary is-soon" aria-disabled="true">{soonLabel}</span>
+    )}
+  </section>
+</div>
+
+<style>
+  /* すべて .os-landing にスコープ（Astro scoped）。HomeLanding と同じトークンで coherence。 */
+  .os-landing{
+    --lp-ink:#14171f; --lp-ink2:#39414f; --lp-sub:#6a707c; --lp-faint:#9aa0ac;
+    --lp-line:#e6e8ee; --lp-line2:#d3d7e0; --lp-card:#ffffff;
+    --lp-accent:#0095f6;              /* サイト既存の青を維持（全ページ coherence） */
+    --lp-accent-ink:#0077c8;
+    --lp-grad-a:#22d3ee; --lp-grad-b:#8b5cf6;  /* ホバー境界線の flourish */
+    --lp-round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif;
+    color:var(--lp-ink);
+    margin:0 -20px; padding:0 20px;
+  }
+  /* 背景：home と同じ鮮明オーロラを os 面にも（統一感） */
+  :global(body.os){
+    background:
+      radial-gradient(58% 40% at 4% -4%, rgba(0,149,246,.20), transparent 58%),
+      radial-gradient(52% 36% at 100% 3%, rgba(139,92,246,.16), transparent 58%),
+      radial-gradient(60% 32% at 96% 102%, rgba(34,211,238,.13), transparent 60%),
+      linear-gradient(180deg,#e6edfe 0%, #edf2fd 50%, #eef3fd 100%);
+    background-repeat:no-repeat;
+  }
+  :global(body.os .wrap){ max-width:720px; }
+
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 6px}
+  .masthead .back{font-size:13px;letter-spacing:.01em;color:var(--lp-sub);text-decoration:none;transition:color .15s ease}
+  .masthead a.back:hover{color:var(--lp-accent-ink)}
+
+  /* ── hero ─────────────────────────────────────────── */
+  .hero{padding:30px 0 8px}
+  .eyebrow-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--lp-round);font-weight:800;
+    font-size:12.5px;letter-spacing:.05em;color:var(--lp-accent-ink);
+    background:rgba(0,149,246,.12);border:1px solid rgba(0,149,246,.30);padding:.4rem .85rem;border-radius:999px;
+    box-shadow:0 4px 14px -8px rgba(0,149,246,.5)}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
+  .status-chip{display:inline-flex;align-items:center;font-family:var(--lp-round);font-weight:800;font-size:11.5px;
+    letter-spacing:.06em;color:var(--lp-sub);background:#fff;border:1px solid var(--lp-line2);
+    padding:.34rem .7rem;border-radius:999px}
+  .lp-h1{font-family:var(--lp-round);font-weight:800;letter-spacing:-.025em;line-height:1.18;
+    font-size:clamp(32px,7vw,48px);margin:18px 0 0;text-wrap:balance;color:var(--lp-ink)}
+  .lp-lead{margin:14px 0 0;color:var(--lp-ink2);font-size:15.5px;line-height:1.85;max-width:44ch}
+  .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .lp-btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--lp-round);font-weight:800;
+    font-size:14.5px;text-decoration:none;border-radius:999px;line-height:1;padding:.72rem 1.2rem;
+    border:1px solid transparent;transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease}
+  .lp-btn :global(svg){width:15px;height:15px;transition:transform .16s ease}
+  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(0,149,246,.55)}
+  .lp-btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px -6px rgba(0,149,246,.55)}
+  .lp-btn.primary:hover :global(svg){transform:translateX(3px)}
+  .lp-btn.primary.is-soon{background:#bfd9ee;color:#fff;box-shadow:none;cursor:default}
+  .lp-btn.primary.is-soon:hover{transform:none;box-shadow:none}
+  .lp-btn.ghost{background:#fff;color:var(--lp-ink);border-color:var(--lp-line2)}
+  .lp-btn.ghost:hover{transform:translateY(-1px);border-color:var(--lp-accent);color:var(--lp-accent-ink)}
+  .waitlist-note{margin:12px 0 0;font-size:12.5px;line-height:1.65;color:var(--lp-sub);max-width:46ch}
+
+  /* ── section label ────────────────────────────────── */
+  .block{margin-top:40px}
+  .eyebrow-sec{font-family:var(--lp-round);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:800;color:var(--lp-faint);margin-bottom:14px}
+
+  /* ── capability cards（主役）— hover でシアン→パープルの境界線 ── */
+  .cards{display:flex;flex-direction:column;gap:12px}
+  .capcard{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);
+    border-radius:18px;padding:22px 24px;isolation:isolate;
+    box-shadow:0 3px 10px -4px rgba(20,30,80,.12);
+    transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
+  .capcard::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.6px;z-index:2;pointer-events:none;
+    background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b));opacity:0;transition:opacity .28s ease;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+  .capcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(20,30,80,.28)}
+  .capcard:hover::before{opacity:1}
+  .cap-title{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--lp-ink)}
+  .cap-body{font-size:14px;color:var(--lp-sub);line-height:1.7;margin-top:8px}
+
+  /* ── steps（自走ループ）── */
+  .steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+  .steps li{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);border-radius:14px;
+    padding:15px 18px 15px 54px;font-size:14px;line-height:1.7;color:var(--lp-ink2);counter-increment:s}
+  .steps li::before{content:counter(s);position:absolute;left:15px;top:13px;width:26px;height:26px;border-radius:50%;
+    font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--lp-accent),#4f7cff)}
+
+  /* ── pricing（準備中・決済導線なし）── */
+  .price-card{background:var(--lp-card);border:1px solid var(--lp-line);border-radius:18px;padding:26px 24px;text-align:center}
+  .price-card .plan{font-family:var(--lp-round);font-weight:800;font-size:13px;letter-spacing:.05em;color:var(--lp-accent-ink)}
+  .price-card .price{font-family:var(--lp-round);font-weight:800;font-size:30px;letter-spacing:-.01em;color:var(--lp-ink);margin-top:6px}
+  .price-card .price-note{font-size:13px;color:var(--lp-sub);line-height:1.7;margin-top:12px;max-width:48ch;margin-left:auto;margin-right:auto}
+
+  /* ── transparency（誠実＝控えめな担保・脚注階層）── */
+  .proof-card{background:var(--lp-soft,#f5f7fb);border:1px solid var(--lp-line);border-radius:16px;padding:20px 22px}
+  .proof-h{font-family:var(--lp-round);font-weight:800;font-size:14.5px;color:var(--lp-ink2);letter-spacing:-.01em}
+  .proof-body{font-size:13px;color:var(--lp-sub);line-height:1.75;margin-top:6px}
+  .proof-points{list-style:none;margin:12px 0 0;display:flex;flex-direction:column;gap:7px}
+  .proof-points li{position:relative;padding-left:20px;font-size:12.5px;line-height:1.6;color:var(--lp-sub)}
+  .proof-points li::before{content:"";position:absolute;left:2px;top:.52em;width:6px;height:6px;border-radius:50%;
+    background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
+
+  /* ── faq ── */
+  .faq dt{font-family:var(--lp-round);font-weight:800;font-size:14.5px;margin-top:20px;color:var(--lp-ink);letter-spacing:-.01em}
+  .faq dt::before{content:"Q. ";color:var(--lp-accent-ink)}
+  .faq dd{font-size:14px;color:var(--lp-sub);margin-top:5px;line-height:1.7}
+
+  /* ── closing CTA ── */
+  .closing{margin-top:48px;text-align:center;background:var(--lp-card);border:1px solid var(--lp-line);
+    border-radius:20px;padding:34px 24px;box-shadow:0 3px 10px -4px rgba(20,30,80,.12)}
+  .closing-h{font-family:var(--lp-round);font-weight:800;font-size:20px;letter-spacing:-.01em;color:var(--lp-ink)}
+  .closing-body{font-size:14px;color:var(--lp-sub);line-height:1.7;margin:8px 0 18px}
+
+  @media (prefers-reduced-motion:reduce){
+    .capcard,.lp-btn,.capcard::before,.lp-btn :global(svg){transition:none}
+  }
+</style>
