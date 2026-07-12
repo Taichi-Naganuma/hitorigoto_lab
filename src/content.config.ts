@@ -22,6 +22,19 @@ const products = defineCollection({
     cta: z.string(), // button label (AB target)
     ctaNote: z.string(),
     stripeLink: z.string().url().startsWith('https://buy.stripe.com/'), // gate
+    // 任意の第2プラン（例: mioca=フルドラフト＋数字診断を1ページに）。単一プラン商品は両方省略＝価格ボックス1つ（従来どおり）。
+    planLabel: z.string().optional(), // 複数プラン時に主プライスの上に出すラベル
+    plan2: z
+      .object({
+        label: z.string(),
+        price: z.number().int().positive(),
+        priceDisplay: z.string(),
+        priceNote: z.string().optional(),
+        cta: z.string(),
+        ctaNote: z.string(),
+        stripeLink: z.string().url().startsWith('https://buy.stripe.com/'), // gate
+      })
+      .optional(),
     card: z.object({
       title: z.string(),
       blurb: z.string(),
