@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0            # QF-6: origin/main を取得し品質フロアの scope=changed 差分を確実にする
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -32,13 +34,14 @@ jobs:
       - name: Build (astro build)
         run: npm run build
       # 第三段ゲート＝品質フロア（トップ/os 同等以上）。正本設計: my-portfolio
-      # Trains/docs/design/planned/quality-floor-standard-design.md §5-a。
-      # 既定 warn-only（continue-on-error かつ QUALITY_FLOOR_ENFORCE 未設定=exit0 で二重に非ブロッキング＝挙動ゼロ差）。
-      # 点火（QF-6）: continue-on-error を外し env に QUALITY_FLOOR_ENFORCE=1 を与える（＋checkout を fetch-depth:0 に）。
-      - name: Quality floor (warn-only)
+      # Trains/docs/design/planned/quality-floor-standard-design.md §5-a／§6。
+      # 点火済（QF-6・2026-07-12）: block 重症度（A2/A3/A4 token 整合・C1/C4 content 完全性）の fail で CI を赤にする。
+      # warn（B2/B4/C2 等）は非ブロッキングのまま（os は別意匠ゆえ B2 未昇格）。現行 main は block 0 を実測済。
+      # 解除に戻すには QUALITY_FLOOR_ENFORCE を外し continue-on-error: true を戻す。
+      - name: Quality floor (enforced)
         run: |
           git fetch --no-tags --depth=1 origin main || true
           npm run quality-floor
         env:
           QUALITY_FLOOR_BASE: origin/main
-        continue-on-error: true
+          QUALITY_FLOOR_ENFORCE: "1"
