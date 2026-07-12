@@ -12,6 +12,7 @@ const products = defineCollection({
     description: z.string(), // meta description
     ogTitle: z.string().optional(), // og:title (falls back to title)
     ogDescription: z.string().optional(), // og:description (falls back to description)
+    name: z.string().optional(), // 商品名（設計室シリーズ）— hero eyebrow / 導線ラベル用（無ければ card.title から導出）
     headline: z.string(), // h1 (AB target, 第五段) — inline <br>/<b> allowed
     lead: z.string(), // hero paragraph — inline <b> allowed
     price: z.number().int().positive(),
@@ -72,6 +73,14 @@ const os = defineCollection({
     status: z.string(), // "準備中" / "Coming soon"（バッジ）
     headline: z.string(), // h1 — inline <br>/<b> allowed
     lead: z.string(),
+    about: z // ブランド説明（Mioca＝澪火）: どんなブランドで何をしているか＋名前の由来（信頼の土台）
+      .object({
+        label: z.string(), // section eyebrow（ABOUT · Mioca（澪火））
+        heading: z.string(),
+        body: z.array(z.string()), // 段落
+        points: z.array(z.string()).optional(), // 任意の要点ハイライト
+      })
+      .optional(),
     ctaPrimary: z.string(), // 先行登録ボタン
     ctaSecondary: z.string(), // アンカー（できることを見る）
     waitlistNote: z.string(), // 「まだ販売していない・決済導線なし」の正直表記（床）

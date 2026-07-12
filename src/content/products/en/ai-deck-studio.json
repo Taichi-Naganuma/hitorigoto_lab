@@ -1,9 +1,10 @@
 {
   "locale": "en",
-  "title": "AI Deck Studio — a custom presentation, designed by AI | Hitorigoto Lab",
-  "description": "Tell us the goal, the audience, and the key points. AI designs a custom presentation from the structure up and delivers an editable PowerPoint (.pptx) and PDF to your inbox. $29.",
-  "ogTitle": "AI Deck Studio — a custom presentation, designed by AI",
+  "title": "Deck Studio — a custom presentation, designed for you | Hitorigoto Lab",
+  "description": "Tell us the goal, the audience, and the key points. We design a custom presentation from the structure up and deliver an editable PowerPoint (.pptx) and PDF to your inbox — a one-off from the Hitorigoto Lab storefront. $29.",
+  "ogTitle": "Deck Studio — you have the message, we build the deck",
   "ogDescription": "You have the message. We build the deck. Editable .pptx + PDF, delivered by email.",
+  "name": "Deck Studio",
   "headline": "You have the message.<br>You just don't have the deck.",
   "lead": "For sales pitches, talks, and internal updates — you know what you want to say, but turning it into slides eats your whole day. Tell us three things — <b>the goal, the audience, and the key points</b> — and AI designs a custom presentation from the structure up, delivered as an <b>editable PowerPoint (.pptx) and a PDF</b>, straight to your inbox.",
   "price": 29,
@@ -14,7 +15,7 @@
   "ctaNote": "Payment is handled on Stripe's secure checkout. Your card details never touch our servers.",
   "stripeLink": "https://buy.stripe.com/fZu9AUdd32Sz9uLa8X5Ne01",
   "card": {
-    "title": "📊 AI Deck Studio",
+    "title": "📊 Deck Studio",
     "blurb": "Tell us the goal, the audience, and the key points. AI designs a custom presentation from the structure up and delivers an editable PowerPoint (.pptx) and PDF to your inbox.",
     "cta": "Learn more →",
     "price": "$29"

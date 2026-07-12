@@ -1,9 +1,10 @@
 {
   "locale": "en",
-  "title": "AI Learning Roadmap — your personal study plan, designed by AI | Hitorigoto Lab",
-  "description": "Tell us your goal, your starting point, and the time you have. AI designs a study roadmap made just for you and delivers it as a PDF.",
-  "ogTitle": "AI Learning Roadmap — a study plan made for you",
+  "title": "Roadmap Studio — your personal study plan, designed for you | Hitorigoto Lab",
+  "description": "Tell us your goal, your starting point, and the time you have. We design a study roadmap made just for you and deliver it as a PDF — a one-off from the Hitorigoto Lab storefront.",
+  "ogTitle": "Roadmap Studio — a study plan made for you",
   "ogDescription": "What to start with, what to skip, when to do what. Zero time wasted deciding.",
+  "name": "Roadmap Studio",
   "headline": "The hardest part of self-study<br>is deciding what to do.",
   "lead": "English, certifications, programming, a new skill for side income — have you ever set out to start, only to lose the whole day just researching materials? This service asks only three things — your goal, where you are now, and the time you can spare — and <b>AI designs a study roadmap made just for you and delivers it as a PDF</b>.",
   "price": 19,
@@ -14,7 +15,7 @@
   "ctaNote": "Payment is handled on Stripe's secure checkout. Your card details never touch our servers.",
   "stripeLink": "https://buy.stripe.com/00w3cweh78cTeP5fth5Ne04",
   "card": {
-    "title": "📍 AI Learning Roadmap",
+    "title": "📍 Roadmap Studio",
     "blurb": "Tell us your goal, your current level, and the time you can spare, and AI designs a study roadmap made just for you, delivered as a PDF by email. What to start with, what to skip, when to do what — zero time wasted deciding.",
     "cta": "Learn more →",
     "price": "$19"

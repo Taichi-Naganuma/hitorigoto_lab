@@ -1,17 +1,15 @@
 ---
-import Nav from './Nav.astro';
+// 商品固有ページ（購買部）。/os・トップと同じ意匠を適用＝回転グラデ境界線（.fx-ring）／
+// 下から浮上リビール（.fx-rise）／グラデ section ラベル／全面ライト。内容は products/<locale>/*.json のまま保持。
+// トークンは src/styles/tokens.css（唯一の真実源）を参照。ハードコードしない。
 import LangSwitcher from './LangSwitcher.astro';
-import PriceBox from './PriceBox.astro';
-import DeliverList from './DeliverList.astro';
-import Steps from './Steps.astro';
-import Target from './Target.astro';
-import Faq from './Faq.astro';
-import AiNote from './AiNote.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import { useTranslations, type Locale } from '../i18n/ui';
 
 interface Props {
   locale: Locale;
   product: {
+    name?: string;
     headline: string;
     lead: string;
     priceDisplay: string;
@@ -24,43 +22,199 @@ interface Props {
     target: string[];
     faq: { q: string; a: string }[];
     aiNote: string;
+    card?: { title: string };
   };
   navHref?: string;
   navLabel: string;
 }
 
 const { locale, product, navHref, navLabel } = Astro.props;
+const isJa = locale === 'ja';
 const t = useTranslations(locale);
+const homeUrl = navHref ?? getRelativeLocaleUrl(locale, '/');
+const osUrl = getRelativeLocaleUrl(locale, '/os/');
+const brandName = isJa ? 'ひとりごと研究所 購買部' : 'Hitorigoto Lab';
+
+// 商品名（設計室シリーズ）。無ければ card.title から先頭の絵文字を落として導出。
+const rawName = product.name ?? product.card?.title ?? '';
+const productName = rawName.replace(/^[^\p{L}\p{N}]+/u, '').trim();
+const eyebrowText = productName ? `${brandName} · ${productName}` : brandName;
+
+const arrow =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const back =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>';
 ---
 
-<Nav href={navHref}>
-  {navLabel}
-  <LangSwitcher slot="end" locale={locale} />
-</Nav>
+<div class="plp">
+  <header class="masthead">
+    <a class="brand" href={homeUrl} aria-label={brandName}>{brandName}</a>
+    <nav class="mast-nav">
+      <a href={osUrl}>{isJa ? '自走OS' : 'Autonomous OS'}</a>
+      {isJa && <a href="/articles/">記事</a>}
+    </nav>
+    <LangSwitcher locale={locale} />
+  </header>
 
-<header>
-  <h1 set:html={product.headline} />
-  <p class="lead" set:html={product.lead} />
-</header>
+  <section class="hero">
+    <span class="eyebrow fx-rise"><span class="dot"></span>{eyebrowText}</span>
+    <h1 class="plp-h1 fx-rise" set:html={product.headline} />
+    <p class="plp-lead fx-rise" set:html={product.lead} />
+  </section>
 
-<PriceBox
-  priceDisplay={product.priceDisplay}
-  priceNote={product.priceNote}
-  cta={product.cta}
-  ctaNote={product.ctaNote}
-  stripeLink={product.stripeLink}
-/>
+  <div class="buy fx-ring fx-rise" style="--fxw:2.4px;--fxo:.55;--fxs:9s">
+    <div class="buy-price">
+      {product.priceDisplay}
+      {product.priceNote && <small>{product.priceNote}</small>}
+    </div>
+    <a class="buy-btn" href={product.stripeLink}>{product.cta}<Fragment set:html={arrow} /></a>
+    <p class="buy-note">{product.ctaNote}</p>
+  </div>
 
-<h2>{t('product.deliver')}</h2>
-<DeliverList items={product.deliver} />
+  <section class="block">
+    <div class="sec-label fx-rise">{t('product.deliver')}</div>
+    <div class="deliver-grid">
+      {product.deliver.map((it, i) => (
+        <div class="dcard fx-ring fx-rise" style={`--fxw:1.6px;--fxo:.4;--fxs:${9 + (i % 3)}s`}>
+          <div class="dc-title">{it.title}</div>
+          <p class="dc-body">{it.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 
-<h2>{t('product.steps')}</h2>
-<Steps items={product.steps} />
+  <section class="block">
+    <div class="sec-label fx-rise">{t('product.steps')}</div>
+    <ol class="steps">
+      {product.steps.map((s) => (<li class="fx-rise">{s}</li>))}
+    </ol>
+  </section>
 
-<h2>{t('product.target')}</h2>
-<Target items={product.target} />
+  <section class="block">
+    <div class="sec-label fx-rise">{t('product.target')}</div>
+    <ul class="target fx-rise">
+      {product.target.map((x) => (<li>{x}</li>))}
+    </ul>
+  </section>
 
-<h2>{t('product.faq')}</h2>
-<Faq items={product.faq} />
+  <section class="block">
+    <div class="sec-label fx-rise">{t('product.faq')}</div>
+    <dl class="faq fx-rise">
+      {product.faq.map((f) => (
+        <>
+          <dt>{f.q}</dt>
+          <dd>{f.a}</dd>
+        </>
+      ))}
+    </dl>
+  </section>
 
-<AiNote text={product.aiNote} />
+  <p class="ai-note fx-rise">{product.aiNote}</p>
+
+  <a class="backlink fx-rise" href={homeUrl}><Fragment set:html={back} />{navLabel.replace(/^←\s*/, '')}</a>
+</div>
+
+<style>
+  .plp { color: var(--lp-ink); }
+
+  /* ── masthead（トップと同型） ─────────────────────────── */
+  .masthead { display: flex; align-items: center; gap: 16px; padding: 18px 0 6px; text-align: left; }
+  .masthead .brand { font-family: var(--lp-round); font-weight: 800; font-size: 14px; letter-spacing: .01em; color: var(--lp-ink); text-decoration: none; transition: color .15s ease; }
+  .masthead a.brand:hover { color: var(--lp-accent-ink); }
+  .mast-nav { display: flex; gap: 16px; margin-left: 6px; }
+  .mast-nav a { position: relative; font-family: var(--lp-round); font-weight: 700; font-size: 13px; color: var(--lp-ink2); text-decoration: none; transition: color .15s ease; }
+  .mast-nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 2px; border-radius: 2px; background: var(--lp-grad); transition: right .25s ease; }
+  .mast-nav a:hover { color: var(--lp-accent-ink); }
+  .mast-nav a:hover::after { right: 0; }
+  .masthead :global(.lang-switch) { margin-left: auto; }
+
+  /* ── hero ─────────────────────────────────────────────── */
+  .hero { padding: 30px 0 8px; text-align: left; }
+  .eyebrow { position: relative; display: inline-flex; align-items: center; gap: .5rem; font-family: var(--lp-round); font-weight: 800;
+    font-size: 12.5px; letter-spacing: .04em; color: var(--lp-accent-ink);
+    background: rgba(0, 149, 246, .10); border: 1px solid transparent; padding: .42rem .9rem; border-radius: var(--r-pill);
+    box-shadow: 0 4px 14px -8px rgba(0, 149, 246, .5); }
+  .eyebrow::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 2.2px; pointer-events: none;
+    background: conic-gradient(from var(--a), var(--lp-grad-a), var(--lp-grad-b), var(--lp-accent), var(--lp-grad-a));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude;
+    animation: plpspin 9s linear infinite; }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lp-grad); animation: plppulse 2.4s ease-in-out infinite; }
+  .plp-h1 { font-family: var(--lp-round); font-weight: 800; letter-spacing: -.025em; line-height: 1.24;
+    font-size: clamp(28px, 6vw, 42px); margin: 18px 0 0; text-wrap: balance; color: var(--lp-ink); }
+  .plp-lead { margin: 16px 0 0; color: var(--lp-ink2); font-size: 15.5px; line-height: 1.9; max-width: 46ch; }
+  .plp-lead :global(b) { color: var(--lp-ink); font-weight: 800; }
+
+  /* ── buy / price（署名＝回転グラデ境界線・CTA は電光ブルー単色） ── */
+  .buy { position: relative; background: var(--lp-card); border-radius: 20px; padding: 30px 26px; text-align: center; margin: 28px 0 8px;
+    box-shadow: 0 20px 48px -26px rgba(40, 30, 120, .42), 0 3px 10px -4px rgba(20, 30, 80, .12); }
+  .buy-price { font-family: var(--lp-round); font-weight: 800; font-size: 36px; letter-spacing: -.02em; color: var(--lp-ink); line-height: 1; }
+  .buy-price small { font-size: 14px; font-weight: 600; color: var(--lp-sub); letter-spacing: 0; }
+  .buy-btn { display: inline-flex; align-items: center; gap: .45rem; margin-top: 18px; font-family: var(--lp-round); font-weight: 800;
+    font-size: 15.5px; line-height: 1; text-decoration: none; color: #fff; background: var(--lp-accent);
+    padding: .95rem 1.7rem; border-radius: var(--r-pill); box-shadow: 0 6px 18px -6px rgba(0, 149, 246, .6);
+    transition: transform .16s ease, box-shadow .16s ease; }
+  .buy-btn :global(svg) { width: 16px; height: 16px; transition: transform .16s ease; }
+  .buy-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(0, 149, 246, .6); }
+  .buy-btn:hover :global(svg) { transform: translateX(3px); }
+  .buy-note { margin: 14px auto 0; font-size: 12.5px; line-height: 1.65; color: var(--lp-sub); max-width: 42ch; }
+
+  /* ── sections ─────────────────────────────────────────── */
+  .block { margin-top: 48px; }
+  .sec-label { font-family: var(--lp-round); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 800;
+    margin: 0 0 16px; background: var(--lp-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* deliver cards（回転グラデ境界線・hover 浮上） */
+  .deliver-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dcard { position: relative; background: var(--lp-card); border-radius: var(--r-card); padding: 20px 20px 18px;
+    box-shadow: 0 3px 10px -4px rgba(20, 30, 80, .12); transition: transform .22s cubic-bezier(.2, .7, .2, 1), box-shadow .22s ease; }
+  .dcard:hover { transform: translateY(-3px); box-shadow: 0 18px 38px -20px rgba(40, 30, 120, .32); }
+  .dc-title { font-family: var(--lp-round); font-weight: 800; font-size: 15.5px; letter-spacing: -.01em; color: var(--lp-ink); line-height: 1.5; }
+  .dc-body { font-size: 13.5px; color: var(--lp-sub); line-height: 1.8; margin-top: 8px; }
+
+  /* steps（番号バッジ＝グラデ） */
+  .steps { list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 10px; }
+  .steps li { position: relative; background: var(--lp-card); border: 1px solid var(--lp-line); border-radius: 14px;
+    padding: 16px 18px 16px 56px; font-size: 14px; line-height: 1.7; color: var(--lp-ink2); counter-increment: s;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .steps li:hover { transform: translateX(3px); border-color: var(--lp-grad-a); box-shadow: 0 8px 20px -14px rgba(40, 30, 120, .4); }
+  .steps li::before { content: counter(s); position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    width: 28px; height: 28px; border-radius: 50%; font-family: var(--lp-round); font-weight: 800; font-size: 13px; color: #fff;
+    display: flex; align-items: center; justify-content: center; background: var(--lp-grad); }
+
+  /* target */
+  .target { list-style: none; background: rgba(0, 149, 246, .06); border: 1px solid rgba(0, 149, 246, .16); border-radius: 16px;
+    padding: 20px 24px; }
+  .target li { position: relative; padding-left: 22px; margin: 8px 0; font-size: 14px; line-height: 1.7; color: var(--lp-ink2); }
+  .target li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--lp-grad); }
+
+  /* faq */
+  .faq { max-width: 100%; }
+  .faq dt { font-family: var(--lp-round); font-weight: 800; font-size: 14.5px; margin-top: 20px; color: var(--lp-ink); letter-spacing: -.01em; }
+  .faq dt:first-of-type { margin-top: 0; }
+  .faq dt::before { content: "Q. "; color: var(--lp-accent-ink); }
+  .faq dd { font-size: 14px; color: var(--lp-sub); margin-top: 5px; line-height: 1.75; }
+
+  /* ai-note */
+  .ai-note { font-size: 12px; color: var(--lp-sub); background: var(--lp-soft); border: 1px solid var(--lp-line); border-radius: 12px;
+    padding: 14px 16px; margin-top: 36px; line-height: 1.7; }
+
+  /* back link */
+  .backlink { display: inline-flex; align-items: center; gap: .4rem; margin: 28px 0 8px; font-family: var(--lp-round); font-weight: 700;
+    font-size: 13.5px; color: var(--lp-ink2); text-decoration: none; transition: color .15s ease, gap .15s ease; }
+  .backlink :global(svg) { width: 15px; height: 15px; transition: transform .16s ease; }
+  .backlink:hover { color: var(--lp-accent-ink); }
+  .backlink:hover :global(svg) { transform: translateX(-3px); }
+
+  @keyframes plpspin { to { --a: 360deg; } }
+  @keyframes plppulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+
+  @media (max-width: 560px) {
+    .deliver-grid { grid-template-columns: 1fr; }
+    .masthead { flex-wrap: wrap; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .eyebrow::before, .eyebrow .dot { animation: none; }
+    .dcard, .buy-btn, .steps li, .backlink { transition: none; }
+  }
+</style>
