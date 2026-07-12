@@ -1,6 +1,7 @@
 export const ui = {
   ja: {
     'footer.legal': '特定商取引法に基づく表記',
+    'footer.privacy': 'プライバシーポリシー',
     'footer.top': 'トップへ',
     'footer.contact': 'お問い合わせ',
     'footer.copyright': '© 2026 ひとりごと研究所',
@@ -14,6 +15,7 @@ export const ui = {
   },
   en: {
     'footer.legal': 'Commercial disclosure',
+    'footer.privacy': 'Privacy',
     'footer.top': 'Home',
     'footer.contact': 'Contact',
     'footer.copyright': '© 2026 Hitorigoto Lab',
