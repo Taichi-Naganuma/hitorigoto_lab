@@ -1,0 +1,61 @@
+/* ── サイト共通 FX（購買部・コンテンツに /os と同じ意匠を適用） ──────────────
+   意匠の署名＝シアン→パープルの回転グラデ境界線／下から浮上するリビール／OS連想グリッド。
+   opt-in（.fx-rise / .fx-ring / body.fx-bg）なので、既存の product/legal 等には波及しない。 */
+
+@property --a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+:root {
+  --fx-accent: #0095f6; --fx-accent-ink: #0077c8;
+  --fx-grad-a: #22d3ee; --fx-grad-b: #8b5cf6;
+  --fx-grad: linear-gradient(120deg, var(--fx-grad-a), var(--fx-grad-b));
+  --fx-round: "SF Pro Rounded", "Hiragino Maru Gothic ProN", "Segoe UI Rounded", "Meiryo", "Noto Sans JP", system-ui, -apple-system, sans-serif;
+}
+
+@keyframes fxSpin { to { --a: 360deg; } }
+@keyframes fxRise { 0% { opacity: 0; transform: translateY(46px) scale(.94); } 55% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+@keyframes fxPulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+@keyframes fxShimmer { to { background-position: 220% 0; } }
+
+/* 回転グラデ境界線ユーティリティ（--fxw 太さ / --fxs 速度 / --fxo 基準不透明度） */
+.fx-ring { position: relative; isolation: isolate; }
+.fx-ring::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: var(--fxw, 2.4px);
+  z-index: 2; pointer-events: none; opacity: var(--fxo, .5);
+  background: conic-gradient(from var(--a), var(--fx-grad-a), var(--fx-grad-b), var(--fx-accent), var(--fx-grad-a));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude;
+  animation: fxSpin var(--fxs, 8s) linear infinite; transition: opacity .28s ease;
+}
+.fx-ring:hover::before { opacity: 1; }
+
+/* グラデ文字（section ラベル等） */
+.fx-grad-text { background: var(--fx-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* 全面ライトのオーロラ＋OS連想グリッド（body に付与） */
+body.fx-bg {
+  background:
+    radial-gradient(56% 40% at 2% -6%, rgba(0, 149, 246, .20), transparent 56%),
+    radial-gradient(50% 36% at 100% 0%, rgba(139, 92, 246, .15), transparent 58%),
+    radial-gradient(60% 34% at 98% 104%, rgba(34, 211, 238, .12), transparent 60%),
+    linear-gradient(180deg, #e8eefe 0%, #eef2fd 52%, #eff3fd 100%);
+  background-repeat: no-repeat; background-attachment: fixed;
+}
+body.fx-bg::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(30, 52, 130, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 52, 130, .05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
+          mask-image: radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
+}
+body.fx-bg .wrap { position: relative; z-index: 1; }
+
+/* 下から浮かびあがるリビール（html.fx-on は BaseLayout の head script が付与＝ちらつき防止・
+   reduced-motion / no-JS では付与されない＝常時可視の床）。.in は observer が付け外し（再入毎に再生）。 */
+html.fx-on .fx-rise { opacity: 0; transform: translateY(46px) scale(.94); }
+html.fx-on .fx-rise.in { animation: fxRise .66s cubic-bezier(.2, .86, .28, 1.12) forwards; animation-delay: calc(var(--ri, 0) * 85ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-ring::before { animation: none; }
+}

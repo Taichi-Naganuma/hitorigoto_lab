@@ -1,39 +1,78 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
-// GEO 記事の一覧（内部リンク＝トピッククラスタの起点・クロール可能性/回遊を上げる）。
+// GEO 記事の一覧（内部リンク＝トピッククラスタの起点）。/os と同じ意匠を適用＋購買部/自走OS 相互リンク。
 const articles = (await getCollection('articles', ({ data }) => !data.draft))
   .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
+const homeUrl = getRelativeLocaleUrl('ja', '/');
+const osUrl = getRelativeLocaleUrl('ja', '/os/');
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 ---
 
 <BaseLayout
   locale="ja"
   variant="product"
+  bodyClass="fx-bg"
   title="記事一覧 | hitorigotolab"
   description="AIスライド・提案資料の作成、AI学習ロードマップの選び方や比較ガイド。"
 >
-  <section class="list">
-    <h1>記事一覧</h1>
-    {articles.length === 0 && <p class="empty">記事は準備中です。</p>}
-    <ul>
+  <div class="cx">
+    <nav class="cx-nav">
+      <a class="cx-brand" href={homeUrl}>ひとりごと研究所 購買部</a>
+      <a class="cx-os" href={osUrl}>自走OS<span aria-hidden="true"> ↗</span></a>
+    </nav>
+
+    <header class="cx-head">
+      <span class="cx-eyebrow fx-grad-text fx-rise">ARTICLES · 記事</span>
+      <h1 class="cx-h1 fx-rise">読みもの</h1>
+      <p class="cx-lead fx-rise">AIスライド・提案資料の作成、AI学習ロードマップの選び方・比較。買い手の「知りたい」に答えるガイドです。</p>
+    </header>
+
+    {articles.length === 0 && <p class="cx-empty fx-rise">記事は準備中です。</p>}
+
+    <div class="cx-cards">
       {articles.map((a) => (
-        <li>
-          <a href={`/articles/${a.id}/`}>{a.data.title}</a>
-          <span class="c">{a.data.category}</span>
-        </li>
+        <a class="acard fx-ring fx-rise" href={`/articles/${a.id}/`} style="--fxw:1.8px;--fxo:.42;--fxs:9s">
+          <span class="ac-cat fx-grad-text">{a.data.category}</span>
+          <div class="ac-title">{a.data.title}</div>
+          <p class="ac-desc">{a.data.description}</p>
+          <span class="ac-cta">読む<Fragment set:html={arrow} /></span>
+        </a>
       ))}
-    </ul>
-  </section>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  .list { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
-  .list h1 { font-size: 26px; margin-bottom: 20px; }
-  .list .empty { color: #64748b; }
-  .list ul { list-style: none; padding: 0; margin: 0; }
-  .list li { padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
-  .list a { color: #2563eb; font-size: 16px; text-decoration: none; }
-  .list a:hover { text-decoration: underline; }
-  .list .c { color: #94a3b8; font-size: 12px; white-space: nowrap; }
+  .cx{--ink:#14171f;--ink2:#39414f;--sub:#6a707c;--line:#e6e8ee;--line2:#d3d7e0;--card:#fff;--accent:#0095f6;--accent-ink:#0077c8;
+    --round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,sans-serif;
+    max-width:760px;margin:0 auto;padding:0 4px 64px;color:var(--ink)}
+
+  .cx-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+  .cx-nav .cx-brand{font-family:var(--round);font-weight:800;font-size:13.5px;color:var(--ink);text-decoration:none;transition:color .15s ease}
+  .cx-nav .cx-brand:hover{color:var(--accent-ink)}
+  .cx-os{font-family:var(--round);font-weight:700;font-size:12.5px;color:var(--sub);text-decoration:none;padding:.3rem .72rem;
+    border:1px solid var(--line2);border-radius:999px;transition:border-color .15s ease,color .15s ease}
+  .cx-os:hover{border-color:var(--accent);color:var(--accent-ink)}
+
+  .cx-head{padding:24px 0 8px}
+  .cx-eyebrow{font-family:var(--round);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .cx-h1{font-family:var(--round);font-weight:800;letter-spacing:-.02em;font-size:clamp(28px,5vw,38px);margin:10px 0 0;color:var(--ink)}
+  .cx-lead{margin:12px 0 0;color:var(--ink2);font-size:15px;line-height:1.8;max-width:52ch}
+  .cx-empty{color:var(--sub);margin-top:24px}
+
+  .cx-cards{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+  .acard{display:block;background:var(--card);border-radius:18px;padding:22px 24px;text-decoration:none;color:inherit;
+    box-shadow:0 3px 10px -4px rgba(20,30,80,.12);transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
+  .acard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(20,30,80,.28)}
+  .ac-cat{font-family:var(--round);font-weight:800;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+  .ac-title{font-family:var(--round);font-weight:800;font-size:17.5px;letter-spacing:-.01em;color:var(--ink);margin-top:6px;line-height:1.4}
+  .ac-desc{font-size:13.5px;color:var(--sub);line-height:1.7;margin-top:8px}
+  .ac-cta{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--round);font-weight:800;font-size:13px;color:var(--accent-ink);margin-top:12px}
+  .ac-cta :global(svg){width:14px;height:14px;transition:transform .16s ease}
+  .acard:hover .ac-cta :global(svg){transform:translateX(3px)}
+
+  @media (prefers-reduced-motion:reduce){ .acard{transition:none} }
 </style>

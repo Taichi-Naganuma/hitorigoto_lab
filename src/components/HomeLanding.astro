@@ -1,6 +1,6 @@
 ---
-// 合成ホーム: 新デザイン言語（丸太見出し/eyebrow/グラデ境界線ホバー）を狭幅ストアに着せる。
-// 内容は home.json + products のまま保持。捏造数値は置かない（床・誠実）。
+// 合成ホーム（購買部）。/os と同じ意匠（回転グラデ境界線・下から浮上リビール・OS連想グリッド）を適用し、
+// 自走OS「Mioca」への相互リンク（バナー＋ナビ）を追加。内容は home.json + products のまま保持（床・誠実）。
 import LangSwitcher from './LangSwitcher.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 
@@ -16,53 +16,66 @@ const eyebrow = isJa ? 'ひとりごと研究所 · AIが自律運営' : 'Hitori
 const seeProducts = isJa ? '商品を見る' : 'See the products';
 const readAbout = isJa ? '研究所について' : 'About the lab';
 const homeUrl = getRelativeLocaleUrl(locale, '/');
+const osUrl = getRelativeLocaleUrl(locale, '/os/');
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 ---
 
 <div class="landing">
-  <div class="masthead">
+  <header class="masthead">
     <a class="brand" href={homeUrl} aria-label={isJa ? 'トップへ' : 'Home'}>{h.logo}</a>
+    <nav class="mast-nav">
+      <a href={osUrl}>{isJa ? '自走OS' : 'Autonomous OS'}</a>
+      {isJa && <a href="/articles/">記事</a>}
+    </nav>
     <LangSwitcher locale={locale} />
-  </div>
+  </header>
 
   <section class="hero">
-    <span class="eyebrow"><span class="dot"></span>{eyebrow}</span>
-    <h1 class="lp-h1" set:html={h.headline} />
-    <p class="lp-lead">{h.lead}</p>
-    <div class="cta-row">
-      <a class="lp-btn primary" href="#products">{seeProducts}
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+    <span class="eyebrow fx-rise"><span class="dot"></span>{eyebrow}</span>
+    <h1 class="lp-h1 fx-rise" set:html={h.headline} />
+    <p class="lp-lead fx-rise">{h.lead}</p>
+    <div class="cta-row fx-rise">
+      <a class="lp-btn primary" href="#products">{seeProducts}<Fragment set:html={arrow} /></a>
       {h.about && <a class="lp-btn ghost" href="#about">{readAbout}</a>}
     </div>
   </section>
 
+  <a class="os-banner fx-ring fx-rise" href={osUrl} style="--fxw:2.6px;--fxo:.6;--fxs:8s">
+    <div class="ob-copy">
+      <span class="ob-eyebrow fx-grad-text">{isJa ? 'PRODUCT · 自走OS' : 'PRODUCT · Autonomous OS'}</span>
+      <div class="ob-title">Mioca</div>
+      <p class="ob-blurb">{isJa
+        ? '手を離しても、事業が回りつづける。無人で回る自律事業OS（準備中／先行登録受付）。'
+        : 'Let go of the wheel, the business keeps running. The autonomous business OS (coming soon).'}</p>
+    </div>
+    <span class="ob-cta">{isJa ? '自走OSを見る' : 'Explore the OS'}<Fragment set:html={arrow} /></span>
+  </a>
+
   <section id="products" class="block">
-    <div class="eyebrow-sec">{h.productsTitle}</div>
+    <div class="eyebrow-sec fx-grad-text fx-rise">{h.productsTitle}</div>
     <div class="cards">
       {products.map((p) => (
-        <a class="pcard" href={p.href}>
+        <a class="pcard fx-ring fx-rise" href={p.href} style="--fxw:1.8px;--fxo:.42;--fxs:9s">
           <div class="pc-title">{p.title}</div>
           {p.price && <div class="pc-price">{p.price}</div>}
           <p class="pc-blurb">{p.blurb}</p>
-          <span class="pc-cta">{p.cta}
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </span>
+          <span class="pc-cta">{p.cta}<Fragment set:html={arrow} /></span>
         </a>
       ))}
     </div>
   </section>
 
   <section class="block">
-    <div class="eyebrow-sec">{h.howTitle}</div>
+    <div class="eyebrow-sec fx-grad-text fx-rise">{h.howTitle}</div>
     <ol class="steps">
-      {h.how.map((step: string) => (<li>{step}</li>))}
+      {h.how.map((step: string) => (<li class="fx-rise">{step}</li>))}
     </ol>
   </section>
 
   {h.about && (
     <section id="about" class="block">
-      <div class="eyebrow-sec">{h.about.title}</div>
-      <div class="about-card">
+      <div class="eyebrow-sec fx-grad-text fx-rise">{h.about.title}</div>
+      <div class="about-card fx-rise">
         <h2 class="about-h">{h.about.heading}</h2>
         <p class="about-body" set:html={h.about.body} />
       </div>
@@ -71,30 +84,25 @@ const homeUrl = getRelativeLocaleUrl(locale, '/');
 </div>
 
 <style>
-  /* すべて .landing にスコープ（Astro scoped）— 他ページ(product/legal/article)には波及しない */
   .landing{
     --lp-ink:#14171f; --lp-ink2:#39414f; --lp-sub:#6a707c; --lp-faint:#9aa0ac;
     --lp-line:#e6e8ee; --lp-line2:#d3d7e0; --lp-card:#ffffff;
-    --lp-accent:#0095f6;              /* サイト既存の青を維持（全ページ coherence） */
-    --lp-accent-ink:#0077c8;
-    --lp-grad-a:#22d3ee; --lp-grad-b:#8b5cf6;  /* ホバー境界線の flourish */
+    --lp-accent:#0095f6; --lp-accent-ink:#0077c8;
+    --lp-grad-a:#22d3ee; --lp-grad-b:#8b5cf6;
     --lp-round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif;
     color:var(--lp-ink);
     margin:0 -20px; padding:0 20px;
   }
-  /* 背景を強く: home 全面に鮮明オーロラ（色を濃く・base に青みを残して消えないように） */
-  :global(body.home){
-    background:
-      radial-gradient(58% 40% at 4% -4%, rgba(0,149,246,.20), transparent 58%),
-      radial-gradient(52% 36% at 100% 3%, rgba(139,92,246,.16), transparent 58%),
-      radial-gradient(60% 32% at 96% 102%, rgba(34,211,238,.13), transparent 60%),
-      linear-gradient(180deg,#e6edfe 0%, #edf2fd 50%, #eef3fd 100%);
-    background-repeat:no-repeat;
-  }
 
-  .masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 6px}
+  .masthead{display:flex;align-items:center;gap:16px;padding:18px 0 6px}
   .masthead .brand{font-family:var(--lp-round);font-weight:800;font-size:14px;letter-spacing:.01em;color:var(--lp-ink);text-decoration:none;transition:color .15s ease}
   .masthead a.brand:hover{color:var(--lp-accent-ink)}
+  .mast-nav{display:flex;gap:16px;margin-left:6px}
+  .mast-nav a{position:relative;font-family:var(--lp-round);font-weight:700;font-size:13px;color:var(--lp-ink2);text-decoration:none;transition:color .15s ease}
+  .mast-nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;border-radius:2px;background:linear-gradient(120deg,var(--lp-grad-a),var(--lp-grad-b));transition:right .25s ease}
+  .mast-nav a:hover{color:var(--lp-accent-ink)}
+  .mast-nav a:hover::after{right:0}
+  .masthead :global(.lang-switch){margin-left:auto}
 
   /* hero */
   .hero{padding:34px 0 8px}
@@ -110,37 +118,46 @@ const homeUrl = getRelativeLocaleUrl(locale, '/');
   .lp-btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--lp-round);font-weight:800;
     font-size:14.5px;text-decoration:none;border-radius:999px;line-height:1;padding:.72rem 1.2rem;
     border:1px solid transparent;transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease}
-  .lp-btn svg{width:15px;height:15px;transition:transform .16s ease}
+  .lp-btn :global(svg){width:15px;height:15px;transition:transform .16s ease}
   .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(0,149,246,.55)}
   .lp-btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px -6px rgba(0,149,246,.55)}
-  .lp-btn.primary:hover svg{transform:translateX(3px)}
+  .lp-btn.primary:hover :global(svg){transform:translateX(3px)}
   .lp-btn.ghost{background:#fff;color:var(--lp-ink);border-color:var(--lp-line2)}
   .lp-btn.ghost:hover{transform:translateY(-1px);border-color:var(--lp-accent);color:var(--lp-accent-ink)}
+
+  /* 自走OS 相互リンク バナー（回転グラデ境界線・.fx-ring） */
+  .os-banner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    margin-top:26px;background:var(--lp-card);border-radius:20px;padding:22px 26px;text-decoration:none;color:inherit;
+    box-shadow:0 10px 30px -18px rgba(40,30,120,.4),0 3px 10px -4px rgba(20,30,80,.12);
+    transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
+  .os-banner:hover{transform:translateY(-3px);box-shadow:0 20px 44px -20px rgba(40,30,120,.4)}
+  .ob-eyebrow{font-family:var(--lp-round);font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
+  .ob-title{font-family:var(--lp-round);font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--lp-ink);margin-top:4px}
+  .ob-blurb{font-size:13.5px;color:var(--lp-sub);line-height:1.7;margin-top:6px;max-width:52ch}
+  .ob-cta{flex:none;display:inline-flex;align-items:center;gap:.35rem;font-family:var(--lp-round);font-weight:800;
+    font-size:14px;color:#fff;background:var(--lp-accent);padding:.66rem 1.15rem;border-radius:999px;white-space:nowrap;
+    box-shadow:0 4px 14px -5px rgba(0,149,246,.55);transition:transform .16s ease}
+  .ob-cta :global(svg){width:15px;height:15px;transition:transform .16s ease}
+  .os-banner:hover .ob-cta :global(svg){transform:translateX(3px)}
 
   /* section eyebrow label */
   .block{margin-top:40px}
   .eyebrow-sec{font-family:var(--lp-round);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-    font-weight:800;color:var(--lp-faint);margin-bottom:14px}
+    font-weight:800;margin-bottom:14px}
 
-  /* product cards — hover でシアン→パープルの境界線が浮く */
+  /* product cards — 常時うっすら回転グラデ境界線＋hover で前面化＆浮上 */
   .cards{display:flex;flex-direction:column;gap:12px}
-  .pcard{position:relative;display:block;background:var(--lp-card);border:1px solid var(--lp-line);
-    border-radius:18px;padding:22px 24px;text-decoration:none;color:inherit;isolation:isolate;
+  .pcard{display:block;background:var(--lp-card);border-radius:18px;padding:22px 24px;text-decoration:none;color:inherit;
     box-shadow:0 3px 10px -4px rgba(20,30,80,.12);
     transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
-  .pcard::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.6px;z-index:2;pointer-events:none;
-    background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b));opacity:0;transition:opacity .28s ease;
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
-            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
   .pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(20,30,80,.28)}
-  .pcard:hover::before{opacity:1}
   .pc-title{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--lp-ink)}
   .pc-price{font-family:var(--lp-round);font-weight:800;font-size:16px;color:var(--lp-ink);margin-top:6px}
   .pc-blurb{font-size:14px;color:var(--lp-sub);line-height:1.7;margin-top:8px}
   .pc-cta{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--lp-round);font-weight:800;
     font-size:13.5px;color:var(--lp-accent-ink);margin-top:12px}
-  .pc-cta svg{width:14px;height:14px;transition:transform .16s ease}
-  .pcard:hover .pc-cta svg{transform:translateX(3px)}
+  .pc-cta :global(svg){width:14px;height:14px;transition:transform .16s ease}
+  .pcard:hover .pc-cta :global(svg){transform:translateX(3px)}
 
   /* steps */
   .steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
@@ -148,14 +165,18 @@ const homeUrl = getRelativeLocaleUrl(locale, '/');
     padding:15px 18px 15px 54px;font-size:14px;line-height:1.7;color:var(--lp-ink2);counter-increment:s}
   .steps li::before{content:counter(s);position:absolute;left:15px;top:13px;width:26px;height:26px;border-radius:50%;
     font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,var(--lp-accent),#4f7cff)}
+    background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
 
   /* about */
   .about-card{background:var(--lp-card);border:1px solid var(--lp-line);border-radius:18px;padding:24px}
   .about-h{font-family:var(--lp-round);font-weight:800;font-size:18px;letter-spacing:-.01em;color:var(--lp-ink)}
   .about-body{margin-top:8px;font-size:14.5px;color:var(--lp-ink2);line-height:1.85}
 
+  @media (max-width:560px){
+    .os-banner{flex-direction:column;align-items:flex-start}
+    .ob-cta{align-self:stretch;justify-content:center}
+  }
   @media (prefers-reduced-motion:reduce){
-    .pcard,.lp-btn,.pcard::before,.lp-btn svg{transition:none}
+    .pcard,.lp-btn,.os-banner{transition:none}
   }
 </style>
