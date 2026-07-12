@@ -9,6 +9,8 @@ interface Props { locale: Locale; active?: string }
 const { locale, active = '' } = Astro.props;
 const t = useTranslations(locale);
 const osHome = getRelativeLocaleUrl(locale, '/os/');
+const storeUrl = getRelativeLocaleUrl(locale, '/'); // 購買部（ひとりごと研究所）への相互リンク
+const storeLabel = locale === 'ja' ? '購買部' : 'Store';
 const items = osNav(locale).map((n) => ({
   ...n,
   href: n.anchor ? `${osHome}#${n.slug}` : getRelativeLocaleUrl(locale, `/os/${n.slug}/`),
@@ -29,6 +31,7 @@ const otherUrl = Astro.url.pathname.replace(new RegExp(`^/${locale}/`), `/${othe
   </a>
   <nav class="nav-links" aria-label="section">
     {items.map((n) => <a href={n.href} class={active === n.slug ? 'on' : ''}>{n.label}</a>)}
+    <a class="store-link" href={storeUrl}>{storeLabel}<span aria-hidden="true"> ↗</span></a>
   </nav>
   <div class="nav-right">
     <a class="lang" href={otherUrl} hreflang={other} lang={other}>{t('lang.switch')}</a>
@@ -59,6 +62,9 @@ const otherUrl = Astro.url.pathname.replace(new RegExp(`^/${locale}/`), `/${othe
     background:linear-gradient(120deg,#22d3ee,#8b5cf6);transition:right .25s ease}
   .nav-links a:hover,.nav-links a.on{color:#0077c8}
   .nav-links a:hover::after,.nav-links a.on::after{right:0}
+  .store-link{margin-left:4px;padding:.3rem .72rem;border:1px solid #d3d7e0;border-radius:999px;font-size:12.5px;color:#6a707c;transition:border-color .15s ease,color .15s ease}
+  .store-link::after{display:none}
+  .store-link:hover{border-color:#0095f6;color:#0077c8}
   .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
   .lang{color:#6a707c;text-decoration:none;font-size:12.5px;font-weight:700;padding:6px 14px;border:1px solid #d3d7e0;
     border-radius:999px;transition:color .15s ease,border-color .15s ease}

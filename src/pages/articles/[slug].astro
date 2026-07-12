@@ -1,9 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
-// GEO 記事の詳細ルート。内部リンクは /articles/<slug>/（ロケール非依存＝生成記事のリンク形に一致）。
-// draft:true は除外（承認後 deploy で false になった記事だけ公開＝公開ゲート）。
+// GEO 記事の詳細ルート。/os と同じ意匠を適用＋購買部/自走OS 相互リンク。draft:true は除外（公開ゲート）。
 export async function getStaticPaths() {
   const articles = await getCollection('articles', ({ data }) => !data.draft);
   return articles.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
@@ -16,8 +16,9 @@ const site = 'https://hitorigotolab.mananect.com';
 const url = `${site}/articles/${entry.id}/`;
 const pub = d.pubDate instanceof Date ? d.pubDate : new Date(d.pubDate);
 const upd = d.updated ? (d.updated instanceof Date ? d.updated : new Date(d.updated)) : pub;
+const homeUrl = getRelativeLocaleUrl('ja', '/');
+const osUrl = getRelativeLocaleUrl('ja', '/os/');
 
-// GEO: 記事の抽出可能性を上げる Article 構造化データ（AI検索の被引用を狙う）。
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -33,26 +34,73 @@ const articleLd = {
 };
 ---
 
-<BaseLayout locale="ja" variant="product" title={d.title} description={d.description} jsonLd={[articleLd]}>
-  <article class="article">
-    <p class="crumb"><a href="/articles/">← 記事一覧</a></p>
-    <h1>{d.title}</h1>
-    <p class="meta">{d.category} ・ {pub.toISOString().slice(0, 10)} 更新</p>
-    <div class="body"><Content /></div>
-  </article>
+<BaseLayout locale="ja" variant="product" bodyClass="fx-bg" title={d.title} description={d.description} jsonLd={[articleLd]}>
+  <div class="cx">
+    <nav class="cx-nav">
+      <a class="cx-brand" href={homeUrl}>ひとりごと研究所 購買部</a>
+      <a class="cx-os" href={osUrl}>自走OS<span aria-hidden="true"> ↗</span></a>
+    </nav>
+
+    <article class="article fx-rise">
+      <p class="crumb"><a href="/articles/">← 記事一覧</a></p>
+      <span class="a-eyebrow fx-grad-text">{d.category}</span>
+      <h1>{d.title}</h1>
+      <p class="meta">{pub.toISOString().slice(0, 10)} 更新</p>
+      <div class="body"><Content /></div>
+    </article>
+
+    <div class="a-foot fx-rise">
+      <a class="foot-btn" href="/articles/">← 記事一覧へ</a>
+      <a class="foot-btn os" href={osUrl}>自走OS「Mioca」を見る →</a>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  .article { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
-  .crumb { font-size: 14px; margin: 0 0 8px; }
-  .article h1 { font-size: 28px; line-height: 1.35; margin: 8px 0 4px; }
-  .meta { color: #64748b; font-size: 13px; margin: 0 0 24px; }
-  .body :global(h2) { font-size: 21px; margin: 32px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
-  .body :global(h3) { font-size: 17px; margin: 22px 0 8px; }
-  .body :global(p) { line-height: 1.85; margin: 12px 0; }
-  .body :global(ul), .body :global(ol) { line-height: 1.85; padding-left: 1.4em; }
-  .body :global(table) { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
-  .body :global(th), .body :global(td) { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; }
-  .body :global(th) { background: #f1f5f9; }
-  .body :global(a) { color: #2563eb; }
+  .cx{--ink:#14171f;--ink2:#39414f;--sub:#6a707c;--line:#e6e8ee;--line2:#d3d7e0;--card:#fff;--accent:#0095f6;--accent-ink:#0077c8;
+    --grad-a:#22d3ee;--grad-b:#8b5cf6;
+    --round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,sans-serif;
+    max-width:760px;margin:0 auto;padding:0 4px 48px;color:var(--ink)}
+
+  .cx-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+  .cx-nav .cx-brand{font-family:var(--round);font-weight:800;font-size:13.5px;color:var(--ink);text-decoration:none;transition:color .15s ease}
+  .cx-nav .cx-brand:hover{color:var(--accent-ink)}
+  .cx-os{font-family:var(--round);font-weight:700;font-size:12.5px;color:var(--sub);text-decoration:none;padding:.3rem .72rem;
+    border:1px solid var(--line2);border-radius:999px;transition:border-color .15s ease,color .15s ease}
+  .cx-os:hover{border-color:var(--accent);color:var(--accent-ink)}
+
+  .article{padding:12px 0 0}
+  .crumb{font-size:13.5px;margin:0 0 12px}
+  .crumb a{color:var(--accent-ink);text-decoration:none}
+  .crumb a:hover{text-decoration:underline}
+  .a-eyebrow{font-family:var(--round);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .article h1{font-family:var(--round);font-weight:800;font-size:clamp(26px,4.6vw,34px);line-height:1.32;letter-spacing:-.02em;margin:8px 0 6px;color:var(--ink)}
+  .meta{color:var(--sub);font-size:13px;margin:0 0 26px}
+
+  .body{font-size:15.5px;line-height:1.9;color:var(--ink2)}
+  .body :global(h2){font-family:var(--round);font-weight:800;font-size:21px;letter-spacing:-.01em;color:var(--ink);
+    margin:40px 0 12px;padding-bottom:8px;position:relative}
+  .body :global(h2)::after{content:"";position:absolute;left:0;bottom:0;width:56px;height:3px;border-radius:3px;
+    background:linear-gradient(120deg,var(--grad-a),var(--grad-b))}
+  .body :global(h3){font-family:var(--round);font-weight:800;font-size:17px;margin:26px 0 8px;color:var(--ink)}
+  .body :global(p){margin:12px 0}
+  .body :global(ul),.body :global(ol){line-height:1.9;padding-left:1.4em;margin:12px 0}
+  .body :global(li){margin:4px 0}
+  .body :global(a){color:var(--accent-ink);text-decoration:underline;text-underline-offset:2px}
+  .body :global(strong){color:var(--ink);font-weight:700}
+  .body :global(table){border-collapse:separate;border-spacing:0;width:100%;margin:18px 0;font-size:14px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .body :global(th),.body :global(td){border-bottom:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top;line-height:1.7}
+  .body :global(th){background:#f5f7fb;font-family:var(--round);font-weight:800;color:var(--ink)}
+  .body :global(td){color:var(--sub)}
+  .body :global(tr:last-child th),.body :global(tr:last-child td){border-bottom:none}
+  .body :global(blockquote){margin:16px 0;padding:12px 18px;border-left:3px solid var(--accent);background:rgba(0,149,246,.06);border-radius:8px;color:var(--ink2)}
+  .body :global(code){background:#f0f2f7;border-radius:5px;padding:.1em .35em;font-size:.9em}
+
+  .a-foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
+  .foot-btn{font-family:var(--round);font-weight:800;font-size:13.5px;text-decoration:none;padding:.6rem 1.05rem;border-radius:999px;
+    border:1px solid var(--line2);color:var(--ink2);transition:border-color .16s ease,transform .16s ease,color .16s ease}
+  .foot-btn:hover{transform:translateY(-1px);border-color:var(--accent);color:var(--accent-ink)}
+  .foot-btn.os{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 4px 14px -5px rgba(0,149,246,.55)}
+  .foot-btn.os:hover{color:#fff;box-shadow:0 8px 22px -6px rgba(0,149,246,.55)}
 </style>

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/site-fx.css';
 import Footer from '../components/Footer.astro';
 import StripeAttribution from '../components/StripeAttribution.astro';
 
@@ -10,6 +11,7 @@ interface Props {
   ogTitle?: string;
   ogDescription?: string;
   variant?: 'home' | 'product' | 'legal' | 'os';
+  bodyClass?: string; // 追加の body クラス（例 "fx-bg"＝オーロラ＋OS連想グリッド）
   noindex?: boolean;
   showFooter?: boolean;
   jsonLd?: Record<string, unknown>[];
@@ -22,6 +24,7 @@ const {
   ogTitle,
   ogDescription,
   variant = 'product',
+  bodyClass,
   noindex = false,
   showFooter = true,
   jsonLd = [],
@@ -55,8 +58,34 @@ const allLd = [orgLd, ...jsonLd];
     {allLd.map((obj) => (
       <script type="application/ld+json" set:html={JSON.stringify(obj)} />
     ))}
+    <script is:inline>
+      // 下から浮上リビール制御（.fx-rise 要素があるページのみ実効）。head で html.fx-on を即時付与＝ちらつき防止。
+      // 入ったら .in・**完全に画面外へ出たときだけ**外す（アニメ中の位置変化で再発火する無限ループを防ぐ）。
+      (function () {
+        try {
+          if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+          document.documentElement.classList.add('fx-on');
+          function init() {
+            var t = document.querySelectorAll('.fx-rise');
+            if (!t.length) return;
+            t.forEach(function (el) { var s = el.parentNode ? el.parentNode.children : [el]; el.style.setProperty('--ri', Array.prototype.indexOf.call(s, el) % 8); });
+            var vh = function () { return window.innerHeight || document.documentElement.clientHeight; };
+            var io = new IntersectionObserver(function (es) {
+              es.forEach(function (e) {
+                if (e.isIntersecting) el_add(e.target);
+                else { var r = e.boundingClientRect; if (r.bottom <= 4 || r.top >= vh() - 4) e.target.classList.remove('in'); }
+              });
+            }, { threshold: 0.15 });
+            function el_add(x) { x.classList.add('in'); }
+            t.forEach(function (el) { io.observe(el); });
+            setTimeout(function () { if (!document.querySelector('.fx-rise.in')) t.forEach(function (el) { el.classList.add('in'); }); }, 1600);
+          }
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+        } catch (e) { document.documentElement.classList.remove('fx-on'); }
+      })();
+    </script>
   </head>
-  <body class={variant}>
+  <body class:list={[variant, bodyClass]}>
     <div class="wrap">
       <slot />
       {showFooter && <Footer locale={locale} variant={variant} />}
