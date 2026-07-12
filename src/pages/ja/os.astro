@@ -1,0 +1,21 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import OsLanding from '../../components/OsLanding.astro';
+
+const locale = 'ja';
+const entry = await getEntry('os', locale);
+if (!entry) throw new Error(`Missing os content for locale: ${locale}`);
+const d = entry.data;
+---
+
+<BaseLayout
+  locale={locale}
+  variant="os"
+  title={d.title}
+  description={d.description}
+  ogTitle={d.ogTitle}
+  ogDescription={d.ogDescription}
+>
+  <OsLanding locale={locale} d={d} />
+</BaseLayout>

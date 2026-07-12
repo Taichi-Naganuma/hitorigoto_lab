@@ -1,0 +1,223 @@
+---
+// Mioca 専用ページ（機能/しくみ/料金）共通レイアウト。os_pages コレクションの blocks を描画。
+// LP と同じ意匠（回転グラデ境界線・全面ライト・OS連想グリッド）。リビールは OsNav の observer が再入毎に再生。
+import OsNav from './OsNav.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { Locale } from '../i18n/ui';
+import { WAITLIST_URLS, osCta } from '../lib/os';
+
+interface Props { locale: Locale; d: any }
+const { locale, d } = Astro.props;
+const isJa = locale === 'ja';
+const WAITLIST_URL = WAITLIST_URLS[locale] ?? '';
+const waitlistOn = WAITLIST_URL.trim().length > 0;
+const soonLabel = isJa ? '先行登録（準備中）' : 'Waitlist — opening soon';
+const cta = osCta(locale);
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+const allPages = [
+  { slug: 'features', label: isJa ? '機能' : 'Features' },
+  { slug: 'how', label: isJa ? 'しくみ' : 'How' },
+  { slug: 'pricing', label: isJa ? '料金' : 'Pricing' },
+];
+const others = allPages.filter((p) => p.slug !== d.page).map((p) => ({ ...p, href: getRelativeLocaleUrl(locale, `/os/${p.slug}/`) }));
+const lpUrl = getRelativeLocaleUrl(locale, '/os/');
+const moreLabel = isJa ? '他のページ' : 'More';
+const backLabel = isJa ? '概要（LP）' : 'Overview';
+---
+
+<div class="os-page">
+  <OsNav locale={locale} active={d.page} />
+
+  <section class="o-hero">
+    <span class="eyebrow"><span class="dot"></span>{d.eyebrow}</span>
+    <h1 class="o-h1" set:html={d.heading} />
+    <p class="o-lead">{d.lead}</p>
+  </section>
+
+  {d.blocks.map((b: any) => (
+    <section class="block o-blk">
+      {b.label && <div class="sec-label">{b.label}</div>}
+      {b.heading && <h2 class="sec-h">{b.heading}</h2>}
+      {b.lead && <p class="sec-lead">{b.lead}</p>}
+
+      {b.cards && (
+        <div class="o-cards">
+          {b.cards.map((c: any) => (
+            <div class="o-card">
+              <div class="o-card-title">{c.title}</div>
+              <p class="o-card-body">{c.body}</p>
+              {c.tag && <div class="o-card-tag">{c.tag}</div>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {b.steps && (
+        <ol class="o-steps">
+          {b.steps.map((s: any) => (
+            <li><b>{s.title}</b><span>{s.body}</span></li>
+          ))}
+        </ol>
+      )}
+
+      {b.points && (
+        <ul class="o-points">
+          {b.points.map((p: string) => (<li>{p}</li>))}
+        </ul>
+      )}
+
+      {b.note && <p class="o-note">{b.note}</p>}
+    </section>
+  ))}
+
+  <nav class="o-more" aria-label={moreLabel}>
+    <span class="o-more-label">{moreLabel}</span>
+    <a href={lpUrl}>{backLabel}</a>
+    {others.map((p) => <a href={p.href}>{p.label}</a>)}
+  </nav>
+
+  <section class="o-closing">
+    <h2 class="closing-h">{d.ctaHeading}</h2>
+    <p class="closing-body">{d.ctaBody}</p>
+    {waitlistOn ? (
+      <a class="lp-btn primary lg" href={WAITLIST_URL} target="_blank" rel="noopener">{cta}<Fragment set:html={arrow} /></a>
+    ) : (
+      <span class="lp-btn primary lg is-soon" aria-disabled="true">{soonLabel}</span>
+    )}
+  </section>
+</div>
+
+<style>
+  @property --a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+  .os-page{
+    --lp-ink:#14171f; --lp-ink2:#39414f; --lp-sub:#6a707c; --lp-faint:#9aa0ac;
+    --lp-line:#e6e8ee; --lp-line2:#d3d7e0; --lp-card:#ffffff; --lp-soft:#f5f7fb;
+    --lp-accent:#0095f6; --lp-accent-ink:#0077c8;
+    --lp-grad-a:#22d3ee; --lp-grad-b:#8b5cf6;
+    --lp-grad:linear-gradient(120deg,var(--lp-grad-a),var(--lp-grad-b));
+    --lp-round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif;
+    color:var(--lp-ink);
+  }
+  :global(body.os){
+    background:
+      radial-gradient(56% 40% at 2% -6%, rgba(0,149,246,.20), transparent 56%),
+      radial-gradient(50% 36% at 100% 0%, rgba(139,92,246,.15), transparent 58%),
+      radial-gradient(60% 34% at 98% 104%, rgba(34,211,238,.12), transparent 60%),
+      linear-gradient(180deg,#e8eefe 0%, #eef2fd 52%, #eff3fd 100%);
+    background-repeat:no-repeat; background-attachment:fixed;
+  }
+  :global(body.os)::before{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(30,52,130,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,52,130,.05) 1px, transparent 1px);
+    background-size:42px 42px;
+    -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
+            mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
+  }
+  :global(body.os .wrap){ max-width:1080px; position:relative; z-index:1; }
+
+  @keyframes borderspin{to{--a:360deg}}
+  /* 下から浮かびあがる＋軽いオーバーシュート＋わずかに拡大＝ページをめくる度にわくわく */
+  @keyframes rise{0%{opacity:0;transform:translateY(46px) scale(.94)}55%{opacity:1}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  .lp-btn{position:relative;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--lp-round);font-weight:800;
+    font-size:14.5px;text-decoration:none;border-radius:999px;line-height:1;padding:.72rem 1.2rem;border:1px solid transparent;white-space:nowrap;
+    transition:transform .16s ease,box-shadow .16s ease}
+  .lp-btn.lg{font-size:15.5px;padding:.85rem 1.5rem}
+  .lp-btn :global(svg){width:15px;height:15px;transition:transform .16s ease}
+  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(0,149,246,.55)}
+  .lp-btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(0,149,246,.55),0 6px 20px -8px rgba(139,92,246,.5)}
+  .lp-btn.primary:hover :global(svg){transform:translateX(3px)}
+  .lp-btn.primary.is-soon{background:#bcd7ee;cursor:default}
+  .lp-btn.primary.is-soon:hover{transform:none;box-shadow:none}
+
+  /* hero */
+  .o-hero{padding:48px 0 8px;max-width:720px}
+  .eyebrow{position:relative;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--lp-round);font-weight:800;
+    font-size:12.5px;letter-spacing:.05em;color:var(--lp-accent-ink);background:rgba(0,149,246,.10);border:1px solid transparent;
+    padding:.42rem .9rem;border-radius:999px;box-shadow:0 4px 14px -8px rgba(0,149,246,.5)}
+  .eyebrow::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.2px;pointer-events:none;
+    background:conic-gradient(from var(--a),var(--lp-grad-a),var(--lp-grad-b),var(--lp-accent),var(--lp-grad-a));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;animation:borderspin 9s linear infinite}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--lp-grad);animation:pulse 2.4s ease-in-out infinite}
+  .o-h1{font-family:var(--lp-round);font-weight:800;letter-spacing:-.025em;line-height:1.18;
+    font-size:clamp(30px,4.6vw,44px);margin:18px 0 0;text-wrap:balance;color:var(--lp-ink)}
+  .o-lead{margin:16px 0 0;color:var(--lp-ink2);font-size:16px;line-height:1.85;max-width:60ch}
+
+  /* blocks */
+  .block{margin-top:56px}
+  .sec-label{font-family:var(--lp-round);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;
+    margin-bottom:12px;background:var(--lp-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sec-h{font-family:var(--lp-round);font-weight:800;letter-spacing:-.02em;line-height:1.2;font-size:clamp(22px,3.2vw,30px);color:var(--lp-ink)}
+  .sec-lead{margin:12px 0 0;color:var(--lp-ink2);font-size:15px;line-height:1.8;max-width:60ch}
+
+  /* cards */
+  .o-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px;margin-top:24px}
+  .o-card{position:relative;background:var(--lp-card);border-radius:18px;padding:24px 24px 20px;
+    box-shadow:0 3px 10px -4px rgba(20,30,80,.12);transition:transform .24s cubic-bezier(.2,.7,.2,1),box-shadow .24s ease}
+  .o-card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.5px;pointer-events:none;opacity:.55;
+    background:conic-gradient(from var(--a),var(--lp-grad-a),var(--lp-grad-b),var(--lp-grad-a));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;animation:borderspin 9s linear infinite;transition:opacity .28s ease}
+  .o-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(40,30,120,.34)}
+  .o-card:hover::before{opacity:1}
+  .o-card-title{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--lp-ink)}
+  .o-card-body{font-size:14px;color:var(--lp-sub);line-height:1.75;margin-top:8px}
+  .o-card-tag{margin-top:16px;padding-top:14px;border-top:1px solid var(--lp-line);font-family:var(--lp-round);font-weight:700;
+    font-size:12.5px;color:var(--lp-accent-ink)}
+
+  /* steps (title + body) */
+  .o-steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:12px;margin-top:24px}
+  .o-steps li{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);border-radius:16px;
+    padding:18px 20px 18px 62px;counter-increment:s;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+  .o-steps li:hover{transform:translateX(3px);border-color:var(--lp-grad-a);box-shadow:0 8px 20px -14px rgba(40,30,120,.4)}
+  .o-steps li::before{content:counter(s);position:absolute;left:18px;top:18px;width:28px;height:28px;border-radius:50%;
+    font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;display:flex;align-items:center;justify-content:center;background:var(--lp-grad)}
+  .o-steps li b{display:block;font-family:var(--lp-round);font-weight:800;font-size:15.5px;color:var(--lp-ink);letter-spacing:-.01em}
+  .o-steps li span{display:block;margin-top:5px;font-size:14px;color:var(--lp-sub);line-height:1.7}
+
+  /* points */
+  .o-points{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+  .o-points li{position:relative;padding-left:22px;font-size:14px;line-height:1.65;color:var(--lp-ink2)}
+  .o-points li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--lp-grad)}
+
+  /* note */
+  .o-note{margin-top:20px;max-width:720px;font-family:var(--lp-round);font-weight:700;font-size:12.5px;color:var(--lp-accent-ink);
+    background:rgba(0,149,246,.08);border:1px solid rgba(0,149,246,.2);border-radius:12px;padding:12px 16px;line-height:1.6}
+
+  /* cross links */
+  .o-more{margin-top:64px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+    padding-top:24px;border-top:1px solid var(--lp-line)}
+  .o-more-label{font-family:var(--lp-round);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--lp-faint)}
+  .o-more a{font-family:var(--lp-round);font-weight:700;font-size:13.5px;color:var(--lp-accent-ink);text-decoration:none;
+    padding:.4rem .85rem;border:1px solid var(--lp-line2);border-radius:999px;transition:border-color .18s ease,transform .18s ease}
+  .o-more a:hover{border-color:var(--lp-accent);transform:translateY(-1px)}
+
+  /* closing */
+  .o-closing{position:relative;margin-top:40px;margin-bottom:8px;text-align:center;background:var(--lp-card);border-radius:22px;
+    padding:44px 24px;box-shadow:0 24px 56px -32px rgba(40,30,120,.46),0 3px 10px -4px rgba(20,30,80,.12);overflow:hidden}
+  .o-closing::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.7px;pointer-events:none;
+    background:conic-gradient(from var(--a),var(--lp-grad-a),var(--lp-grad-b),var(--lp-accent),var(--lp-grad-a));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;animation:borderspin 8s linear infinite}
+  .closing-h{font-family:var(--lp-round);font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--lp-ink)}
+  .closing-body{font-size:14px;color:var(--lp-sub);line-height:1.7;margin:8px 0 20px}
+
+  /* reveal（再入毎に再生） */
+  .os-page.reveal-on .o-hero > *,.os-page.reveal-on .sec-label,.os-page.reveal-on .sec-h,.os-page.reveal-on .sec-lead,
+  .os-page.reveal-on .o-card,.os-page.reveal-on .o-steps li,.os-page.reveal-on .o-points li,
+  .os-page.reveal-on .o-note,.os-page.reveal-on .o-closing{opacity:0;transform:translateY(46px) scale(.94)}
+  .os-page.reveal-on .in{animation:rise .66s cubic-bezier(.2,.86,.28,1.12) forwards;animation-delay:calc(var(--ri,0)*85ms)}
+
+  @media (prefers-reduced-motion:reduce){
+    .o-card::before,.o-closing::before,.eyebrow::before,.eyebrow .dot{animation:none}
+  }
+  @media (max-width:820px){
+    .o-points{grid-template-columns:1fr}
+  }
+</style>

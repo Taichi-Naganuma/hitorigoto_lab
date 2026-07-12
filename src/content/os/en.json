@@ -1,0 +1,99 @@
+{
+  "locale": "en",
+  "title": "Mioca — let go, and the business keeps running (coming soon)",
+  "description": "An unattended business OS. Mioca decides and executes across acquisition, support, delivery, and improvement. Numbers measured deterministically, published with tamper-evident signatures. Waitlist opening soon.",
+  "ogTitle": "Mioca — a business OS that runs itself",
+  "ogDescription": "Let go of the wheel, the business keeps running. From proposing to shipping, measuring, and revising.",
+  "brand": "Mioca",
+  "eyebrow": "the business OS that runs unattended",
+  "status": "Coming soon",
+  "headline": "Let go of the wheel,<br>the business keeps running.",
+  "lead": "Mioca decides and executes across acquisition, support, delivery, and improvement. You touch it only a little each week. Every number is measured deterministically and published with a tamper-evident signature.",
+  "ctaPrimary": "Join the waitlist",
+  "ctaSecondary": "See what it does",
+  "waitlistNote": "Not for sale yet. There's no checkout on this page. Join the waitlist and we'll tell you first when it opens — and share indicative pricing before anyone else.",
+  "chips": ["Tamper-evident signatures", "Deterministic metrics", "Minimal human touch"],
+  "console": {
+    "title": "Autonomous activity",
+    "tag": "Sample",
+    "rows": [
+      { "text": "Published 3 articles", "time": "09:12", "state": "done" },
+      { "text": "Synced inventory", "time": "11:40", "state": "done" },
+      { "text": "Answered 12 inquiries", "time": "14:05", "state": "done" },
+      { "text": "Optimizing listing prices", "time": "live", "state": "running" }
+    ],
+    "foot": "* This is an illustration (coming soon). After launch, this shows real data from the internal ledger."
+  },
+  "capTitle": "FEATURES",
+  "capHeading": "Start as one person.<br>Grow into your core OS.",
+  "capLead": "Today, for one person's hands-off. Tomorrow, as an organization's backbone. The same system grows with you.",
+  "caps": [
+    {
+      "title": "Executes autonomously",
+      "body": "From acquisition to support, delivery, and improvement, Mioca decides and acts. You just hand it the goal.",
+      "personal": "Solo: hands-off",
+      "corporate": "Team: automated operations"
+    },
+    {
+      "title": "Proves it deterministically",
+      "body": "Every number is reproducible from the same input and signed for tamper-detection. Hand your results straight to an audit.",
+      "personal": "Solo: peace of mind",
+      "corporate": "Team: audit & governance"
+    },
+    {
+      "title": "Stays under control",
+      "body": "High-risk actions always pass a human approval gate. Even running itself, control stays in your hands.",
+      "personal": "Solo: no runaway",
+      "corporate": "Team: internal controls"
+    }
+  ],
+  "howTitle": "How the loop runs",
+  "how": [
+    "Read the market and the response",
+    "Propose the next move — with a hypothesis",
+    "Generate the deliverable",
+    "Wait for your approval on the calls that matter",
+    "Ship what's approved",
+    "Measure the result and record it",
+    "Rewrite the strategy, then go again"
+  ],
+  "proofLabel": "LIVE TELEMETRY · Proof of unattended operation",
+  "proofTitle": "See it running, as it runs.",
+  "proof": {
+    "heading": "* Coming soon: this is replaced by real ledger data after launch. For now, it explains the mechanism.",
+    "body": "Every number is tallied deterministically from the internal ledger. The LLM writes none of it. Recompute the signature from the same input and anyone can detect tampering.",
+    "points": [
+      "Decisions and shipments are logged — when, what, and why",
+      "Deliverables are signed, so tampering is detectable",
+      "Deterministic steps return the same output for the same input",
+      "Low-confidence output is held for a human, not published"
+    ]
+  },
+  "pricingTitle": "Pricing",
+  "pricing": {
+    "plan": "TBD",
+    "price": "Coming soon",
+    "note": "Pricing is still being set. Waitlist members get indicative pricing before it's finalized. You can't buy or pay on this page yet."
+  },
+  "faqTitle": "FAQ",
+  "faq": [
+    {
+      "q": "When does it launch?",
+      "a": "The date is still being set. Waitlist members hear about the launch and pricing first."
+    },
+    {
+      "q": "Does it really run \"unattended\"?",
+      "a": "You set the direction and approve the calls that matter. Everything else — proposing, building, shipping, measuring, revising — the machine runs itself. We only claim what it can actually do."
+    },
+    {
+      "q": "What do humans do?",
+      "a": "Decide what to aim for, and approve high-risk actions. It isn't built around manual selling or hand-posting."
+    },
+    {
+      "q": "How does this relate to the existing Mioca?",
+      "a": "Those are among the things Mioca produces. This OS runs the producing, shipping, and improving itself."
+    }
+  ],
+  "closingTitle": "Join the waitlist",
+  "closingBody": "We'll tell you first when it opens. Indicative pricing goes to the waitlist first, too."
+}
