@@ -1,0 +1,17 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- ひとりごと研究所（購買部）：ひとりごと＝つぶやきの吹き出し。電光ブルーの角丸地＋白い吹き出し＋点。 -->
+  <defs>
+    <linearGradient id="lbg" x1="3" y1="2" x2="29" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0095f6"/>
+      <stop offset="1" stop-color="#4f7cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="url(#lbg)"/>
+  <!-- 吹き出し本体＋しっぽ -->
+  <rect x="6" y="6" width="20" height="13" rx="4" fill="#ffffff"/>
+  <path d="M10 17 L10 24 L15.5 17 Z" fill="#ffffff"/>
+  <!-- つぶやきの点（ひとりごと） -->
+  <circle cx="12.5" cy="12.4" r="1.6" fill="#0095f6"/>
+  <circle cx="16" cy="12.4" r="1.6" fill="#0095f6"/>
+  <circle cx="19.5" cy="12.4" r="1.6" fill="#0095f6"/>
+</svg>
