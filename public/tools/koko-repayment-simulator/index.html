@@ -1,0 +1,27 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>公庫返済シミュレーター</title><script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "公庫返済シミュレーター", "applicationCategory": "FinanceApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}</script></head><body><main><h1>公庫返済シミュレーター</h1><p class="privacy">※入力内容はこのブラウザ内だけで計算され、サーバーに送信・保存されません。</p><div class="ft-tool"><label>借入額(円) <input id="ft-principal" type="number" value="10000000"></label><label>年利(%) <input id="ft-rate" type="number" step="0.1" value="2.0"></label><label>返済期間(月) <input id="ft-months" type="number" value="84"></label><label>据置(月) <input id="ft-grace" type="number" value="0"></label><label>方式 <select id="ft-method"><option value="equal_payment">元利均等</option><option value="equal_principal">元金均等</option></select></label><label>想定月商(円・任意) <input id="ft-revenue" type="number" value=""></label><button id="ft-run" type="button">計算する</button><div id="ft-out"></div></div><p class="cta"><a href="/l/lp/cnt-dda5ce93?to=/ja/mioca-loan/" data-item="cnt-dda5ce93">AI詳細診断を受ける</a></p><p class="guide"><a href="guide/">解説記事を読む</a></p></main><script>(function(){
+function calc(p,rate,n,grace,method){
+ p=Math.max(0,p||0);n=Math.max(0,Math.floor(n||0));grace=Math.max(0,Math.min(Math.floor(grace||0),n));
+ var r=Math.max(0,rate||0)/100/12;
+ if(p<=0||n<=0){return {monthly_first:0,total_payment:0,total_interest:0,schedule:[]};}
+ var s=[],bal=p,tp=0,ti=0,rep=n-grace,m,i,interest,pay,prin;
+ for(m=1;m<=grace;m++){interest=bal*r;s.push({month:m,payment:Math.round(interest),principal:0,interest:Math.round(interest),balance:Math.round(bal)});tp+=interest;ti+=interest;}
+ if(method==='equal_principal'){
+  prin=rep?bal/rep:0;
+  for(i=0;i<rep;i++){m=grace+i+1;interest=bal*r;pay=prin+interest;bal-=prin;s.push({month:m,payment:Math.round(pay),principal:Math.round(prin),interest:Math.round(interest),balance:Math.round(Math.max(0,bal))});tp+=pay;ti+=interest;}
+ }else{
+  if(r===0){pay=rep?bal/rep:0;}else{pay=bal*r*Math.pow(1+r,rep)/(Math.pow(1+r,rep)-1);}
+  for(i=0;i<rep;i++){m=grace+i+1;interest=bal*r;prin=pay-interest;if(i===rep-1){prin=bal;pay=prin+interest;}bal-=prin;s.push({month:m,payment:Math.round(pay),principal:Math.round(prin),interest:Math.round(interest),balance:Math.round(Math.max(0,bal))});tp+=pay;ti+=interest;}
+ }
+ var first=s.length>grace?s[grace].payment:(s.length?s[0].payment:0);
+ return {monthly_first:Math.round(first),total_payment:Math.round(tp),total_interest:Math.round(ti),schedule:s};
+}
+function revShare(mp,mr){if(!mr||mr<=0)return null;return Math.round(mp/mr*1000)/10;}
+function num(id){var e=document.getElementById(id);return e?parseFloat(String(e.value).replace(/[^0-9.-]/g,''))||0:0;}
+function run(){
+ var res=calc(num('ft-principal'),num('ft-rate'),num('ft-months'),num('ft-grace'),(document.getElementById('ft-method')||{}).value||'equal_payment');
+ var rs=revShare(res.monthly_first,num('ft-revenue'));
+ var rows=res.schedule.map(function(x){return '<tr><td>'+x.month+'</td><td>'+x.payment.toLocaleString()+'</td><td>'+x.principal.toLocaleString()+'</td><td>'+x.interest.toLocaleString()+'</td><td>'+x.balance.toLocaleString()+'</td></tr>';}).join('');
+ document.getElementById('ft-out').innerHTML='<p>初回月返済 <b>'+res.monthly_first.toLocaleString()+'</b>円／総返済 <b>'+res.total_payment.toLocaleString()+'</b>円／総利息 <b>'+res.total_interest.toLocaleString()+'</b>円'+(rs!==null?'／売上に占める返済比率 <b>'+rs+'%</b>':'')+'</p><table><thead><tr><th>回</th><th>返済</th><th>元金</th><th>利息</th><th>残高</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+var b=document.getElementById('ft-run');if(b){b.addEventListener('click',run);}
+})();</script></body></html>

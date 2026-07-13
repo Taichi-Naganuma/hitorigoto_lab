@@ -1,0 +1,20 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>創業計画書セルフチェッカー</title><script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "創業計画書セルフチェッカー", "applicationCategory": "FinanceApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}</script></head><body><main><h1>創業計画書セルフチェッカー</h1><p class="privacy">※入力内容はこのブラウザ内だけで計算され、サーバーに送信・保存されません。</p><div class="ft-tool"><label>創業動機<textarea id="ft-f0" rows="2"></textarea></label><label>経歴<textarea id="ft-f1" rows="2"></textarea></label><label>取扱商品サービス<textarea id="ft-f2" rows="2"></textarea></label><label>取引先<textarea id="ft-f3" rows="2"></textarea></label><label>従業員<textarea id="ft-f4" rows="2"></textarea></label><label>借入状況<textarea id="ft-f5" rows="2"></textarea></label><label>必要資金<textarea id="ft-f6" rows="2"></textarea></label><label>事業見通し<textarea id="ft-f7" rows="2"></textarea></label><button id="ft-run" type="button">チェックする</button><div id="ft-out"></div></div><p class="cta"><a href="/l/lp/cnt-1247856e?to=/ja/mioca-loan/" data-item="cnt-1247856e">AI詳細診断を受ける</a></p><p class="guide"><a href="guide/">解説記事を読む</a></p></main><script>(function(){
+var FIELDS=["創業動機","経歴","取扱商品サービス","取引先","従業員","借入状況","必要資金","事業見通し"];
+var NUMREQ={"必要資金":1,"事業見通し":1};var MIN=40;var NUM=/[0-9０-９]/;
+function run(){
+ var per={},warn=[],filled=0,vals={};
+ FIELDS.forEach(function(name,i){
+  var e=document.getElementById('ft-f'+i);var t=e?String(e.value).trim():'';vals[name]=t;
+  var iss=[];
+  if(!t){iss.push('空欄');}else if(t.length<MIN){iss.push('文字数不足('+t.length+'<'+MIN+')');}
+  if(NUMREQ[name]&&t&&!NUM.test(t)){iss.push('数値の裏付けなし');}
+  if(t&&iss.length===0){filled++;}
+  per[name]={ok:iss.length===0,issues:iss,chars:t.length};
+ });
+ if(NUM.test(vals["必要資金"]||'')&&(vals["事業見通し"]||'')&&!NUM.test(vals["事業見通し"]||'')){warn.push('必要資金の数値に対し、事業見通し(収支)に数値の裏付けがない＝面談で突っ込まれやすい');}
+ var score=Math.round(filled/FIELDS.length*100);
+ var lis=FIELDS.map(function(n){var p=per[n];return '<li>'+n+': '+(p.ok?'OK':p.issues.join('・'))+'</li>';}).join('');
+ document.getElementById('ft-out').innerHTML='<p>スコア <b>'+score+'</b>/100</p><ul>'+lis+'</ul>'+(warn.length?'<p class="warn">⚠ '+warn.join('<br>')+'</p>':'');
+}
+var b=document.getElementById('ft-run');if(b){b.addEventListener('click',run);}
+})();</script></body></html>
