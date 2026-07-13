@@ -16,6 +16,19 @@
 const UTM_SOURCES = new Set([
   "coconala", "x", "threads", "linkedin", "chiebukuro", "reddit", "note", "email", "lp",
 ]);
+
+// Destination short paths (/l/<dest>, no decision_id) — VD-5 funnel_destinations の short 実装。
+// Contract (keep in sync with my-portfolio Trains/train-sample/app_workspace/data/funnel_destinations.json):
+// 漫画/動画 CTA が公開物に刷り込む恒久パス。ここに無い dest は 404（偽の面を作らない＝
+// mioca-waitlist はページ未実装のため未宣言）。値は固定表のみ＝open redirect にしない。
+// "note" は attribution source と重複するが、decision_id 付き（/l/note/<id>）は source 帰属、
+// 裸（/l/note）は dest（note プロフィール）と一意に振り分けられる。
+const DEST_TARGETS = {
+  deck: "/en/ai-deck-studio/",                    // funnel_destinations: theater=en
+  mioca: "/ja/mioca-loan/",
+  follow: "https://x.com/hitorigoto_john",
+  note: "https://note.com/grand_daisy6450",
+};
 const DEFAULT_TARGET = "/ja/ai-deck-studio/";
 const SAFE_SEGMENT = /^[A-Za-z0-9._-]+$/;
 const SAFE_TARGET = /^\/(ja|en)\/[A-Za-z0-9._\-/]*$/;
@@ -64,9 +77,18 @@ export default {
     const url = new URL(request.url);
     const m = url.pathname.match(/^\/l\/([^/]+)(?:\/([^/]+))?\/?$/);
     if (m) {
-      const [, source, decisionId = ""] = m;
-      if (UTM_SOURCES.has(source) && (!decisionId || SAFE_SEGMENT.test(decisionId))) {
-        return interstitial(buildTarget(url, source, decisionId));
+      const [, seg, decisionId = ""] = m;
+      // 目的地 short（裸 /l/<dest>）を先に判定。decision_id 付きは従来どおり source 帰属。
+      if (!decisionId && Object.prototype.hasOwnProperty.call(DEST_TARGETS, seg)) {
+        const dest = DEST_TARGETS[seg];
+        const params = new URLSearchParams(url.search);
+        params.delete("to");
+        if (dest.startsWith("/") && !params.has("utm_source")) params.set("utm_source", seg);
+        const qs = params.toString();
+        return interstitial(qs ? `${dest}${dest.includes("?") ? "&" : "?"}${qs}` : dest);
+      }
+      if (UTM_SOURCES.has(seg) && (!decisionId || SAFE_SEGMENT.test(decisionId))) {
+        return interstitial(buildTarget(url, seg, decisionId));
       }
     }
     return env.ASSETS.fetch(request);
