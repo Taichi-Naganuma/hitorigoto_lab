@@ -187,4 +187,25 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { products, home, os, osPages, articles };
+// db: PSEO 資産工場（Trains R1）が鋳造する一次データ DB ページ。1 md = 1ページ。
+// front-matter は工場（tools/analysis/pseo_factory.py）が決定論で付与する契約に一致させる。
+// draft:true は公開ゲート（affiliate deploy 承認で false へ反転）＝route 側で除外する。
+const db = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/db' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string().optional(),
+    route: z.string().optional(),
+    draft: z.boolean().default(true),
+    region: z.string().default('jp'),
+    template: z.string().optional(),
+    last_verified: z.string().optional(),
+    status: z.string().optional(),
+    data_rows: z.number().optional(),
+    page_id: z.string().optional(),
+    sources: z.array(z.string()).default([]),
+    item_id: z.string().optional(),
+  }),
+});
+
+export const collections = { products, home, os, osPages, articles, db };

@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+// PSEO DB ページ（一次データの一覧）の受け皿ルート。中身（表・出典・注記・CTA）は
+// Trains の資産工場が md 本文へ決定論で焼き込み済み＝ここは器（描画とメタ）だけを持つ。
+// draft:true は除外（公開ゲート＝affiliate deploy 承認で false へ反転してから載る）。
+export async function getStaticPaths() {
+  const pages = await getCollection('db', ({ data }) => !data.draft);
+  return pages.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const site = 'https://hitorigotolab.mananect.com';
+const url = `${site}/db/${entry.id}/`;
+const description = `${d.title}。一次データ${d.data_rows ?? ''}行を出典つきで一覧化（最終確認 ${d.last_verified ?? '—'}）。`;
+const homeUrl = getRelativeLocaleUrl('ja', '/');
+const osUrl = getRelativeLocaleUrl('ja', '/os/');
+
+const datasetLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: d.title,
+  description,
+  url,
+  inLanguage: d.region === 'en' ? 'en' : 'ja',
+  ...(d.last_verified ? { dateModified: d.last_verified } : {}),
+  ...(d.sources.length ? { isBasedOn: d.sources } : {}),
+  creator: { '@type': 'Organization', name: 'hitorigotolab', url: site },
+};
+---
+
+<BaseLayout locale="ja" variant="product" bodyClass="fx-bg" title={d.title} description={description} jsonLd={[datasetLd]}>
+  <div class="cx">
+    <nav class="cx-nav">
+      <a class="cx-brand" href={homeUrl}>ひとりごと研究所 購買部</a>
+      <a class="cx-os" href={osUrl}>自走OS<span aria-hidden="true"> ↗</span></a>
+    </nav>
+
+    <article class="dbpage fx-rise">
+      <span class="a-eyebrow fx-grad-text">DATABASE</span>
+      <h1>{d.title}</h1>
+      <p class="meta">
+        {d.data_rows ? `${d.data_rows}件` : ''}{d.last_verified ? ` ・ 最終確認 ${d.last_verified}` : ''}
+      </p>
+      <div class="body"><Content /></div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .cx{--ink:#14171f;--ink2:#39414f;--sub:#6a707c;--line:#e6e8ee;--line2:#d3d7e0;--card:#fff;--accent:#0095f6;--accent-ink:#0077c8;
+    --grad-a:#22d3ee;--grad-b:#8b5cf6;
+    --round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,sans-serif;
+    max-width:860px;margin:0 auto;padding:0 4px 48px;color:var(--ink)}
+
+  .cx-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+  .cx-nav .cx-brand{font-family:var(--round);font-weight:800;font-size:13.5px;color:var(--ink);text-decoration:none;transition:color .15s ease}
+  .cx-nav .cx-brand:hover{color:var(--accent-ink)}
+  .cx-os{font-family:var(--round);font-weight:700;font-size:12.5px;color:var(--sub);text-decoration:none;padding:.3rem .72rem;
+    border:1px solid var(--line2);border-radius:999px;transition:border-color .15s ease,color .15s ease}
+  .cx-os:hover{border-color:var(--accent);color:var(--accent-ink)}
+
+  .dbpage{padding:12px 0 0}
+  .a-eyebrow{font-family:var(--round);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .dbpage h1{font-family:var(--round);font-weight:800;font-size:clamp(24px,4.2vw,32px);line-height:1.32;letter-spacing:-.02em;margin:8px 0 6px;color:var(--ink)}
+  .meta{color:var(--sub);font-size:13px;margin:0 0 24px}
+
+  .body{font-size:15px;line-height:1.85;color:var(--ink2)}
+  .body :global(h1){display:none} /* md 先頭の重複 H1 は front-matter title で描画済み */
+  .body :global(h2){font-family:var(--round);font-weight:800;font-size:20px;letter-spacing:-.01em;color:var(--ink);
+    margin:38px 0 12px;padding-bottom:8px;position:relative}
+  .body :global(h2)::after{content:"";position:absolute;left:0;bottom:0;width:56px;height:3px;border-radius:3px;
+    background:linear-gradient(120deg,var(--grad-a),var(--grad-b))}
+  .body :global(p){margin:12px 0}
+  .body :global(ul){line-height:1.85;padding-left:1.4em;margin:12px 0}
+  .body :global(a){color:var(--accent-ink);text-decoration:underline;text-underline-offset:2px}
+  /* 一次データ表: 列が多いので横スクロールをページでなく表に閉じ込める */
+  .body :global(table){display:block;overflow-x:auto;border-collapse:separate;border-spacing:0;width:100%;margin:18px 0;
+    font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+  .body :global(th),.body :global(td){border-bottom:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;
+    line-height:1.6;white-space:nowrap}
+  .body :global(td:nth-child(4)){white-space:normal;min-width:220px} /* 所在地などの長文列 */
+  .body :global(th){background:#f5f7fb;font-family:var(--round);font-weight:800;color:var(--ink);position:sticky;top:0}
+  .body :global(td){color:var(--sub)}
+  .body :global(tr:last-child th),.body :global(tr:last-child td){border-bottom:none}
+</style>
