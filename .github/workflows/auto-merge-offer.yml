@@ -1,0 +1,38 @@
+name: Auto-merge offer-reflection PRs
+
+# auto/offer-* の PR（my-portfolio offer_reflect.py が生成する採択オファーの売り場反映）を
+# CI(astro build=品質フロア)成功時に自動マージする。my-portfolio の auto-merge.yml と同方式:
+# private+無料プランでは branch protection が使えないため `gh pr merge --auto` は CI を
+# 待たずに即マージしてしまう → workflow_run で CI の成功を検知してから直接マージする。
+# 統治: 人間承認は採択時(decision_queue chosen.by=owner)に済んでおり、PR 本文に decision_id が刻まれる。
+# 対象は head が auto/offer-* の PR だけ（手動 PR・main への push は対象外）。
+on:
+  workflow_run:
+    workflows: [astro build]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge:
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      startsWith(github.event.workflow_run.head_branch, 'auto/offer-')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge PR for the offer-reflection branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+          REPO: ${{ github.repository }}
+        run: |
+          pr=$(gh pr list --repo "$REPO" --head "$BRANCH" --state open \
+                 --json number --jq '.[0].number // empty')
+          if [ -z "$pr" ]; then
+            echo "No open PR for $BRANCH — nothing to merge."
+            exit 0
+          fi
+          echo "CI green on $BRANCH → merging PR #$pr"
+          gh pr merge "$pr" --repo "$REPO" --squash --delete-branch
