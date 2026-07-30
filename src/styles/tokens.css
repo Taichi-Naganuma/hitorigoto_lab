@@ -6,17 +6,36 @@
    var(--token) を参照し、色/フォント/角丸をハードコードしない。
    正本の掟: my-portfolio `Trains/docs/design/DESIGN-INVARIANTS.md`（憲法）＋
              `Trains/docs/design/planned/os-site-improvement-division-of-labor.md` §3-1。
-   憲法（機械が起案しても棄却される面）: アクセントは電光ブルー1色（多色化しない）／
-     ホバー境界線はシアン→パープル／全面ライト／角丸・OS連想グリッド。
+   憲法（機械が起案しても棄却される面）: アクセントは Operator Blue 1色（多色化しない）／
+     証跡は金で前傾（<5%）／全面ライト・ダークは証拠帯のみ／角丸・OS連想グリッド。
+   ── ブランドカラーシステム v1（2026-07-31 オーナー改訂）:
+      青=システム1色 / 金=証跡 / ライト正面・ダークは証拠帯。旧 #0095f6・cyan→紫グラデは
+      「SNS青／AIハイプのクリシェ」として棄却し、深コバルト＋証跡ゴールドへ移行。
    ════════════════════════════════════════════════════════════════════════════ */
 
 :root {
   /* ── ブランド憲法プリミティブ（DESIGN-INVARIANTS §1・機械が最も触る面） ── */
-  --accent: #0095f6;        /* §1-2 アクセント＝電光ブルー1色（多色化しない） */
-  --accent-ink: #0077c8;    /* アクセント濃色（テキスト/ホバー/リンク） */
-  --edge-cyan: #22d3ee;     /* §1-2 ホバー境界線 シアン */
-  --edge-purple: #8b5cf6;   /* §1-2 ホバー境界線 パープル */
+  --accent: #2A50DA;        /* §1-2 アクセント＝Operator Blue 1色（深コバルト・多色化しない） */
+  --accent-ink: #1E3CAF;    /* アクセント濃色（テキスト/ホバー/リンク） */
+  --accent-soft: #EAF0FE;   /* アクセント淡色（淡い塗り/選択面） */
+
+  /* ── ホバー境界（§1-2）── cyan→紫（ハイプ連想）を撤去し、アクセント青の極薄グラデへ委譲。
+     別名互換のため変数名は保持し、値だけ青系に寄せる。 */
+  --edge-cyan: #6E93F5;     /* 旧シアン枠 → 明るい青 */
+  --edge-purple: #2A50DA;   /* 旧パープル枠 → アクセント青（紫は使わない） */
   --edge-grad: linear-gradient(120deg, var(--edge-cyan), var(--edge-purple));
+
+  /* ── 証跡ゴールド（§1-3「証拠は前傾」を色で担保）── ライブ数値・未証明件数など証跡のみ。
+     面積<5%。ボタン・境界・見出しには使わない（金＝非アラート証跡／橙 warning＝アラート）。 */
+  --gold: #C6890B;
+  --gold-ink: #B0700A;
+  --gold-soft: #FAF1DA;
+
+  /* ── セマンティック（機能色）── */
+  --success: #12805C; --success-soft: #E7F5EF;
+  --warning: #DC6803; --warning-soft: #FCEEDD;
+  --danger:  #D0392B; --danger-soft:  #FBEBE9;
+
   --round-face: "SF Pro Rounded", "Hiragino Maru Gothic ProN", "Segoe UI Rounded", "Meiryo", "Noto Sans JP", system-ui, -apple-system, sans-serif; /* §1-4 丸系見出し */
 
   /* ── 全面ライトの中立色（§1-1・購買部/記事/凡例の土台） ── */
@@ -40,6 +59,13 @@
   /* ── モーション（下から浮上リビール・試作由来） ── */
   --stagger: 85ms;                              /* リビールの段差 */
   --rise-ease: cubic-bezier(.2, .86, .28, 1.12); /* 軽いオーバーシュート */
+
+  /* ── ダーク証跡帯トークン（§1-1「ダークは証拠帯のみ」）──
+     cockpit / live / sample を見せる面専用。既定の顔（LP/記事/OS）には使わない。 */
+  --d-bg: #0D0F14; --d-sf: #14171E; --d-sf2: #1B1F28; --d-bd: #262C37;
+  --d-tx: #E6E9EF; --d-tx2: #AEB6C2; --d-mut: #7A8390;
+  --d-accent: #6E93F5;  /* ダーク上の Operator Blue */
+  --d-gold: #E7AE4E;    /* ダーク上の証跡ゴールド */
 
   /* ── エイリアス（既存 var 参照を壊さない・canonical へ委譲） ────────────────
      コンポーネント側は歴史的に --lp-* / --fx-* を参照している。真実源を一箇所に
