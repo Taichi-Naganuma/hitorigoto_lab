@@ -37,12 +37,12 @@ test("A: 実 tokens.css は block 0", () => {
 });
 
 test("A2: accent 多色化で block", () => {
-  const css = read("src/styles/tokens.css").replace("--accent: #2A50DA", "--accent: #ff3300");
+  const css = read("src/styles/tokens.css").replace("--accent: #a8781e", "--accent: #ff3300");
   assert.ok(ids(checkTokens(css)).includes("A2"));
 });
 
 test("A3: ダーク顔化で block", () => {
-  const css = read("src/styles/tokens.css").replace("--bg: #fafafa", "--bg: #101014");
+  const css = read("src/styles/tokens.css").replace("--bg: #f5f2ea", "--bg: #101014");
   assert.ok(ids(checkTokens(css)).includes("A3"));
 });
 
@@ -51,8 +51,8 @@ test("A4: キー追加で block", () => {
   assert.ok(ids(checkTokens(css)).includes("A4"));
 });
 
-test("A4: ベースラインキー数は 57", () => {
-  assert.equal(new Set(BASELINE_TOKEN_KEYS).size, 57);
+test("A4: ベースラインキー数は 60", () => {
+  assert.equal(new Set(BASELINE_TOKEN_KEYS).size, 60);
 });
 
 // ── A1: .astro 生 hex ─────────────────────────────────────────

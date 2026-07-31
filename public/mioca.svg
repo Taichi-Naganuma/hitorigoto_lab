@@ -2,8 +2,8 @@
   <!-- 澪火（Mioca）: 火＝炎の蒸留マーク（電光ブルー角丸地＋白い炎）。フルの澪火 emblem はロゴ/OG 用・favicon はこれ。 -->
   <defs>
     <linearGradient id="mbg" x1="3" y1="2" x2="29" y2="30" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2A50DA"/>
-      <stop offset="1" stop-color="#6E93F5"/>
+      <stop stop-color="#a8781e"/>
+      <stop offset="1" stop-color="#dda843"/>
     </linearGradient>
     <linearGradient id="mfl" x1="16" y1="4" x2="16" y2="22" gradientUnits="userSpaceOnUse">
       <stop stop-color="#ffffff"/>

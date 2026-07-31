@@ -30,10 +30,10 @@
 /* 全面ライトのオーロラ＋OS連想グリッド（body に付与） */
 body.fx-bg {
   background:
-    radial-gradient(56% 40% at 2% -6%, rgba(42, 80, 218, .20), transparent 56%),
-    radial-gradient(50% 36% at 100% 0%, rgba(42, 80, 218, .15), transparent 58%),
+    radial-gradient(56% 40% at 2% -6%, rgba(168, 120, 30, .20), transparent 56%),
+    radial-gradient(50% 36% at 100% 0%, rgba(168, 120, 30, .15), transparent 58%),
     radial-gradient(60% 34% at 98% 104%, rgba(110, 147, 245, .12), transparent 60%),
-    linear-gradient(180deg, #e8eefe 0%, #eef2fd 52%, #eff3fd 100%);
+    linear-gradient(180deg, #f5f2ea 0%, #f1eee4 52%, #f5f2ea 100%);
   background-repeat: no-repeat; background-attachment: fixed;
 }
 body.fx-bg::before {

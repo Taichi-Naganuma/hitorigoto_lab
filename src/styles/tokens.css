@@ -1,79 +1,58 @@
 /* ══════════════════════════════════════════════════════════════════════════
    tokens.css — デザイントークン（サイト唯一の真実源）
    ---------------------------------------------------------------------------
-   自走OS（Mioca）が自分のサイトを改善するとき、機械が触ってよい「見た目」の面は
-   このファイルだけ（＝一次値の単一真実源）。コンポーネントの scoped CSS は必ず
-   var(--token) を参照し、色/フォント/角丸をハードコードしない。
-   正本の掟: my-portfolio `Trains/docs/design/DESIGN-INVARIANTS.md`（憲法）＋
-             `Trains/docs/design/planned/os-site-improvement-division-of-labor.md` §3-1。
-   憲法（機械が起案しても棄却される面）: アクセントは Operator Blue 1色（多色化しない）／
-     証跡は金で前傾（<5%）／全面ライト・ダークは証拠帯のみ／角丸・OS連想グリッド。
-   ── ブランドカラーシステム v1（2026-07-31 オーナー改訂）:
-      青=システム1色 / 金=証跡 / ライト正面・ダークは証拠帯。旧アクセント(SNS青)・cyan→紫グラデは
-      「SNS青／AIハイプのクリシェ」として棄却し、深コバルト＋証跡ゴールドへ移行。
+   Mananect ブランドシステム v1（2026-08-01 オーナー確定）: 色は意味。
+     Light = Convince（理解・説得・学習 / Reasoning）＝地。面: サイト・LP・docs・構想。
+     Dark  = Operate （実行・監視・証跡 / Execution）＝地。面: 製品アプリ・cockpit・live。
+     Gold  = Verify  （信頼・署名・証明 / Evidence）＝印。地にしない・面積<8%・多色化しない。
+     Rust  = Unverified（未証明）＝金の対の印。
+   憲章: hitorigoto-lab/DESIGN-INVARIANTS.md §1（正本 my-portfolio）。
+   機構: 機械は「値のみ可・キー増減禁止」（quality-floor A4）。キー名は保持し値だけ動かす。
    ════════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── ブランド憲法プリミティブ（DESIGN-INVARIANTS §1・機械が最も触る面） ── */
-  --accent: #2A50DA;        /* §1-2 アクセント＝Operator Blue 1色（深コバルト・多色化しない） */
-  --accent-ink: #1E3CAF;    /* アクセント濃色（テキスト/ホバー/リンク） */
-  --accent-soft: #EAF0FE;   /* アクセント淡色（淡い塗り/選択面） */
-
-  /* ── ホバー境界（§1-2）── cyan→紫（ハイプ連想）を撤去し、アクセント青の極薄グラデへ委譲。
-     別名互換のため変数名は保持し、値だけ青系に寄せる。 */
-  --edge-cyan: #6E93F5;     /* 旧シアン枠 → 明るい青 */
-  --edge-purple: #2A50DA;   /* 旧パープル枠 → アクセント青（紫は使わない） */
+  /* ── Verify = Gold（印）＝ Light 面のアクセント/CTA/リンク。多色化しない ── */
+  --accent: #a8781e;        /* Verify Gold（on light） */
+  --accent-ink: #87611a;    /* 濃色（テキストリンク/ホバー） */
+  --accent-soft: #f0e7cf;   /* 淡い塗り/選択面 */
+  /* ホバー境界：金の極薄グラデ（単一色相・旧 cyan→紫は撤去）。Phase2 で罫へ移行予定 */
+  --edge-cyan: #c9a24e;
+  --edge-purple: #a8781e;
   --edge-grad: linear-gradient(120deg, var(--edge-cyan), var(--edge-purple));
+  /* Gold 別名（証跡の印） */
+  --gold: #a8781e; --gold-ink: #87611a; --gold-soft: #f0e7cf;
+  /* Rust = Unverified（未証明の印・金の対） */
+  --rust: #a9552f; --rust-soft: #f1e4d9;
+  /* セマンティック（機能色） */
+  --success: #12805c; --success-soft: #e7f5ef;
+  --warning: #dc6803; --warning-soft: #fceedd;
+  --danger:  #d0392b; --danger-soft:  #fbebe9;
+  --round-face: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic","Noto Sans JP",system-ui,-apple-system,"Segoe UI",sans-serif;
 
-  /* ── 証跡ゴールド（§1-3「証拠は前傾」を色で担保）── ライブ数値・未証明件数など証跡のみ。
-     面積<5%。ボタン・境界・見出しには使わない（金＝非アラート証跡／橙 warning＝アラート）。 */
-  --gold: #C6890B;
-  --gold-ink: #B0700A;
-  --gold-soft: #FAF1DA;
+  /* ── Light = Convince（地・温ペーパー）── */
+  --ink: #1b1913;   /* 本文 */
+  --sub: #8a836f;   /* 副次 */
+  --line: #ded9c9;  /* ヘアライン */
+  --bg: #f5f2ea;    /* ページ背景 */
+  --card: #fcfbf7;  /* カード面 */
+  --soft: #f1eee4;  /* 微弱な塗り */
+  --font-ja: "Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",system-ui,sans-serif;
+  --font-en: -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+  --lp-ink: #1b1913; --lp-ink2: #4a463a; --lp-sub: #8a836f; --lp-faint: #a9a28c;
+  --lp-line: #ded9c9; --lp-line2: #cbc4af; --lp-card: #fcfbf7; --lp-soft: #f1eee4;
 
-  /* ── セマンティック（機能色）── */
-  --success: #12805C; --success-soft: #E7F5EF;
-  --warning: #DC6803; --warning-soft: #FCEEDD;
-  --danger:  #D0392B; --danger-soft:  #FBEBE9;
+  --r-pill: 999px; --r-card: 18px;
+  --stagger: 85ms; --rise-ease: cubic-bezier(.2, .86, .28, 1.12);
 
-  --round-face: "SF Pro Rounded", "Hiragino Maru Gothic ProN", "Segoe UI Rounded", "Meiryo", "Noto Sans JP", system-ui, -apple-system, sans-serif; /* §1-4 丸系見出し */
+  /* ── Dark = Operate（地・温 near-black・製品アプリ/cockpit/live 専用。既定の顔には使わない）── */
+  --d-bg: #100f09; --d-sf: #17150d; --d-sf2: #201d13; --d-bd: #332e1d;
+  --d-tx: #ece7d8; --d-tx2: #b3ab92; --d-mut: #7c7458;
+  --d-accent: #dda843; --d-gold: #dda843; --d-rust: #c6633c;
 
-  /* ── 全面ライトの中立色（§1-1・購買部/記事/凡例の土台） ── */
-  --ink: #262626;   /* 本文（near-black） */
-  --sub: #737373;   /* 副次テキスト */
-  --line: #dbdbdb;  /* ヘアライン境界 */
-  --bg: #fafafa;    /* ページ背景 */
-  --card: #ffffff;  /* カード面 */
-  --soft: #f7f7f8;  /* 微弱な塗り */
-  --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic", system-ui, sans-serif;
-  --font-en: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
-
-  /* ── LP/OS 面の ink スケール（全面ライト上の濃い見出し系） ── */
-  --lp-ink: #14171f; --lp-ink2: #39414f; --lp-sub: #6a707c; --lp-faint: #9aa0ac;
-  --lp-line: #e6e8ee; --lp-line2: #d3d7e0; --lp-card: #ffffff; --lp-soft: #f5f7fb;
-
-  /* ── 角丸（§1-4 OS連想の丸み） ── */
-  --r-pill: 999px;  /* ピル（ボタン/バッジ/eyebrow） */
-  --r-card: 18px;   /* カード面（機能/料金/o-card） */
-
-  /* ── モーション（下から浮上リビール・試作由来） ── */
-  --stagger: 85ms;                              /* リビールの段差 */
-  --rise-ease: cubic-bezier(.2, .86, .28, 1.12); /* 軽いオーバーシュート */
-
-  /* ── ダーク証跡帯トークン（§1-1「ダークは証拠帯のみ」）──
-     cockpit / live / sample を見せる面専用。既定の顔（LP/記事/OS）には使わない。 */
-  --d-bg: #0D0F14; --d-sf: #14171E; --d-sf2: #1B1F28; --d-bd: #262C37;
-  --d-tx: #E6E9EF; --d-tx2: #AEB6C2; --d-mut: #7A8390;
-  --d-accent: #6E93F5;  /* ダーク上の Operator Blue */
-  --d-gold: #E7AE4E;    /* ダーク上の証跡ゴールド */
-
-  /* ── エイリアス（既存 var 参照を壊さない・canonical へ委譲） ────────────────
-     コンポーネント側は歴史的に --lp-* / --fx-* を参照している。真実源を一箇所に
-     保つため、これらは canonical プリミティブへの別名にする（同一計算値）。 */
+  /* ── エイリアス（既存 var 参照を壊さない・canonical へ委譲）── */
   --lp-accent: var(--accent); --lp-accent-ink: var(--accent-ink);
   --lp-grad-a: var(--edge-cyan); --lp-grad-b: var(--edge-purple);
   --lp-grad: var(--edge-grad); --lp-round: var(--round-face);
-
   --fx-accent: var(--accent); --fx-accent-ink: var(--accent-ink);
   --fx-grad-a: var(--edge-cyan); --fx-grad-b: var(--edge-purple);
   --fx-grad: var(--edge-grad); --fx-round: var(--round-face);
