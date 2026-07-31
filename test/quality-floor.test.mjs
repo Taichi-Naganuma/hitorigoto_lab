@@ -25,8 +25,8 @@ test("relLuminance: 白は高・近黒は低", () => {
 });
 
 test("parseTokens: :root の変数を拾う", () => {
-  const { values, keys } = parseTokens(":root{ --accent:#0095f6; /* c */ --bg:#fafafa; }");
-  assert.equal(values["--accent"], "#0095f6");
+  const { values, keys } = parseTokens(":root{ --accent:#2A50DA; /* c */ --bg:#fafafa; }");
+  assert.equal(values["--accent"], "#2A50DA");
   assert.ok(keys.has("--bg"));
 });
 
@@ -37,7 +37,7 @@ test("A: 実 tokens.css は block 0", () => {
 });
 
 test("A2: accent 多色化で block", () => {
-  const css = read("src/styles/tokens.css").replace("--accent: #0095f6", "--accent: #ff3300");
+  const css = read("src/styles/tokens.css").replace("--accent: #2A50DA", "--accent: #ff3300");
   assert.ok(ids(checkTokens(css)).includes("A2"));
 });
 
@@ -51,8 +51,8 @@ test("A4: キー追加で block", () => {
   assert.ok(ids(checkTokens(css)).includes("A4"));
 });
 
-test("A4: ベースラインキー数は 38", () => {
-  assert.equal(new Set(BASELINE_TOKEN_KEYS).size, 38);
+test("A4: ベースラインキー数は 57", () => {
+  assert.equal(new Set(BASELINE_TOKEN_KEYS).size, 57);
 });
 
 // ── A1: .astro 生 hex ─────────────────────────────────────────
@@ -62,7 +62,7 @@ test("A1: 黒白 mask/on-accent は許可", () => {
 });
 
 test("A1: 生ブランド色は warn（craft ヒント・機械は .astro 非対象）", () => {
-  const found = checkAstroRawHex("x.astro", "<style>.x{color:#0095f6}</style>");
+  const found = checkAstroRawHex("x.astro", "<style>.x{color:#2A50DA}</style>");
   const a1 = found.find((x) => x.id === "A1");
   assert.ok(a1 && a1.severity === "warn");
 });

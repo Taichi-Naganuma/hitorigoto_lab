@@ -227,7 +227,8 @@ const capIcons = [
   .waitlist-note{margin:16px 0 0;font-size:12.5px;line-height:1.65;color:var(--lp-sub);max-width:48ch}
 
   /* console = 動作イメージ（回転グラデ境界線・太さ2.7px） */
-  .console{position:relative;background:var(--lp-card);border-radius:20px;padding:20px 20px 16px;
+  /* 証拠帯（動作イメージ）＝憲法§1-1が許した唯一のダーク面。done=青／running=金のライブシグナル。 */
+  .console{position:relative;--lp-ink:var(--d-tx);--lp-ink2:var(--d-tx2);--lp-faint:var(--d-mut);--lp-line:var(--d-bd);--lp-accent-ink:var(--d-accent);background:var(--d-sf);border-radius:20px;padding:20px 20px 16px;
     box-shadow:0 26px 60px -30px rgba(40,30,120,.5),0 3px 10px -4px rgba(20,30,80,.12)}
   .console::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.7px;z-index:3;pointer-events:none;
     background:conic-gradient(from var(--a), var(--lp-grad-a), var(--lp-grad-b), var(--lp-accent), var(--lp-grad-a));
@@ -240,16 +241,16 @@ const capIcons = [
   .con-tag{font-family:var(--lp-round);font-weight:800;font-size:10.5px;letter-spacing:.04em;color:#fff;
     background:var(--lp-grad);padding:.24rem .6rem;border-radius:var(--r-pill)}
   .con-rows{list-style:none;margin:6px 0 0;padding:0}
-  .con-rows li{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid #f0f2f7}
+  .con-rows li{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--d-bd)}
   .con-rows li:last-child{border-bottom:none}
   .con-ico{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
   .con-ico :global(svg){width:13px;height:13px}
   .con-rows li.done .con-ico{background:rgba(42,80,218,.12);color:var(--lp-accent-ink)}
-  .con-rows li.run .con-ico{background:linear-gradient(135deg,rgba(110,147,245,.2),rgba(42,80,218,.2));color:#6d4bd0}
+  .con-rows li.run .con-ico{background:rgba(231,174,78,.16);color:var(--d-gold)}
   .con-rows li.run .con-ico :global(svg){animation:borderspin 1.4s linear infinite}
   .con-text{flex:1;font-size:13.5px;color:var(--lp-ink2);line-height:1.35}
   .con-time{font-family:var(--lp-round);font-weight:700;font-size:12px;color:var(--lp-faint);white-space:nowrap}
-  .con-rows li.run .con-time{color:#6d4bd0;animation:pulse 1.8s ease-in-out infinite}
+  .con-rows li.run .con-time{color:var(--d-gold);animation:pulse 1.8s ease-in-out infinite}
   .con-foot{margin:14px 0 0;font-size:11px;line-height:1.55;color:var(--lp-faint)}
 
   /* ── sections ────────────────────────────────────── */

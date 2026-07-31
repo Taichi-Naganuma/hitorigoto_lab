@@ -21,9 +21,13 @@ export const BASELINE_TOKEN_KEYS = [
   "--r-pill", "--r-card", "--stagger", "--rise-ease",
   "--lp-accent", "--lp-accent-ink", "--lp-grad-a", "--lp-grad-b", "--lp-grad", "--lp-round",
   "--fx-accent", "--fx-accent-ink", "--fx-grad-a", "--fx-grad-b", "--fx-grad", "--fx-round",
+  // ブランドカラーシステム v1（2026-07-31 オーナー改訂・§1-2/1-3b）: 証跡ゴールド・semantic・証拠帯
+  "--accent-soft", "--gold", "--gold-ink", "--gold-soft",
+  "--success", "--success-soft", "--warning", "--warning-soft", "--danger", "--danger-soft",
+  "--d-bg", "--d-sf", "--d-sf2", "--d-bd", "--d-tx", "--d-tx2", "--d-mut", "--d-accent", "--d-gold",
 ];
 // A2 憲法固定色（§1-2）。
-export const SANCTIONED = { "--accent": "#0095f6", "--edge-cyan": "#22d3ee", "--edge-purple": "#8b5cf6" };
+export const SANCTIONED = { "--accent": "#2a50da", "--edge-cyan": "#6e93f5", "--edge-purple": "#2a50da" };
 // A3 全面ライト（§1-1）＝相対輝度がこの床以上。
 export const LIGHT_KEYS = ["--bg", "--card", "--lp-card", "--soft", "--lp-soft"];
 export const LIGHT_LUMINANCE_FLOOR = 0.85;
