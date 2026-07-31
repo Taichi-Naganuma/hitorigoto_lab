@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
-const site = 'https://hitorigotolab.mananect.com';
+const site = 'https://mananect.com';
 const url = `${site}/articles/${entry.id}/`;
 const pub = d.pubDate instanceof Date ? d.pubDate : new Date(d.pubDate);
 const upd = d.updated ? (d.updated instanceof Date ? d.updated : new Date(d.updated)) : pub;

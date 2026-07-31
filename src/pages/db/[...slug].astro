@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
-const site = 'https://hitorigotolab.mananect.com';
+const site = 'https://mananect.com';
 const url = `${site}/db/${entry.id}/`;
 const description = `${d.title}。一次データ${d.data_rows ?? ''}行を出典つきで一覧化（最終確認 ${d.last_verified ?? '—'}）。`;
 const homeUrl = getRelativeLocaleUrl('ja', '/');

@@ -15,5 +15,9 @@
   },
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  // Mananect 本丸ドメイン。apex を Worker のカスタムドメインに割り当て（DNS は wrangler が管理）。
+  "routes": [
+    { "pattern": "mananect.com", "custom_domain": true }
   ]
 }
