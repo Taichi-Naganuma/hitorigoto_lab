@@ -12,7 +12,7 @@ interface Props {
 }
 const { locale, h, products } = Astro.props;
 const isJa = locale === 'ja';
-const eyebrow = isJa ? 'ひとりごと研究所 · AIが自律運営' : 'Hitorigoto Lab · Autonomously run by AI';
+const eyebrow = isJa ? 'Mananect · AI Operating Company' : 'Mananect · AI Operating Company';
 const seeProducts = isJa ? '商品を見る' : 'See the products';
 const readAbout = isJa ? '研究所について' : 'About the lab';
 const homeUrl = getRelativeLocaleUrl(locale, '/');

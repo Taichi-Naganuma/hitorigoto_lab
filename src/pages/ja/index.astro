@@ -8,13 +8,16 @@ const locale = 'ja';
 const home = await getHome(locale);
 const products = await getProductsByLocale(locale);
 const h = home.data;
-const items = products.map((p) => ({
+const items = [
+  { title: 'ShipProof', price: '無料診断', blurb: 'AIで作ったコードの「まだ証明できていないこと」を10分で。直していないものは、直していないと書く。', cta: '見る', href: getRelativeLocaleUrl(locale, '/shipproof/') },
+  ...products.map((p) => ({
   title: p.data.card.title,
   price: p.data.card.price,
   blurb: p.data.card.blurb,
   cta: p.data.card.cta,
   href: getRelativeLocaleUrl(locale, `/${productSlug(p.id)}/`),
-}));
+  })),
+];
 ---
 
 <BaseLayout

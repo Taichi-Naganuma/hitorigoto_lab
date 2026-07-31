@@ -1,22 +1,22 @@
 {
   "locale": "en",
-  "title": "Hitorigoto Lab — every order, made for you by AI",
-  "description": "The Hitorigoto Lab storefront. There's no stock — the moment you order, AI builds a one-off from your input and delivers it to you.",
-  "ogTitle": "Hitorigoto Lab",
-  "ogDescription": "Every order, made for you by AI.",
-  "logo": "Hitorigoto Lab",
-  "headline": "You bring the intent.<br>AI makes it, just for you.",
-  "lead": "\"Where do I even start?\" — we take that small, easily-lost thought seriously. There's no stock here. The moment you order, AI builds a one-off from your input and sends it straight to your inbox.",
+  "title": "Mananect — a company where AI runs the operations",
+  "description": "Mananect is building an AI Operating Company, where AI runs a company's operations. Our first product is ShipProof: turning fast, AI-written code into a state you can hand over and prove.",
+  "ogTitle": "Mananect — AI Operating Company",
+  "ogDescription": "AI runs the operations. It starts with ShipProof.",
+  "logo": "Mananect",
+  "headline": "AI runs the operations.<br>It starts with ShipProof.",
+  "lead": "Mananect is building an AI Operating Company, where AI runs a company's operations itself. It's a big vision, but it starts with something concrete: ShipProof. We turn fast, AI-written code into a state your customer can accept and you can prove. One move at a time.",
   "productsTitle": "Products",
-  "howTitle": "How it works",
+  "howTitle": "How we think",
   "how": [
-    "Answer a few questions at checkout",
-    "AI designs a one-off from your answers alone",
-    "Delivered by email within 24 hours (usually minutes)"
+    "Convince: put the evidence up front, so people understand",
+    "Operate: AI and human run the work and watch it",
+    "Verify: stamp the work with responsibility and proof"
   ],
   "about": {
-    "title": "About the lab",
-    "heading": "Why everything is \"made for you\"",
-    "body": "Hitorigoto Lab starts from the quiet thought most people never say out loud — \"where do I even start?\" — and designs a one-off deliverable addressed to you, one at a time. Nothing sits on a shelf. The moment your order arrives, we begin building something made only for you, from the goal, the starting point, and the constraints you gave us — and nothing else.<br><br>Off-the-shelf answers aren't addressed to you. So we begin by restating what you told us — \"here's what we understood\" — before we build anything: so we never work from a wrong premise, and never water your message down into generic advice. No cheerleading, no rankings, no diagnoses. Just an answer addressed to you, right now.<br><br>An AI does the making, but the design stance is constant — receive, address, commit. The Deck Studio, the Roadmap Studio, and every studio we add next are built on the same posture. That's the Hitorigoto Lab storefront."
+    "title": "About Mananect",
+    "heading": "Rebuilding a name that once stayed on paper",
+    "body": "Mananect was a business name that once stayed theoretical. This time, with AI and one person, we are rebuilding it for real.<br><br>The goal is an AI Operating Company, an OS (Mioca) where AI runs a company's operations. But we do not lead with the grand vision. We ship one useful thing first: ShipProof, which turns fast, AI-written code into a state you can explain and prove. What we did not fix, we write down as not fixed. We do not bend the numbers.<br><br>More products will follow, each an AI Worker in time. All built on the same stance: understand, operate, verify. That is Mananect."
   }
 }

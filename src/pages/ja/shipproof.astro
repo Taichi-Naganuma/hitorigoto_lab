@@ -1,0 +1,199 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const locale = 'ja';
+const homeUrl = getRelativeLocaleUrl(locale, '/');
+const title = 'ShipProof — Mananect';
+const description = 'AIで速く作ったコードから「まだ証明できていないこと」を機械が洗い出し、A4数枚で。直していないものは、直していないと書きます。点数は付けません。10分・無料。ShipProof by Mananect.';
+---
+
+<BaseLayout locale={locale} variant="product" title={title} description={description} ogTitle="ShipProof — Mananect" ogDescription={description} showFooter={true}>
+  <div class="sp">
+    <header class="mast">
+      <a class="brand" href={homeUrl}><span class="co">Mananect</span><span class="sep">/</span><span class="pr">ShipProof</span></a>
+      <nav class="mnav"><a href="#example" class="hide">見本</a><a href="#deliver" class="hide">何が届くか</a><a href="#worries" class="hide">懸念</a><a href="#request" class="cta">無料診断</a></nav>
+    </header>
+
+    <section class="hero">
+      <div class="spec">
+        <span>PRODUCT&nbsp;/&nbsp;<b>ShipProof</b></span>
+        <span>SUBJECT&nbsp;/&nbsp;<b>AI生成の小規模Webアプリ</b></span>
+        <span>METHOD&nbsp;/&nbsp;<b>御社環境内・10分</b></span>
+      </div>
+      <h1>次の納品で聞かれる質問を、<em>先に</em>洗い出す。</h1>
+      <p class="lede">AIで速く作ったコードから、“まだ証明できていないこと”を機械が洗い出し、A4数枚で返します。10分。<b>直していないものは、直していないと書きます。</b>点数は付けません。数字も曲げません。</p>
+      <div class="cta-row">
+        <a class="btn solid" href="#request">無料で診断を依頼 <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#example">見本を検める</a>
+      </div>
+      <div class="gauges">
+        <div class="g"><div class="k">未証明 / Before</div><div class="v rust"><span class="ph">23</span></div><div class="s">見えていない</div></div>
+        <div class="g"><div class="k">未証明 / After</div><div class="v"><span class="ph">3</span></div><div class="s">見える・合意済み</div></div>
+        <div class="g"><div class="k">引渡し資料</div><div class="v">7</div><div class="s">After で追加</div></div>
+        <div class="g"><div class="k">テスト網羅</div><div class="v"><span class="ph">22</span><small>%</small></div><div class="s">上げていない</div></div>
+      </div>
+    </section>
+
+    <section id="example" class="blk">
+      <span class="kick">Before / After — 検証できる見本</span>
+      <h2 class="sh">AIで30分で作ったアプリを、渡せる状態にするまで。</h2>
+      <p class="sl">同一リポジトリ・ブランチ差分。コードも履歴も公開。直したところも、直していないところも、そのまま検められます。</p>
+      <div class="ledger">
+        <div class="lr head"><div class="c">項目</div><div class="c">Before</div><div class="c">After</div></div>
+        <div class="lr"><div class="c k">引渡し資料</div><div class="c before">README のみ</div><div class="c after"><b>7</b> つの引渡し資料</div></div>
+        <div class="lr"><div class="c k">テスト網羅</div><div class="c before"><b><span class="ph">22</span>%</b></div><div class="c after"><b><span class="ph">22</span>%</b> <span class="ok">上げていない</span></div></div>
+        <div class="lr"><div class="c k">環境変数</div><div class="c before"><b><span class="ph">5</span></b> 個 用途不明</div><div class="c after"><b><span class="ph">14</span></b> 個 用途を記載</div></div>
+        <div class="lr"><div class="c k">AI生成箇所</div><div class="c before"><b><span class="ph">12</span></b> 件 記録なし</div><div class="c after">うち <b><span class="ph">4</span></b> 件「未レビュー」と明記</div></div>
+        <div class="lr"><div class="c k">ロールバック</div><div class="c before">手順なし</div><div class="c after">手順を追加</div></div>
+        <div class="lr punch">
+          <div class="c k">未証明項目<br><span class="tiny">まだ証明できていないこと</span></div>
+          <div class="c before"><span class="big"><span class="ph">23</span></span><span class="cap">件 — 見えない</span></div>
+          <div class="c after"><span class="big"><span class="ph">3</span></span><span class="cap">件 — 見える・合意済み</span></div>
+        </div>
+      </div>
+      <div class="annot">
+        <div class="ah"><span class="tag">未修正のまま残す</span><span class="t">ここで直していないもの</span></div>
+        <ul>
+          <li><span class="id">U-01</span><span class="tx">テスト網羅率は <span class="ph">22</span>% のまま。<b>上げていません。</b></span></li>
+          <li><span class="id">U-02</span><span class="tx">依存パッケージ <span class="ph">18</span> 件は古いまま。「更新は別途」と記載。</span></li>
+          <li><span class="id">U-03</span><span class="tx">管理者APIの権限チェックは <b>「未検証」</b>と明記。直していません。</span></li>
+        </ul>
+        <p class="th">この“直していない一覧”があること自体が、<b>「品質改善」ではなく「説明できる状態」を売っている</b>証跡です。相手が「うちも22%だ」と自分ごとにできて、はじめて話が始まります。</p>
+      </div>
+    </section>
+
+    <section id="deliver" class="blk">
+      <span class="kick">何が届くか</span>
+      <h2 class="sh">A4数枚。点数は付けません。</h2>
+      <p class="sl">返すのは総合点でなく「まだ証明できていないこと」の一覧。検出できなかったものは「見つけられませんでした」と書きます——「無い」とは言いません。</p>
+      <div class="cat">
+        <div class="it"><span class="no">P1</span><h3>未証明項目の件数と型の分布</h3><p>点数ではなく、件数と型で。何がどれだけ証明できていないか。</p></div>
+        <div class="it"><span class="no">P2</span><h3>納品時に聞かれそうな質問</h3><p>「これはテストされていますか」に、今の状態で何を出せるか。優先度順。</p></div>
+        <div class="it"><span class="no">P3</span><h3>保守引継ぎで詰まる箇所</h3><p>環境変数・依存・デプロイ・障害時の連絡先。1人で立ち上げられるか。</p></div>
+        <div class="it"><span class="no">P4</span><h3>作るべき資料の優先順位</h3><p>低コストで効く順。＋この診断で検出できなかった範囲を明記。</p></div>
+      </div>
+      <p class="honest"><b>品質を上げるサービスではありません。</b>「何が証明できていて、何ができていないか」を、顧客に説明できる状態にするサービスです。できていないことを、できているようには見せません。</p>
+    </section>
+
+    <section id="worries" class="blk">
+      <span class="kick">懸念に先回り</span>
+      <h2 class="sh">断る理由を、先に消しておきます。</h2>
+      <div class="ql">
+        <details open><summary><span class="qn">Q1</span><span class="q">その解析スクリプト、危険では？</span><span class="pm">+</span></summary>
+          <div class="a">スクリプトは全文お渡しします。読んでから実行できます。ネットワークを切った状態（<span class="mono">--network none</span>）でも動くことを、その場でお見せします。外部の AI サービスに送る鍵を持ちません。“送らない約束”ではなく、送れない構造です。</div></details>
+        <details><summary><span class="qn">Q2</span><span class="q">AIで自分でできそうだけど</span><span class="pm">+</span></summary>
+          <div class="a">生成はできます。うちが売るのは、顧客に提出できる形に束ねて責任を持つ運用と、“外の当事者が確かめた”という事実です。機能では反論しません。</div></details>
+        <details><summary><span class="qn">Q3</span><span class="q">セキュリティ的に無理です</span><span class="pm">+</span></summary>
+          <div class="a">解析は御社環境内で完結します。弊社はコードを一度も受け取りません。だから、お取りやめのとき弊社側で消すものも、そもそもありません。</div></details>
+        <details><summary><span class="qn">Q4</span><span class="q">いくらですか</span><span class="pm">+</span></summary>
+          <div class="a">診断は無料です。その後の引渡し証跡パックは <span class="mono">¥150,000</span>。はじめに申し上げます。濁しません。</div></details>
+      </div>
+    </section>
+
+    <section id="request" class="final">
+      <h2>同じことを、御社のリポジトリで。</h2>
+      <p>対象リポジトリの読み取り権限、または ZIP をいただくだけ。次の納品で困りそうな箇所を、A4数枚でお返しします。営業目的の打ち合わせのお願いではありません。</p>
+      <a class="btn solid big" href="#">無料で診断を依頼 <span aria-hidden="true">→</span></a>
+      <p class="parent">ShipProof は <b>Mananect</b> の最初の製品です。私たちは <span class="g1">Mioca — AI Operating Company</span>（AIが会社の運用を回す OS）を作っています。</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .sp{ --mono:"SFMono-Regular",ui-monospace,"JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;
+    max-width:920px; margin:0 auto; padding:0 26px; color:var(--ink); }
+  .sp a{ color:var(--accent-ink); text-decoration:none; }
+  .sp a:hover{ text-decoration:underline; text-underline-offset:3px; }
+  .sp h1,.sp h2,.sp h3{ margin:0; line-height:1.25; letter-spacing:-.01em; }
+  .mono{ font-family:var(--mono); }
+  .ph{ color:var(--rust); border-bottom:1px dashed var(--rust); }
+  .tiny{ font-size:10.5px; color:var(--lp-faint); }
+
+  .mast{ display:flex; align-items:center; justify-content:space-between; height:56px; border-bottom:1px solid var(--line); font-family:var(--mono); }
+  .mast .brand{ display:flex; align-items:baseline; gap:9px; font-size:15px; color:var(--ink); }
+  .mast .co{ font-weight:700; } .mast .sep{ color:var(--lp-line2); } .mast .pr{ font-weight:700; color:var(--accent-ink); }
+  .mnav{ display:flex; gap:20px; font-size:12.5px; align-items:center; }
+  .mnav a{ color:var(--sub); } .mnav .cta{ color:var(--accent-ink); font-weight:600; }
+  @media(max-width:640px){ .mnav .hide{ display:none; } }
+
+  .hero{ padding:56px 0 8px; }
+  .spec{ display:flex; flex-wrap:wrap; gap:8px 32px; font-family:var(--mono); font-size:11.5px; color:var(--sub); border-bottom:1px solid var(--line); padding-bottom:14px; }
+  .spec b{ color:var(--lp-ink2); font-weight:500; }
+  .hero h1{ font-size:clamp(30px,5.4vw,50px); font-weight:800; margin:26px 0 0; max-width:15ch; text-wrap:balance; }
+  .hero h1 em{ font-style:normal; box-shadow:inset 0 -.42em var(--gold-soft); }
+  .lede{ font-size:clamp(15.5px,2.1vw,18px); color:var(--lp-ink2); max-width:52ch; margin:22px 0 0; }
+  .lede b{ color:var(--ink); font-weight:700; }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .btn{ font-family:var(--font-ja); font-size:15px; font-weight:700; padding:12px 22px; border-radius:6px; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--accent); transition:.14s; }
+  .btn.solid{ background:var(--accent); color:#fff; } .btn.solid:hover{ background:var(--accent-ink); text-decoration:none; }
+  .btn.ghost{ background:transparent; color:var(--accent-ink); border-color:var(--lp-line2); } .btn.ghost:hover{ border-color:var(--accent); text-decoration:none; }
+  .btn.big{ font-size:16px; padding:14px 26px; margin-top:8px; }
+
+  .gauges{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); border-radius:6px; margin-top:36px; background:var(--card); }
+  @media(max-width:600px){ .gauges{ grid-template-columns:repeat(2,1fr); } }
+  .g{ padding:16px 18px; border-left:1px solid var(--line); }
+  .g:first-child{ border-left:0; }
+  @media(max-width:600px){ .g:nth-child(2n+1){ border-left:0; } .g:nth-child(n+3){ border-top:1px solid var(--line); } }
+  .g .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--sub); }
+  .g .v{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:clamp(23px,3.4vw,30px); font-weight:700; margin-top:7px; line-height:1; color:var(--accent-ink); }
+  .g .v.rust{ color:var(--rust); } .g .v small{ font-size:13px; color:var(--sub); font-weight:500; }
+  .g .s{ font-size:11px; color:var(--lp-faint); margin-top:5px; font-family:var(--mono); }
+
+  .blk{ padding:60px 0; border-top:1px solid var(--line); }
+  .kick{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); }
+  .sh{ font-size:clamp(21px,3vw,28px); font-weight:800; margin:11px 0 0; }
+  .sl{ color:var(--lp-ink2); margin:14px 0 0; max-width:60ch; }
+
+  .ledger{ margin-top:32px; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--card); }
+  .lr{ display:grid; grid-template-columns:1.15fr 1fr 1fr; border-top:1px solid var(--line); }
+  .lr:first-child{ border-top:0; }
+  .lr .c{ padding:13px 18px; border-left:1px solid var(--line); font-size:14px; }
+  .lr .c:first-child{ border-left:0; }
+  .lr.head .c{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--sub); background:var(--soft); }
+  .lr .c.k{ font-family:var(--mono); font-size:11.5px; color:var(--lp-ink2); text-transform:uppercase; }
+  .lr .c b{ font-family:var(--mono); font-variant-numeric:tabular-nums; }
+  .lr .before b{ color:var(--rust); } .lr .after b{ color:var(--accent-ink); } .lr .after .ok{ color:var(--sub); font-family:var(--mono); font-size:11px; }
+  .lr.punch .c{ background:var(--gold-soft); padding:17px 18px; }
+  .lr.punch .big{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:30px; font-weight:800; line-height:1; display:block; }
+  .lr.punch .before .big{ color:var(--rust); } .lr.punch .after .big{ color:var(--accent-ink); }
+  .lr.punch .cap{ display:block; margin-top:7px; font-family:var(--mono); font-size:11px; color:var(--sub); }
+  @media(max-width:600px){ .lr{ grid-template-columns:1fr 1fr; } .lr .c.k{ grid-column:1/-1; border-left:0; border-bottom:1px solid var(--line); } .lr.head{ display:none; } }
+
+  .annot{ margin-top:28px; border:1px solid var(--line); border-left:3px solid var(--rust); border-radius:6px; background:var(--card); }
+  .annot .ah{ padding:16px 22px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .annot .tag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--rust); border:1px solid var(--rust); padding:3px 9px; border-radius:3px; }
+  .annot .ah .t{ font-weight:800; font-size:16px; }
+  .annot ul{ list-style:none; margin:0; padding:6px 22px; }
+  .annot li{ display:grid; grid-template-columns:auto 1fr; gap:14px; padding:11px 0; border-bottom:1px dashed var(--line); align-items:baseline; }
+  .annot li:last-child{ border-bottom:0; }
+  .annot li .id{ font-family:var(--mono); font-size:11px; color:var(--rust); }
+  .annot li .tx{ color:var(--lp-ink2); font-size:14.5px; } .annot li .tx b{ color:var(--ink); }
+  .annot .th{ padding:17px 22px; border-top:1px solid var(--line); color:var(--lp-ink2); font-size:14.5px; } .annot .th b{ color:var(--accent-ink); }
+
+  .cat{ display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line); border-radius:6px; margin-top:32px; overflow:hidden; background:var(--card); }
+  @media(max-width:600px){ .cat{ grid-template-columns:1fr; } }
+  .it{ padding:20px 22px; border-left:1px solid var(--line); border-top:1px solid var(--line); }
+  .it:nth-child(-n+2){ border-top:0; } .it:nth-child(2n+1){ border-left:0; }
+  @media(max-width:600px){ .it{ border-left:0; } .it:nth-child(2){ border-top:1px solid var(--line); } }
+  .it .no{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--accent-ink); }
+  .it h3{ font-size:16px; margin:8px 0 7px; } .it p{ color:var(--lp-ink2); font-size:13.5px; margin:0; }
+  .honest{ margin:26px 0 0; color:var(--lp-ink2); font-size:15.5px; max-width:60ch; } .honest b{ color:var(--ink); }
+
+  .ql{ margin-top:28px; border-top:1px solid var(--line); }
+  .ql details{ border-bottom:1px solid var(--line); }
+  .ql summary{ list-style:none; cursor:pointer; display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; padding:17px 2px; }
+  .ql summary::-webkit-details-marker{ display:none; }
+  .ql .qn{ font-family:var(--mono); font-size:11px; color:var(--accent-ink); }
+  .ql .q{ font-weight:700; font-size:15.5px; } .ql .pm{ font-family:var(--mono); color:var(--accent); font-size:17px; }
+  .ql details[open] .pm{ color:var(--rust); }
+  .ql .a{ padding:0 2px 18px 38px; color:var(--lp-ink2); font-size:14px; max-width:64ch; } .ql .a .mono{ color:var(--accent-ink); }
+
+  .final{ padding:64px 0; border-top:1px solid var(--line); text-align:center; }
+  .final h2{ font-size:clamp(23px,3.6vw,32px); font-weight:800; }
+  .final p{ color:var(--lp-ink2); max-width:56ch; margin:16px auto 0; }
+  .final .parent{ margin-top:34px; font-family:var(--mono); font-size:12px; color:var(--sub); border-top:1px solid var(--line); padding-top:20px; }
+  .final .parent b{ color:var(--ink); } .final .parent .g1{ color:var(--accent-ink); }
+
+  @media(prefers-reduced-motion:reduce){ .sp *{ transition:none!important; } }
+</style>
