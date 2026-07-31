@@ -39,8 +39,8 @@ body.fx-bg {
 body.fx-bg::before {
   content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(30, 52, 130, .05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30, 52, 130, .05) 1px, transparent 1px);
+    linear-gradient(rgba(70, 55, 25, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(70, 55, 25, .05) 1px, transparent 1px);
   background-size: 42px 42px;
   -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
           mask-image: radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);

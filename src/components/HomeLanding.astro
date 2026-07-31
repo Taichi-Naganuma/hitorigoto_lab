@@ -14,7 +14,7 @@ const { locale, h, products } = Astro.props;
 const isJa = locale === 'ja';
 const eyebrow = isJa ? 'Mananect · AI Operating Company' : 'Mananect · AI Operating Company';
 const seeProducts = isJa ? '商品を見る' : 'See the products';
-const readAbout = isJa ? '研究所について' : 'About the lab';
+const readAbout = isJa ? 'Mananect について' : 'About Mananect';
 const homeUrl = getRelativeLocaleUrl(locale, '/');
 const osUrl = getRelativeLocaleUrl(locale, '/os/');
 const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
@@ -128,9 +128,9 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   /* 自走OS 相互リンク バナー（回転グラデ境界線・.fx-ring） */
   .os-banner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
     margin-top:26px;background:var(--lp-card);border-radius:20px;padding:22px 26px;text-decoration:none;color:inherit;
-    box-shadow:0 10px 30px -18px rgba(40,30,120,.4),0 3px 10px -4px rgba(20,30,80,.12);
+    box-shadow:0 10px 30px -18px rgba(55, 42, 20,.4),0 3px 10px -4px rgba(40, 32, 18,.12);
     transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
-  .os-banner:hover{transform:translateY(-3px);box-shadow:0 20px 44px -20px rgba(40,30,120,.4)}
+  .os-banner:hover{transform:translateY(-3px);box-shadow:0 20px 44px -20px rgba(55, 42, 20,.4)}
   .ob-eyebrow{font-family:var(--lp-round);font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
   .ob-title{font-family:var(--lp-round);font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--lp-ink);margin-top:4px}
   .ob-blurb{font-size:13.5px;color:var(--lp-sub);line-height:1.7;margin-top:6px;max-width:52ch}
@@ -148,9 +148,9 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   /* product cards — 常時うっすら回転グラデ境界線＋hover で前面化＆浮上 */
   .cards{display:flex;flex-direction:column;gap:12px}
   .pcard{display:block;background:var(--lp-card);border-radius:18px;padding:22px 24px;text-decoration:none;color:inherit;
-    box-shadow:0 3px 10px -4px rgba(20,30,80,.12);
+    box-shadow:0 3px 10px -4px rgba(40, 32, 18,.12);
     transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
-  .pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(20,30,80,.28)}
+  .pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(40, 32, 18,.28)}
   .pc-title{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--lp-ink)}
   .pc-price{font-family:var(--lp-round);font-weight:800;font-size:16px;color:var(--lp-ink);margin-top:6px}
   .pc-blurb{font-size:14px;color:var(--lp-sub);line-height:1.7;margin-top:8px}

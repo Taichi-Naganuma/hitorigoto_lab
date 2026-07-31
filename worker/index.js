@@ -52,7 +52,7 @@ function interstitial(target) {
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>移動中… | Hitorigoto Lab</title>
+<title>移動中… | Mananect</title>
 <style>body{font-family:sans-serif;display:grid;place-items:center;min-height:100vh;margin:0}p{color:#555}</style>
 </head>
 <body>

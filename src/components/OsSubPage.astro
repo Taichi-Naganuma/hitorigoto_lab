@@ -104,8 +104,8 @@ const backLabel = isJa ? '概要（LP）' : 'Overview';
   :global(body.os)::before{
     content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
     background-image:
-      linear-gradient(rgba(30,52,130,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30,52,130,.05) 1px, transparent 1px);
+      linear-gradient(rgba(70, 55, 25,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(70, 55, 25,.05) 1px, transparent 1px);
     background-size:42px 42px;
     -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
             mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
@@ -152,12 +152,12 @@ const backLabel = isJa ? '概要（LP）' : 'Overview';
   /* cards */
   .o-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px;margin-top:24px}
   .o-card{position:relative;background:var(--lp-card);border-radius:var(--r-card);padding:24px 24px 20px;
-    box-shadow:0 3px 10px -4px rgba(20,30,80,.12);transition:transform .24s cubic-bezier(.2,.7,.2,1),box-shadow .24s ease}
+    box-shadow:0 3px 10px -4px rgba(40, 32, 18,.12);transition:transform .24s cubic-bezier(.2,.7,.2,1),box-shadow .24s ease}
   .o-card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.5px;pointer-events:none;opacity:.55;
     background:conic-gradient(from var(--a),var(--lp-grad-a),var(--lp-grad-b),var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
             mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;animation:borderspin 9s linear infinite;transition:opacity .28s ease}
-  .o-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(40,30,120,.34)}
+  .o-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(55, 42, 20,.34)}
   .o-card:hover::before{opacity:1}
   .o-card-title{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--lp-ink)}
   .o-card-body{font-size:14px;color:var(--lp-sub);line-height:1.75;margin-top:8px}
@@ -168,7 +168,7 @@ const backLabel = isJa ? '概要（LP）' : 'Overview';
   .o-steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:12px;margin-top:24px}
   .o-steps li{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);border-radius:16px;
     padding:18px 20px 18px 62px;counter-increment:s;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
-  .o-steps li:hover{transform:translateX(3px);border-color:var(--lp-grad-a);box-shadow:0 8px 20px -14px rgba(40,30,120,.4)}
+  .o-steps li:hover{transform:translateX(3px);border-color:var(--lp-grad-a);box-shadow:0 8px 20px -14px rgba(55, 42, 20,.4)}
   .o-steps li::before{content:counter(s);position:absolute;left:18px;top:18px;width:28px;height:28px;border-radius:50%;
     font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;display:flex;align-items:center;justify-content:center;background:var(--lp-grad)}
   .o-steps li b{display:block;font-family:var(--lp-round);font-weight:800;font-size:15.5px;color:var(--lp-ink);letter-spacing:-.01em}
@@ -193,7 +193,7 @@ const backLabel = isJa ? '概要（LP）' : 'Overview';
 
   /* closing */
   .o-closing{position:relative;margin-top:40px;margin-bottom:8px;text-align:center;background:var(--lp-card);border-radius:22px;
-    padding:44px 24px;box-shadow:0 24px 56px -32px rgba(40,30,120,.46),0 3px 10px -4px rgba(20,30,80,.12);overflow:hidden}
+    padding:44px 24px;box-shadow:0 24px 56px -32px rgba(55, 42, 20,.46),0 3px 10px -4px rgba(40, 32, 18,.12);overflow:hidden}
   .o-closing::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.7px;pointer-events:none;
     background:conic-gradient(from var(--a),var(--lp-grad-a),var(--lp-grad-b),var(--lp-accent),var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;

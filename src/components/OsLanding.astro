@@ -170,8 +170,8 @@ const capIcons = [
   :global(body.os)::before{
     content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
     background-image:
-      linear-gradient(rgba(30,52,130,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30,52,130,.05) 1px, transparent 1px);
+      linear-gradient(rgba(70, 55, 25,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(70, 55, 25,.05) 1px, transparent 1px);
     background-size:42px 42px;
     -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
             mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
@@ -229,7 +229,7 @@ const capIcons = [
   /* console = 動作イメージ（回転グラデ境界線・太さ2.7px） */
   /* 証拠帯（動作イメージ）＝憲法§1-1が許した唯一のダーク面。done=青／running=金のライブシグナル。 */
   .console{position:relative;--lp-ink:var(--d-tx);--lp-ink2:var(--d-tx2);--lp-faint:var(--d-mut);--lp-line:var(--d-bd);--lp-accent-ink:var(--d-accent);background:var(--d-sf);border-radius:20px;padding:20px 20px 16px;
-    box-shadow:0 26px 60px -30px rgba(40,30,120,.5),0 3px 10px -4px rgba(20,30,80,.12)}
+    box-shadow:0 26px 60px -30px rgba(55, 42, 20,.5),0 3px 10px -4px rgba(40, 32, 18,.12)}
   .console::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.7px;z-index:3;pointer-events:none;
     background:conic-gradient(from var(--a), var(--lp-grad-a), var(--lp-grad-b), var(--lp-accent), var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
@@ -263,13 +263,13 @@ const capIcons = [
 
   .features .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
   .capcard{position:relative;background:var(--lp-card);border-radius:var(--r-card);padding:22px 22px 20px;
-    box-shadow:0 3px 10px -4px rgba(20,30,80,.12);transition:transform .24s cubic-bezier(.2,.7,.2,1),box-shadow .24s ease}
+    box-shadow:0 3px 10px -4px rgba(40, 32, 18,.12);transition:transform .24s cubic-bezier(.2,.7,.2,1),box-shadow .24s ease}
   .capcard::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.5px;z-index:3;pointer-events:none;opacity:.55;
     background:conic-gradient(from calc(var(--a) + var(--i,0)*40deg), var(--lp-grad-a), var(--lp-grad-b), var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
             mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
     animation:borderspin 9s linear infinite;transition:opacity .28s ease}
-  .capcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(40,30,120,.34)}
+  .capcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(55, 42, 20,.34)}
   .capcard:hover::before{opacity:1}
   .cap-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
   .cap-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
@@ -290,7 +290,7 @@ const capIcons = [
   .steps li{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);border-radius:14px;
     padding:15px 18px 15px 54px;font-size:14px;line-height:1.6;color:var(--lp-ink2);counter-increment:s;
     transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
-  .steps li:hover{transform:translateX(3px);border-color:var(--lp-grad-a);box-shadow:0 8px 20px -14px rgba(40,30,120,.4)}
+  .steps li:hover{transform:translateX(3px);border-color:var(--lp-grad-a);box-shadow:0 8px 20px -14px rgba(55, 42, 20,.4)}
   .steps li::before{content:counter(s);position:absolute;left:15px;top:50%;transform:translateY(-50%);
     width:26px;height:26px;border-radius:50%;font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;
     display:flex;align-items:center;justify-content:center;background:var(--lp-grad)}
@@ -326,7 +326,7 @@ const capIcons = [
   .faq dd{font-size:14px;color:var(--lp-sub);margin-top:5px;line-height:1.7}
 
   .closing{position:relative;margin-top:72px;margin-bottom:8px;text-align:center;background:var(--lp-card);
-    border-radius:22px;padding:44px 24px;box-shadow:0 24px 56px -32px rgba(40,30,120,.46),0 3px 10px -4px rgba(20,30,80,.12);overflow:hidden}
+    border-radius:22px;padding:44px 24px;box-shadow:0 24px 56px -32px rgba(55, 42, 20,.46),0 3px 10px -4px rgba(40, 32, 18,.12);overflow:hidden}
   .closing::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.7px;pointer-events:none;
     background:conic-gradient(from var(--a),var(--lp-grad-a),var(--lp-grad-b),var(--lp-accent),var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
