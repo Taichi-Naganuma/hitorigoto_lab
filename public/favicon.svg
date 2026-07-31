@@ -1,5 +1,5 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- ひとりごと研究所（購買部）：ひとりごと＝つぶやきの吹き出し。電光ブルーの角丸地＋白い吹き出し＋点。 -->
+  <!-- Mananect（購買部）：ひとりごと＝つぶやきの吹き出し。電光ブルーの角丸地＋白い吹き出し＋点。 -->
   <defs>
     <linearGradient id="lbg" x1="3" y1="2" x2="29" y2="30" gradientUnits="userSpaceOnUse">
       <stop stop-color="#a8781e"/>
