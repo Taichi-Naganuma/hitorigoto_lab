@@ -1,0 +1,11 @@
+# Mananect — cache policy（Workers Assets）
+# HTML はエッジキャッシュしない＝デプロイが即反映（手動 purge 不要にする）。
+/*
+  Cache-Control: no-store
+# ハッシュ付き不変資産・メディアは長期キャッシュ（most-specific/last が勝つ）。
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+/*.svg
+  Cache-Control: public, max-age=86400
+/*.png
+  Cache-Control: public, max-age=86400
