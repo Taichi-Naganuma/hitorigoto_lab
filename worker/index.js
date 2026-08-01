@@ -75,6 +75,11 @@ addEventListener("load", function () {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // www → apex 正規化（canonical は https://mananect.com 一本）。
+    if (url.hostname === "www.mananect.com") {
+      url.hostname = "mananect.com";
+      return Response.redirect(url.toString(), 301);
+    }
     const m = url.pathname.match(/^\/l\/([^/]+)(?:\/([^/]+))?\/?$/);
     if (m) {
       const [, seg, decisionId = ""] = m;

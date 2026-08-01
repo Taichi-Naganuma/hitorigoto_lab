@@ -5,19 +5,22 @@
   "observability": {
     "enabled": true
   },
-  // /l/* はチャネル帰属のインタースティシャル（worker/index.js 参照）。ここには asset が無いので
-  // worker を先に通す。それ以外は従来どおり静的 assets + _redirects を配信。
+  // worker を全経路で先に通す（run_worker_first: true）。理由が2つ:
+  //  (1) /l/* のチャネル帰属インタースティシャル（worker/index.js 参照）。
+  //  (2) www.mananect.com → apex の 301 正規化（Host 判定は asset 配信では不可能なため worker 必須）。
+  // 非該当パスは worker が末尾で env.ASSETS.fetch(request) にフォールスルー＝従来どおり静的配信＋_headers。
   "main": "worker/index.js",
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/l/*"]
+    "run_worker_first": true
   },
   "compatibility_flags": [
     "nodejs_compat"
   ],
   // Mananect 本丸ドメイン。apex を Worker のカスタムドメインに割り当て（DNS は wrangler が管理）。
   "routes": [
-    { "pattern": "mananect.com", "custom_domain": true }
+    { "pattern": "mananect.com", "custom_domain": true },
+    { "pattern": "www.mananect.com", "custom_domain": true }
   ]
 }
