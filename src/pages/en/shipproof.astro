@@ -1,0 +1,199 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const locale = 'en';
+const homeUrl = getRelativeLocaleUrl(locale, '/');
+const title = 'ShipProof — Mananect';
+const description = 'A machine surfaces what your fast, AI-written code still can’t prove, and hands it back on a few pages. What we didn’t fix, we write down as not fixed. No score. 10 minutes, free. ShipProof by Mananect.';
+---
+
+<BaseLayout locale={locale} variant="product" title={title} description={description} ogTitle="ShipProof — Mananect" ogDescription={description} showFooter={true}>
+  <div class="sp">
+    <header class="mast">
+      <a class="brand" href={homeUrl}><span class="co">Mananect</span><span class="sep">/</span><span class="pr">ShipProof</span></a>
+      <nav class="mnav"><a href="#example" class="hide">Sample</a><a href="#deliver" class="hide">What you get</a><a href="#worries" class="hide">Concerns</a><a href="#request" class="cta">Free diagnosis</a></nav>
+    </header>
+
+    <section class="hero">
+      <div class="spec">
+        <span>PRODUCT&nbsp;/&nbsp;<b>ShipProof</b></span>
+        <span>SUBJECT&nbsp;/&nbsp;<b>Small AI-written web app</b></span>
+        <span>METHOD&nbsp;/&nbsp;<b>Inside your environment · 10 min</b></span>
+      </div>
+      <h1>Surface the questions your <em>next</em> handover will get.</h1>
+      <p class="lede">A machine reads your fast, AI-written code and returns what it still can’t prove — on a few pages, in 10 minutes. <b>What we didn’t fix, we write down as not fixed.</b> No score. We don’t bend the numbers.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="#request">Request a free diagnosis <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#example">Inspect a sample</a>
+      </div>
+      <div class="gauges">
+        <div class="g"><div class="k">Unproven / Before</div><div class="v rust"><span class="ph">23</span></div><div class="s">not visible</div></div>
+        <div class="g"><div class="k">Unproven / After</div><div class="v"><span class="ph">3</span></div><div class="s">visible · agreed</div></div>
+        <div class="g"><div class="k">Handover docs</div><div class="v">7</div><div class="s">added in After</div></div>
+        <div class="g"><div class="k">Test coverage</div><div class="v"><span class="ph">22</span><small>%</small></div><div class="s">not raised</div></div>
+      </div>
+    </section>
+
+    <section id="example" class="blk">
+      <span class="kick">Before / After — a sample you can check</span>
+      <h2 class="sh">From an app built in 30 minutes to one you can hand over.</h2>
+      <p class="sl">Same repository, a branch diff. Code and history are public. What we changed — and what we left untouched — is right there to inspect.</p>
+      <div class="ledger">
+        <div class="lr head"><div class="c">Item</div><div class="c">Before</div><div class="c">After</div></div>
+        <div class="lr"><div class="c k">Handover docs</div><div class="c before">README only</div><div class="c after"><b>7</b> handover docs</div></div>
+        <div class="lr"><div class="c k">Test coverage</div><div class="c before"><b><span class="ph">22</span>%</b></div><div class="c after"><b><span class="ph">22</span>%</b> <span class="ok">not raised</span></div></div>
+        <div class="lr"><div class="c k">Env variables</div><div class="c before"><b><span class="ph">5</span></b> undocumented</div><div class="c after"><b><span class="ph">14</span></b> with purpose noted</div></div>
+        <div class="lr"><div class="c k">AI-written code</div><div class="c before"><b><span class="ph">12</span></b> spots, no record</div><div class="c after"><b><span class="ph">4</span></b> marked “unreviewed”</div></div>
+        <div class="lr"><div class="c k">Rollback</div><div class="c before">no procedure</div><div class="c after">procedure added</div></div>
+        <div class="lr punch">
+          <div class="c k">Unproven items<br><span class="tiny">things not yet proven</span></div>
+          <div class="c before"><span class="big"><span class="ph">23</span></span><span class="cap">items — invisible</span></div>
+          <div class="c after"><span class="big"><span class="ph">3</span></span><span class="cap">items — visible · agreed</span></div>
+        </div>
+      </div>
+      <div class="annot">
+        <div class="ah"><span class="tag">Left unfixed on purpose</span><span class="t">What we did not fix here</span></div>
+        <ul>
+          <li><span class="id">U-01</span><span class="tx">Test coverage stays at <span class="ph">22</span>%. <b>We did not raise it.</b></span></li>
+          <li><span class="id">U-02</span><span class="tx"><span class="ph">18</span> dependencies stay outdated. Noted as “update separately.”</span></li>
+          <li><span class="id">U-03</span><span class="tx">The admin API permission check is marked <b>“unverified.”</b> We did not fix it.</span></li>
+        </ul>
+        <p class="th">The existence of this “did-not-fix” list is itself the proof that we sell <b>a state you can explain, not a quality bump</b>. The conversation only starts once the other side can say “ours is 22% too” and make it their own.</p>
+      </div>
+    </section>
+
+    <section id="deliver" class="blk">
+      <span class="kick">What you get</span>
+      <h2 class="sh">A few pages. No score.</h2>
+      <p class="sl">We return a list of “things not yet proven,” not an overall grade. What we couldn’t detect, we write as “we couldn’t find it” — never as “it isn’t there.”</p>
+      <div class="cat">
+        <div class="it"><span class="no">P1</span><h3>Count and type of unproven items</h3><p>Not a score — a count and a type distribution. What isn’t proven, and how much.</p></div>
+        <div class="it"><span class="no">P2</span><h3>Questions likely at handover</h3><p>For “is this tested?”, what you can show today. In priority order.</p></div>
+        <div class="it"><span class="no">P3</span><h3>Where maintenance handoff stalls</h3><p>Env vars, dependencies, deploy, who to call on an incident. Can one person stand it up?</p></div>
+        <div class="it"><span class="no">P4</span><h3>Which docs to write first</h3><p>Highest effect for lowest cost — plus what this diagnosis could not cover, stated plainly.</p></div>
+      </div>
+      <p class="honest"><b>This is not a service that raises quality.</b> It’s a service that makes “what’s proven and what isn’t” explainable to your customer. We don’t make what isn’t done look done.</p>
+    </section>
+
+    <section id="worries" class="blk">
+      <span class="kick">Getting ahead of the doubts</span>
+      <h2 class="sh">We remove your reasons to say no, up front.</h2>
+      <div class="ql">
+        <details open><summary><span class="qn">Q1</span><span class="q">Isn’t that analysis script dangerous?</span><span class="pm">+</span></summary>
+          <div class="a">You get the full script. Read it before you run it. We’ll show you, on the spot, that it runs with the network cut off (<span class="mono">--network none</span>). It holds no key to send anything to an external AI service. Not a promise not to send — a structure that can’t.</div></details>
+        <details><summary><span class="qn">Q2</span><span class="q">Couldn’t I do this myself with AI?</span><span class="pm">+</span></summary>
+          <div class="a">You can generate it. What we sell is the operation of bundling it into a form you can submit and stand behind — and the fact that an outside party verified it. We don’t argue on features.</div></details>
+        <details><summary><span class="qn">Q3</span><span class="q">Security won’t allow it.</span><span class="pm">+</span></summary>
+          <div class="a">The analysis completes inside your environment. We never receive the code, not once. So when you decline, there’s nothing on our side to delete either.</div></details>
+        <details><summary><span class="qn">Q4</span><span class="q">How much is it?</span><span class="pm">+</span></summary>
+          <div class="a">The diagnosis is free. The handover-evidence pack after it is <span class="mono">¥150,000</span>. We say it up front. We don’t blur it.</div></details>
+      </div>
+    </section>
+
+    <section id="request" class="final">
+      <h2>The same thing, on your repository.</h2>
+      <p>Just read access to the target repo, or a ZIP. We return the spots likely to trip up your next handover, on a few pages. This is not a request for a sales meeting.</p>
+      <a class="btn solid big" href="#">Request a free diagnosis <span aria-hidden="true">→</span></a>
+      <p class="parent">ShipProof is the first product of <b>Mananect</b>. We’re building <span class="g1">Mioca — an AI Operating Company</span> (an OS where AI runs a company’s operations).</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .sp{ --mono:"SFMono-Regular",ui-monospace,"JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;
+    max-width:920px; margin:0 auto; padding:0 26px; color:var(--ink); }
+  .sp a{ color:var(--accent-ink); text-decoration:none; }
+  .sp a:hover{ text-decoration:underline; text-underline-offset:3px; }
+  .sp h1,.sp h2,.sp h3{ margin:0; line-height:1.25; letter-spacing:-.01em; }
+  .mono{ font-family:var(--mono); }
+  .ph{ color:var(--rust); border-bottom:1px dashed var(--rust); }
+  .tiny{ font-size:10.5px; color:var(--lp-faint); }
+
+  .mast{ display:flex; align-items:center; justify-content:space-between; height:56px; border-bottom:1px solid var(--line); font-family:var(--mono); }
+  .mast .brand{ display:flex; align-items:baseline; gap:9px; font-size:15px; color:var(--ink); }
+  .mast .co{ font-weight:700; } .mast .sep{ color:var(--lp-line2); } .mast .pr{ font-weight:700; color:var(--accent-ink); }
+  .mnav{ display:flex; gap:20px; font-size:12.5px; align-items:center; }
+  .mnav a{ color:var(--sub); } .mnav .cta{ color:var(--accent-ink); font-weight:600; }
+  @media(max-width:640px){ .mnav .hide{ display:none; } }
+
+  .hero{ padding:56px 0 8px; }
+  .spec{ display:flex; flex-wrap:wrap; gap:8px 32px; font-family:var(--mono); font-size:11.5px; color:var(--sub); border-bottom:1px solid var(--line); padding-bottom:14px; }
+  .spec b{ color:var(--lp-ink2); font-weight:500; }
+  .hero h1{ font-size:clamp(30px,5.4vw,50px); font-weight:800; margin:26px 0 0; max-width:15ch; text-wrap:balance; }
+  .hero h1 em{ font-style:normal; box-shadow:inset 0 -.42em var(--gold-soft); }
+  .lede{ font-size:clamp(15.5px,2.1vw,18px); color:var(--lp-ink2); max-width:52ch; margin:22px 0 0; }
+  .lede b{ color:var(--ink); font-weight:700; }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .btn{ font-family:var(--font-en); font-size:15px; font-weight:700; padding:12px 22px; border-radius:6px; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--accent); transition:.14s; }
+  .btn.solid{ background:var(--accent); color:#fff; } .btn.solid:hover{ background:var(--accent-ink); text-decoration:none; }
+  .btn.ghost{ background:transparent; color:var(--accent-ink); border-color:var(--lp-line2); } .btn.ghost:hover{ border-color:var(--accent); text-decoration:none; }
+  .btn.big{ font-size:16px; padding:14px 26px; margin-top:8px; }
+
+  .gauges{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); border-radius:6px; margin-top:36px; background:var(--card); }
+  @media(max-width:600px){ .gauges{ grid-template-columns:repeat(2,1fr); } }
+  .g{ padding:16px 18px; border-left:1px solid var(--line); }
+  .g:first-child{ border-left:0; }
+  @media(max-width:600px){ .g:nth-child(2n+1){ border-left:0; } .g:nth-child(n+3){ border-top:1px solid var(--line); } }
+  .g .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--sub); }
+  .g .v{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:clamp(23px,3.4vw,30px); font-weight:700; margin-top:7px; line-height:1; color:var(--accent-ink); }
+  .g .v.rust{ color:var(--rust); } .g .v small{ font-size:13px; color:var(--sub); font-weight:500; }
+  .g .s{ font-size:11px; color:var(--lp-faint); margin-top:5px; font-family:var(--mono); }
+
+  .blk{ padding:60px 0; border-top:1px solid var(--line); }
+  .kick{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); }
+  .sh{ font-size:clamp(21px,3vw,28px); font-weight:800; margin:11px 0 0; }
+  .sl{ color:var(--lp-ink2); margin:14px 0 0; max-width:60ch; }
+
+  .ledger{ margin-top:32px; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--card); }
+  .lr{ display:grid; grid-template-columns:1.15fr 1fr 1fr; border-top:1px solid var(--line); }
+  .lr:first-child{ border-top:0; }
+  .lr .c{ padding:13px 18px; border-left:1px solid var(--line); font-size:14px; }
+  .lr .c:first-child{ border-left:0; }
+  .lr.head .c{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--sub); background:var(--soft); }
+  .lr .c.k{ font-family:var(--mono); font-size:11.5px; color:var(--lp-ink2); text-transform:uppercase; }
+  .lr .c b{ font-family:var(--mono); font-variant-numeric:tabular-nums; }
+  .lr .before b{ color:var(--rust); } .lr .after b{ color:var(--accent-ink); } .lr .after .ok{ color:var(--sub); font-family:var(--mono); font-size:11px; }
+  .lr.punch .c{ background:var(--gold-soft); padding:17px 18px; }
+  .lr.punch .big{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:30px; font-weight:800; line-height:1; display:block; }
+  .lr.punch .before .big{ color:var(--rust); } .lr.punch .after .big{ color:var(--accent-ink); }
+  .lr.punch .cap{ display:block; margin-top:7px; font-family:var(--mono); font-size:11px; color:var(--sub); }
+  @media(max-width:600px){ .lr{ grid-template-columns:1fr 1fr; } .lr .c.k{ grid-column:1/-1; border-left:0; border-bottom:1px solid var(--line); } .lr.head{ display:none; } }
+
+  .annot{ margin-top:28px; border:1px solid var(--line); border-left:3px solid var(--rust); border-radius:6px; background:var(--card); }
+  .annot .ah{ padding:16px 22px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .annot .tag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--rust); border:1px solid var(--rust); padding:3px 9px; border-radius:3px; }
+  .annot .ah .t{ font-weight:800; font-size:16px; }
+  .annot ul{ list-style:none; margin:0; padding:6px 22px; }
+  .annot li{ display:grid; grid-template-columns:auto 1fr; gap:14px; padding:11px 0; border-bottom:1px dashed var(--line); align-items:baseline; }
+  .annot li:last-child{ border-bottom:0; }
+  .annot li .id{ font-family:var(--mono); font-size:11px; color:var(--rust); }
+  .annot li .tx{ color:var(--lp-ink2); font-size:14.5px; } .annot li .tx b{ color:var(--ink); }
+  .annot .th{ padding:17px 22px; border-top:1px solid var(--line); color:var(--lp-ink2); font-size:14.5px; } .annot .th b{ color:var(--accent-ink); }
+
+  .cat{ display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line); border-radius:6px; margin-top:32px; overflow:hidden; background:var(--card); }
+  @media(max-width:600px){ .cat{ grid-template-columns:1fr; } }
+  .it{ padding:20px 22px; border-left:1px solid var(--line); border-top:1px solid var(--line); }
+  .it:nth-child(-n+2){ border-top:0; } .it:nth-child(2n+1){ border-left:0; }
+  @media(max-width:600px){ .it{ border-left:0; } .it:nth-child(2){ border-top:1px solid var(--line); } }
+  .it .no{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--accent-ink); }
+  .it h3{ font-size:16px; margin:8px 0 7px; } .it p{ color:var(--lp-ink2); font-size:13.5px; margin:0; }
+  .honest{ margin:26px 0 0; color:var(--lp-ink2); font-size:15.5px; max-width:60ch; } .honest b{ color:var(--ink); }
+
+  .ql{ margin-top:28px; border-top:1px solid var(--line); }
+  .ql details{ border-bottom:1px solid var(--line); }
+  .ql summary{ list-style:none; cursor:pointer; display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; padding:17px 2px; }
+  .ql summary::-webkit-details-marker{ display:none; }
+  .ql .qn{ font-family:var(--mono); font-size:11px; color:var(--accent-ink); }
+  .ql .q{ font-weight:700; font-size:15.5px; } .ql .pm{ font-family:var(--mono); color:var(--accent); font-size:17px; }
+  .ql details[open] .pm{ color:var(--rust); }
+  .ql .a{ padding:0 2px 18px 38px; color:var(--lp-ink2); font-size:14px; max-width:64ch; } .ql .a .mono{ color:var(--accent-ink); }
+
+  .final{ padding:64px 0; border-top:1px solid var(--line); text-align:center; }
+  .final h2{ font-size:clamp(23px,3.6vw,32px); font-weight:800; }
+  .final p{ color:var(--lp-ink2); max-width:56ch; margin:16px auto 0; }
+  .final .parent{ margin-top:34px; font-family:var(--mono); font-size:12px; color:var(--sub); border-top:1px solid var(--line); padding-top:20px; }
+  .final .parent b{ color:var(--ink); } .final .parent .g1{ color:var(--accent-ink); }
+
+  @media(prefers-reduced-motion:reduce){ .sp *{ transition:none!important; } }
+</style>
