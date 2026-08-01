@@ -61,6 +61,16 @@ const description = 'AIで速く作ったコードから「まだ証明できて
         </ul>
         <p class="th">この“直していない一覧”があること自体が、<b>「品質改善」ではなく「説明できる状態」を売っている</b>証跡です。相手が「うちも22%だ」と自分ごとにできて、はじめて話が始まります。</p>
       </div>
+
+      <div class="proof">
+        <span class="pk">検証できる実物</span>
+        <p class="pt">上の数値は説明用です。実際に診断した公開サンプルは、コードも履歴も差分も、そのまま検められます。伏せていません。</p>
+        <div class="plinks">
+          <a class="pl" href="https://github.com/Taichi-Naganuma/taskboard-before-after" target="_blank" rel="noopener">サンプルのリポジトリ<span aria-hidden="true">&nbsp;↗</span></a>
+          <a class="pl" href="https://github.com/Taichi-Naganuma/taskboard-before-after/compare/main...after" target="_blank" rel="noopener">Before ↔ After の差分<span aria-hidden="true">&nbsp;↗</span></a>
+          <a class="pl" href="https://github.com/Taichi-Naganuma/taskboard-before-after/pull/1" target="_blank" rel="noopener">対応のプルリクエスト<span aria-hidden="true">&nbsp;↗</span></a>
+        </div>
+      </div>
     </section>
 
     <section id="deliver" class="blk fx-rise">
@@ -194,6 +204,13 @@ const description = 'AIで速く作ったコードから「まだ証明できて
   .final p{ color:var(--lp-ink2); max-width:56ch; margin:16px auto 0; }
   .final .parent{ margin-top:34px; font-family:var(--mono); font-size:12px; color:var(--sub); border-top:1px solid var(--line); padding-top:20px; }
   .final .parent b{ color:var(--ink); } .final .parent .g1{ color:var(--accent-ink); }
+
+  .proof{ margin-top:26px; border:1px solid var(--line); border-left:3px solid var(--gold, var(--accent)); border-radius:6px; background:var(--card); padding:18px 22px; }
+  .proof .pk{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-ink); }
+  .proof .pt{ margin:9px 0 0; color:var(--lp-ink2); font-size:14px; max-width:60ch; }
+  .plinks{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .plinks .pl{ font-family:var(--mono); font-size:12.5px; color:var(--accent-ink); border:1px solid var(--lp-line2); border-radius:5px; padding:8px 13px; transition:.14s; }
+  .plinks .pl:hover{ border-color:var(--accent); background:var(--soft); text-decoration:none; }
 
   @media(prefers-reduced-motion:reduce){ .sp *{ transition:none!important; } }
 </style>
