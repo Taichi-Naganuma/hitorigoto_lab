@@ -9,27 +9,29 @@
 
 ---
 
-## 1. ブランド憲法（顔の条項・機械は起案も不可）— Mananect Brand System v1（2026-08-01 確定）
+## 1. ブランド憲法（顔の条項・機械は起案も不可）— Mananect Brand System v2（2026-08-01 確定・冷地×金の印）
 
-**色は意味。3軸が会社の思想（AOS ループ）に対応する。** Convince/Operate/Verify。
+**色は意味。3軸が会社の思想（AOS ループ）に対応する。** Convince/Operate/Verify。v1 の暖クリーム＋金は warm-on-warm で沈む（AI 定番配色）ため、**冷スレート地**に転換して対比を作る。金は冷地の上でこそ"証明の印"として映える。
 
-- **1-1 Light = Convince（地・Reasoning）**: 理解・説得・学習の面は**全面ライト（温ペーパー）**。面: mananect.com・製品マーケLP・docs・ブログ・構想。深夜×ネオンのハイプ見た目は詐欺パターンとして棄却。
-- **1-2 Dark = Operate（地・Execution）**: 実行・監視・証跡の面は**ダーク（温 near-black）**。面: 製品アプリ・診断コンソール・Mioca cockpit・live。**ダークは"作業/証跡"の面に限る**（マーケ/読み物をダークにしない）。
-- **1-3 Gold = Verify（印・Evidence・多色化しない）**: 信頼・署名・証明は**証跡ゴールド `#a8781e`（on light）/`#dda843`（on dark）**の印で担保。**Gold は"地"にしない・面積<8%**。Light 面のアクセント/CTA/リンク＝金。青・緑・紫をブランド色に足さない。
-- **1-3b Rust = Unverified（印・金の対）**: 「まだ証明できていない」は **Rust `#a9552f`／ダーク`#c6633c`** で正直に示す。金＝証明済み／錆＝未証明で、正直な台帳になる。
-- **1-4 地と印の法則**: Light/Dark は排他的な"地"（面の役割で決まる）。Gold は"地"にならない"印"で、両方を縫って1社に見せる。**唯一許す混在＝ライト説得ページ内のダーク Operate 帯**（人の説明の中で機械が動く証拠）。書体: ゴシック＝人の声（Convince）／モノスペース＝機械の声（Operate/Verify）。
+- **1-1 Light = Convince（地・Reasoning）**: 理解・説得・学習の面は**冷スレートの淡地**（off-white＋清潔な白カード）。面: mananect.com・製品マーケLP・docs・ブログ・構想。深夜×ネオンのハイプ見た目は詐欺パターンとして棄却。
+- **1-2 Dark = Operate（地・Execution）**: 実行・監視・証跡の面は**冷チャコール/紺**。面: 製品アプリ・診断コンソール・Mioca cockpit・live。**ダークは"作業/証跡"の面に限る**（マーケ/読み物をダークにしない）。
+- **1-2b Azure = Operate の相互作用色（アクセント・多色化しない）**: リンク・CTA・操作・システムの生気は **Azure `#1c74ac`（on light）/`#3d9fd6`（on dark）** の1色。ホバー境界は cyan→azure の極薄グラデ。**主 CTA は Azure 塗り＋白文字**（濃azure文字で沈めない）。青の他に緑・紫をブランド色に足さない。
+- **1-3 Gold = Verify（印・Evidence・多色化しない）**: 信頼・署名・証明は**証跡ゴールド `#c69224`（on light）/`#e3b24e`（on dark）**の印で担保。**Gold は"地"にしない・面積<8%・CTA/リンクにしない**（相互作用は Azure）。冷地に少量置いて初めて映える。
+- **1-3b Rust = Unverified（印・金の対）**: 「まだ証明できていない」は **Rust `#b85630`／dark `#d1703f`** で正直に示す。金＝証明済み／錆＝未証明で、正直な台帳になる。
+- **1-4 地と印の法則・書体**: Light/Dark は排他的な"地"。Azure は"地"の相互作用色、Gold は"地"にならない"印"。**唯一許す混在＝ライト説得ページ内のダーク Operate 帯**。書体: ゴシック＝人の声（Convince）／モノスペース＝機械の声（Operate/Verify）。**マーケの顔（ホーム）は丸ゴシック（`--lp-round`＝親しみ・人の声）、計器面（ShipProof/os/記事の見出し）は角ゴシック（`--round-face`）**——面の役割で書体を分ける。
 
 ### トークン確定値（一次値の真実源は `src/styles/tokens.css`）
 | 軸 | トークン | 確定値 | 備考 |
 |---|---|---|---|
-| Verify | アクセント/金 | `#a8781e`（`--accent`=`--gold`）／dark `#dda843` | 印・面積<8%・多色化しない（§1-3） |
-| Unverified | 錆 | `#a9552f`（`--rust`）／dark `#c6633c` | 未証明の印（§1-3b） |
-| Convince | Light 地 | bg `#f5f2ea`・ink `#1b1913`・line `#ded9c9` | 温ペーパー（§1-1） |
-| Operate | Dark 地 | `--d-bg#100f09`・`--d-tx#ece7d8`・`--d-bd#332e1d` | 温 near-black・作業/証跡面のみ（§1-2） |
+| Operate | Azure（アクセント/CTA/リンク） | `#1c74ac`（`--accent`）ink `#155a86`／dark `#3d9fd6` | 相互作用の1色・多色化しない（§1-2b） |
+| Verify | 金 | `#c69224`（`--gold`）soft `#f2e7cb`／dark `#e3b24e` | 印・面積<8%・CTA不可（§1-3） |
+| Unverified | 錆 | `#b85630`（`--rust`）／dark `#d1703f` | 未証明の印（§1-3b） |
+| Convince | Light 地 | bg `#f4f6f9`・card `#ffffff`・ink `#1a2230`・line `#dde3ea` | 冷スレート淡地（§1-1） |
+| Operate | Dark 地 | `--d-bg#121722`・`--d-tx#e6ebf2`・`--d-bd#313b4d` | 冷チャコール/紺・作業面のみ（§1-2） |
 | — | セマンティック | success `#12805c`／warning `#dc6803`／danger `#d0392b` | 機能色 |
-| — | 見出し | `--round-face`（ゴシック＝人の声） | §1-4 |
+| — | 見出し | ホーム=`--lp-round`（丸）／計器面=`--round-face`（角） | §1-4 |
 
-> 一次値は `src/styles/tokens.css` の `:root`（唯一の真実源）。本表は憲法としての写し。憲章 v1 の全文＝Convince/Operate/Verify に従う。
+> 一次値は `src/styles/tokens.css` の `:root`（唯一の真実源）。本表は憲法としての写し。憲章 v2＝冷地×金の印（Convince/Operate/Verify）に従う。
 
 ## 2. 機械が触れる面／触れない面（権限の明文）
 
