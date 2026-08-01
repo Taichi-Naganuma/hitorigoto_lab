@@ -29,7 +29,7 @@
   --success: #12805c; --success-soft: #e7f5ef;
   --warning: #dc6803; --warning-soft: #fceedd;
   --danger:  #d0392b; --danger-soft:  #fbebe9;
-  --round-face: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic","Noto Sans JP",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --round-face: "SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif; /* 全面 丸ゴシックで統一（v2.1） */
 
   /* ── Light = Convince（地・冷スレートの淡地）── */
   --ink: #1a2230;   /* 本文（冷 near-black・ref1 最暗） */

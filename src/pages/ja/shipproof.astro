@@ -21,13 +21,13 @@ const description = 'AIで速く作ったコードから「まだ証明できて
         <span>SUBJECT&nbsp;/&nbsp;<b>AI生成の小規模Webアプリ</b></span>
         <span>METHOD&nbsp;/&nbsp;<b>御社環境内・10分</b></span>
       </div>
-      <h1>次の納品で聞かれる質問を、<em>先に</em>洗い出す。</h1>
-      <p class="lede">AIで速く作ったコードから、“まだ証明できていないこと”を機械が洗い出し、A4数枚で返します。10分。<b>直していないものは、直していないと書きます。</b>点数は付けません。数字も曲げません。</p>
-      <div class="cta-row">
+      <h1 class="fx-rise" style="--ri:0">次の納品で聞かれる質問を、<em>先に</em>洗い出す。</h1>
+      <p class="lede fx-rise" style="--ri:1">AIで速く作ったコードから、“まだ証明できていないこと”を機械が洗い出し、A4数枚で返します。10分。<b>直していないものは、直していないと書きます。</b>点数は付けません。数字も曲げません。</p>
+      <div class="cta-row fx-rise" style="--ri:2">
         <a class="btn solid" href="#request">無料で診断を依頼 <span aria-hidden="true">→</span></a>
         <a class="btn ghost" href="#example">見本を検める</a>
       </div>
-      <div class="gauges">
+      <div class="gauges fx-rise" style="--ri:3">
         <div class="g"><div class="k">未証明 / Before</div><div class="v rust"><span class="ph">23</span></div><div class="s">見えていない</div></div>
         <div class="g"><div class="k">未証明 / After</div><div class="v"><span class="ph">3</span></div><div class="s">見える・合意済み</div></div>
         <div class="g"><div class="k">引渡し資料</div><div class="v">7</div><div class="s">After で追加</div></div>
@@ -35,7 +35,7 @@ const description = 'AIで速く作ったコードから「まだ証明できて
       </div>
     </section>
 
-    <section id="example" class="blk">
+    <section id="example" class="blk fx-rise">
       <span class="kick">Before / After — 検証できる見本</span>
       <h2 class="sh">AIで30分で作ったアプリを、渡せる状態にするまで。</h2>
       <p class="sl">同一リポジトリ・ブランチ差分。コードも履歴も公開。直したところも、直していないところも、そのまま検められます。</p>
@@ -63,7 +63,7 @@ const description = 'AIで速く作ったコードから「まだ証明できて
       </div>
     </section>
 
-    <section id="deliver" class="blk">
+    <section id="deliver" class="blk fx-rise">
       <span class="kick">何が届くか</span>
       <h2 class="sh">A4数枚。点数は付けません。</h2>
       <p class="sl">返すのは総合点でなく「まだ証明できていないこと」の一覧。検出できなかったものは「見つけられませんでした」と書きます——「無い」とは言いません。</p>
@@ -76,7 +76,7 @@ const description = 'AIで速く作ったコードから「まだ証明できて
       <p class="honest"><b>品質を上げるサービスではありません。</b>「何が証明できていて、何ができていないか」を、顧客に説明できる状態にするサービスです。できていないことを、できているようには見せません。</p>
     </section>
 
-    <section id="worries" class="blk">
+    <section id="worries" class="blk fx-rise">
       <span class="kick">懸念に先回り</span>
       <h2 class="sh">断る理由を、先に消しておきます。</h2>
       <div class="ql">
@@ -91,7 +91,7 @@ const description = 'AIで速く作ったコードから「まだ証明できて
       </div>
     </section>
 
-    <section id="request" class="final">
+    <section id="request" class="final fx-rise">
       <h2>同じことを、御社のリポジトリで。</h2>
       <p>対象リポジトリの読み取り権限、または ZIP をいただくだけ。次の納品で困りそうな箇所を、A4数枚でお返しします。営業目的の打ち合わせのお願いではありません。</p>
       <a class="btn solid big" href="mailto:bookstore1308@gmail.com?subject=ShipProof%20無料診断の依頼&body=対象リポジトリのURL（または%20ZIP）と、次の納品予定を教えてください。">無料で診断を依頼 <span aria-hidden="true">→</span></a>
@@ -105,7 +105,7 @@ const description = 'AIで速く作ったコードから「まだ証明できて
     max-width:920px; margin:0 auto; padding:0 26px; color:var(--ink); }
   .sp a{ color:var(--accent-ink); text-decoration:none; }
   .sp a:hover{ text-decoration:underline; text-underline-offset:3px; }
-  .sp h1,.sp h2,.sp h3{ margin:0; line-height:1.25; letter-spacing:-.01em; }
+  .sp h1,.sp h2,.sp h3{ margin:0; line-height:1.25; letter-spacing:-.01em; font-family:var(--round-face); }
   .mono{ font-family:var(--mono); }
   .ph{ color:var(--rust); border-bottom:1px dashed var(--rust); }
   .tiny{ font-size:10.5px; color:var(--lp-faint); }

@@ -29,14 +29,14 @@ const backLabel = isJa ? '概要（LP）' : 'Overview';
 <div class="os-page">
   <OsNav locale={locale} active={d.page} />
 
-  <section class="o-hero">
+  <section class="o-hero fx-rise">
     <span class="eyebrow"><span class="dot"></span>{d.eyebrow}</span>
     <h1 class="o-h1" set:html={d.heading} />
     <p class="o-lead">{d.lead}</p>
   </section>
 
   {d.blocks.map((b: any) => (
-    <section class="block o-blk">
+    <section class="block o-blk fx-rise">
       {b.label && <div class="sec-label">{b.label}</div>}
       {b.heading && <h2 class="sec-h">{b.heading}</h2>}
       {b.lead && <p class="sec-lead">{b.lead}</p>}
@@ -77,7 +77,7 @@ const backLabel = isJa ? '概要（LP）' : 'Overview';
     {others.map((p) => <a href={p.href}>{p.label}</a>)}
   </nav>
 
-  <section class="o-closing">
+  <section class="o-closing fx-rise">
     <h2 class="closing-h">{d.ctaHeading}</h2>
     <p class="closing-body">{d.ctaBody}</p>
     {waitlistOn ? (
