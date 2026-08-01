@@ -1,53 +1,55 @@
 /* ══════════════════════════════════════════════════════════════════════════
    tokens.css — デザイントークン（サイト唯一の真実源）
    ---------------------------------------------------------------------------
-   Mananect ブランドシステム v1（2026-08-01 オーナー確定）: 色は意味。
-     Light = Convince（理解・説得・学習 / Reasoning）＝地。面: サイト・LP・docs・構想。
-     Dark  = Operate （実行・監視・証跡 / Execution）＝地。面: 製品アプリ・cockpit・live。
-     Gold  = Verify  （信頼・署名・証明 / Evidence）＝印。地にしない・面積<8%・多色化しない。
-     Rust  = Unverified（未証明）＝金の対の印。
+   Mananect ブランドシステム v2（2026-08-01 オーナー確定・冷地×金の印）: 色は意味。
+     Light  = Convince（理解・説得・学習 / Reasoning）＝地。冷スレートの淡地（暖クリームから移行）。
+     Dark   = Operate （実行・監視・証跡 / Execution）＝地。冷チャコール/紺。製品アプリ・cockpit・live。
+     Azure  = Operate の相互作用色（リンク/CTA/システム）＝冷アクセント。地の主役の"動き"。
+     Gold   = Verify  （信頼・署名・証明 / Evidence）＝印。地にしない・面積<8%・多色化しない。
+              冷地の上でこそ映える（暖色 × 冷地＝最大対比）。
+     Rust   = Unverified（未証明）＝金の対の印。
    憲章: hitorigoto-lab/DESIGN-INVARIANTS.md §1（正本 my-portfolio）。
    機構: 機械は「値のみ可・キー増減禁止」（quality-floor A4）。キー名は保持し値だけ動かす。
    ════════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Verify = Gold（印）＝ Light 面のアクセント/CTA/リンク。多色化しない ── */
-  --accent: #a8781e;        /* Verify Gold（on light） */
-  --accent-ink: #87611a;    /* 濃色（テキストリンク/ホバー） */
-  --accent-soft: #f0e7cf;   /* 淡い塗り/選択面 */
-  /* ホバー境界：金の極薄グラデ（単一色相・旧 cyan→紫は撤去）。Phase2 で罫へ移行予定 */
-  --edge-cyan: #c9a24e;
-  --edge-purple: #a8781e;
+  /* ── Operate = Azure（相互作用色）＝ Light 面のアクセント/CTA/リンク。多色化しない ── */
+  --accent: #1c74ac;        /* Azure（on light・リンク/CTA/操作） */
+  --accent-ink: #155a86;    /* 濃色（テキストリンク/ホバー） */
+  --accent-soft: #e3eef6;   /* 淡い塗り/選択面 */
+  /* ホバー境界：cyan→azure の極薄グラデ（冷・単一系。ref3 のシアン＋ref2 の青） */
+  --edge-cyan: #3fb0d8;
+  --edge-purple: #1c74ac;
   --edge-grad: linear-gradient(120deg, var(--edge-cyan), var(--edge-purple));
-  /* Gold 別名（証跡の印） */
-  --gold: #a8781e; --gold-ink: #87611a; --gold-soft: #f0e7cf;
+  /* Verify = Gold（証跡の印・冷地の上で映える・面積<8%） */
+  --gold: #c69224; --gold-ink: #98701a; --gold-soft: #f2e7cb;
   /* Rust = Unverified（未証明の印・金の対） */
-  --rust: #a9552f; --rust-soft: #f1e4d9;
+  --rust: #b85630; --rust-soft: #f6e6dd;
   /* セマンティック（機能色） */
   --success: #12805c; --success-soft: #e7f5ef;
   --warning: #dc6803; --warning-soft: #fceedd;
   --danger:  #d0392b; --danger-soft:  #fbebe9;
   --round-face: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic","Noto Sans JP",system-ui,-apple-system,"Segoe UI",sans-serif;
 
-  /* ── Light = Convince（地・温ペーパー）── */
-  --ink: #1b1913;   /* 本文 */
-  --sub: #8a836f;   /* 副次 */
-  --line: #ded9c9;  /* ヘアライン */
-  --bg: #f5f2ea;    /* ページ背景 */
-  --card: #fcfbf7;  /* カード面 */
-  --soft: #f1eee4;  /* 微弱な塗り */
+  /* ── Light = Convince（地・冷スレートの淡地）── */
+  --ink: #1a2230;   /* 本文（冷 near-black・ref1 最暗） */
+  --sub: #64707f;   /* 副次（冷スレートグレー） */
+  --line: #dde3ea;  /* ヘアライン */
+  --bg: #f4f6f9;    /* ページ背景（冷 off-white） */
+  --card: #ffffff;  /* カード面（清潔な白＝冷地に対比） */
+  --soft: #eef1f5;  /* 微弱な塗り */
   --font-ja: "Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",system-ui,sans-serif;
   --font-en: -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
-  --lp-ink: #1b1913; --lp-ink2: #4a463a; --lp-sub: #8a836f; --lp-faint: #a9a28c;
-  --lp-line: #ded9c9; --lp-line2: #cbc4af; --lp-card: #fcfbf7; --lp-soft: #f1eee4;
+  --lp-ink: #1a2230; --lp-ink2: #3a4453; --lp-sub: #64707f; --lp-faint: #9aa4b2;
+  --lp-line: #dde3ea; --lp-line2: #c6cfda; --lp-card: #ffffff; --lp-soft: #eef1f5;
 
   --r-pill: 999px; --r-card: 18px;
   --stagger: 85ms; --rise-ease: cubic-bezier(.2, .86, .28, 1.12);
 
-  /* ── Dark = Operate（地・温 near-black・製品アプリ/cockpit/live 専用。既定の顔には使わない）── */
-  --d-bg: #100f09; --d-sf: #17150d; --d-sf2: #201d13; --d-bd: #332e1d;
-  --d-tx: #ece7d8; --d-tx2: #b3ab92; --d-mut: #7c7458;
-  --d-accent: #dda843; --d-gold: #dda843; --d-rust: #c6633c;
+  /* ── Dark = Operate（地・冷チャコール/紺・製品アプリ/cockpit/live 専用。既定の顔には使わない）── */
+  --d-bg: #121722; --d-sf: #1a2130; --d-sf2: #232c3d; --d-bd: #313b4d;
+  --d-tx: #e6ebf2; --d-tx2: #aab4c2; --d-mut: #7a8598;
+  --d-accent: #3d9fd6; --d-gold: #e3b24e; --d-rust: #d1703f;
 
   /* ── エイリアス（既存 var 参照を壊さない・canonical へ委譲）── */
   --lp-accent: var(--accent); --lp-accent-ink: var(--accent-ink);

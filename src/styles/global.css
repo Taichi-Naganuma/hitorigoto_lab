@@ -91,7 +91,7 @@ body.product .lead { text-align: left; }
   border-radius: 10px; font-weight: 600; letter-spacing: .01em;
   transition: transform .15s ease, box-shadow .15s ease;
 }
-.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(168, 120, 30, .28); }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(28, 116, 172, .28); }
 .btn.disabled { background: #b2dffc; cursor: default; pointer-events: none; box-shadow: none; transform: none; }
 body.home .btn { padding: 11px 22px; font-size: 14px; }
 body.product .btn { padding: 14px 38px; font-size: 15px; }
@@ -129,7 +129,7 @@ ul.deliver li b { display: block; margin-bottom: 4px; color: var(--ink); font-si
   display: flex; align-items: center; justify-content: center;
 }
 
-.target { background: rgba(168, 120, 30, .06); border-radius: 16px; padding: 20px 24px; font-size: 14px; line-height: 1.7; color: var(--ink); }
+.target { background: rgba(28, 116, 172, .06); border-radius: 16px; padding: 20px 24px; font-size: 14px; line-height: 1.7; color: var(--ink); }
 .target li { margin-left: 18px; margin-bottom: 6px; }
 
 dl.faq dt { font-weight: 700; font-size: 14.5px; margin-top: 20px; color: var(--ink); letter-spacing: -.01em; }

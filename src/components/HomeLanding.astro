@@ -85,10 +85,10 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 
 <style>
   .landing{
-    --lp-ink:#1b1913; --lp-ink2:#4a463a; --lp-sub:#8a836f; --lp-faint:#a9a28c;
-    --lp-line:#ded9c9; --lp-line2:#cbc4af; --lp-card:#ffffff;
-    --lp-accent:#a8781e; --lp-accent-ink:#87611a;
-    --lp-grad-a:#dda843; --lp-grad-b:#a8781e;
+    --lp-ink:#1a2230; --lp-ink2:#3a4453; --lp-sub:#64707f; --lp-faint:#9aa4b2;
+    --lp-line:#dde3ea; --lp-line2:#c6cfda; --lp-card:#ffffff;
+    --lp-accent:#1c74ac; --lp-accent-ink:#155a86;
+    --lp-grad-a:#3fb0d8; --lp-grad-b:#1c74ac;
     --lp-round:"SF Pro Rounded","Hiragino Maru Gothic ProN","Segoe UI Rounded","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif;
     color:var(--lp-ink);
     margin:0 -20px; padding:0 20px;
@@ -108,8 +108,8 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   .hero{padding:34px 0 8px}
   .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--lp-round);font-weight:800;
     font-size:12.5px;letter-spacing:.05em;color:var(--lp-accent-ink);
-    background:rgba(168, 120, 30,.12);border:1px solid rgba(168, 120, 30,.30);padding:.4rem .85rem;border-radius:999px;
-    box-shadow:0 4px 14px -8px rgba(168, 120, 30,.5)}
+    background:rgba(28, 116, 172,.12);border:1px solid rgba(28, 116, 172,.30);padding:.4rem .85rem;border-radius:999px;
+    box-shadow:0 4px 14px -8px rgba(28, 116, 172,.5)}
   .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--lp-grad-a),var(--lp-grad-b))}
   .lp-h1{font-family:var(--lp-round);font-weight:800;letter-spacing:-.025em;line-height:1.2;
     font-size:clamp(32px,7vw,48px);margin:18px 0 0;text-wrap:balance;color:var(--lp-ink)}
@@ -119,8 +119,8 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
     font-size:14.5px;text-decoration:none;border-radius:999px;line-height:1;padding:.72rem 1.2rem;
     border:1px solid transparent;transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease}
   .lp-btn :global(svg){width:15px;height:15px;transition:transform .16s ease}
-  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(168, 120, 30,.55)}
-  .lp-btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px -6px rgba(168, 120, 30,.55)}
+  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(28, 116, 172,.55)}
+  .lp-btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px -6px rgba(28, 116, 172,.55)}
   .lp-btn.primary:hover :global(svg){transform:translateX(3px)}
   .lp-btn.ghost{background:#fff;color:var(--lp-ink);border-color:var(--lp-line2)}
   .lp-btn.ghost:hover{transform:translateY(-1px);border-color:var(--lp-accent);color:var(--lp-accent-ink)}
@@ -128,15 +128,15 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   /* 自走OS 相互リンク バナー（回転グラデ境界線・.fx-ring） */
   .os-banner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
     margin-top:26px;background:var(--lp-card);border-radius:20px;padding:22px 26px;text-decoration:none;color:inherit;
-    box-shadow:0 10px 30px -18px rgba(55, 42, 20,.4),0 3px 10px -4px rgba(40, 32, 18,.12);
+    box-shadow:0 10px 30px -18px rgba(26, 34, 48,.4),0 3px 10px -4px rgba(20, 26, 38,.12);
     transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
-  .os-banner:hover{transform:translateY(-3px);box-shadow:0 20px 44px -20px rgba(55, 42, 20,.4)}
+  .os-banner:hover{transform:translateY(-3px);box-shadow:0 20px 44px -20px rgba(26, 34, 48,.4)}
   .ob-eyebrow{font-family:var(--lp-round);font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
   .ob-title{font-family:var(--lp-round);font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--lp-ink);margin-top:4px}
   .ob-blurb{font-size:13.5px;color:var(--lp-sub);line-height:1.7;margin-top:6px;max-width:52ch}
   .ob-cta{flex:none;display:inline-flex;align-items:center;gap:.35rem;font-family:var(--lp-round);font-weight:800;
     font-size:14px;color:#fff;background:var(--lp-accent);padding:.66rem 1.15rem;border-radius:999px;white-space:nowrap;
-    box-shadow:0 4px 14px -5px rgba(168, 120, 30,.55);transition:transform .16s ease}
+    box-shadow:0 4px 14px -5px rgba(28, 116, 172,.55);transition:transform .16s ease}
   .ob-cta :global(svg){width:15px;height:15px;transition:transform .16s ease}
   .os-banner:hover .ob-cta :global(svg){transform:translateX(3px)}
 
@@ -148,9 +148,9 @@ const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
   /* product cards — 常時うっすら回転グラデ境界線＋hover で前面化＆浮上 */
   .cards{display:flex;flex-direction:column;gap:12px}
   .pcard{display:block;background:var(--lp-card);border-radius:18px;padding:22px 24px;text-decoration:none;color:inherit;
-    box-shadow:0 3px 10px -4px rgba(40, 32, 18,.12);
+    box-shadow:0 3px 10px -4px rgba(20, 26, 38,.12);
     transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease}
-  .pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(40, 32, 18,.28)}
+  .pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(20, 26, 38,.28)}
   .pc-title{font-family:var(--lp-round);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--lp-ink)}
   .pc-price{font-family:var(--lp-round);font-weight:800;font-size:16px;color:var(--lp-ink);margin-top:6px}
   .pc-blurb{font-size:14px;color:var(--lp-sub);line-height:1.7;margin-top:8px}

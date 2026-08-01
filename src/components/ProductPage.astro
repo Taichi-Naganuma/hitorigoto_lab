@@ -164,8 +164,8 @@ const back =
   .hero { padding: 30px 0 8px; text-align: left; }
   .eyebrow { position: relative; display: inline-flex; align-items: center; gap: .5rem; font-family: var(--lp-round); font-weight: 800;
     font-size: 12.5px; letter-spacing: .04em; color: var(--lp-accent-ink);
-    background: rgba(168, 120, 30, .10); border: 1px solid transparent; padding: .42rem .9rem; border-radius: var(--r-pill);
-    box-shadow: 0 4px 14px -8px rgba(168, 120, 30, .5); }
+    background: rgba(28, 116, 172, .10); border: 1px solid transparent; padding: .42rem .9rem; border-radius: var(--r-pill);
+    box-shadow: 0 4px 14px -8px rgba(28, 116, 172, .5); }
   .eyebrow::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 2.2px; pointer-events: none;
     background: conic-gradient(from var(--a), var(--lp-grad-a), var(--lp-grad-b), var(--lp-accent), var(--lp-grad-a));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
@@ -179,15 +179,15 @@ const back =
 
   /* ── buy / price（署名＝回転グラデ境界線・CTA は電光ブルー単色） ── */
   .buy { position: relative; background: var(--lp-card); border-radius: 20px; padding: 30px 26px; text-align: center; margin: 28px 0 8px;
-    box-shadow: 0 20px 48px -26px rgba(55, 42, 20, .42), 0 3px 10px -4px rgba(40, 32, 18, .12); }
+    box-shadow: 0 20px 48px -26px rgba(26, 34, 48, .42), 0 3px 10px -4px rgba(20, 26, 38, .12); }
   .buy-price { font-family: var(--lp-round); font-weight: 800; font-size: 36px; letter-spacing: -.02em; color: var(--lp-ink); line-height: 1; }
   .buy-price small { font-size: 14px; font-weight: 600; color: var(--lp-sub); letter-spacing: 0; }
   .buy-btn { display: inline-flex; align-items: center; gap: .45rem; margin-top: 18px; font-family: var(--lp-round); font-weight: 800;
     font-size: 15.5px; line-height: 1; text-decoration: none; color: #fff; background: var(--lp-accent);
-    padding: .95rem 1.7rem; border-radius: var(--r-pill); box-shadow: 0 6px 18px -6px rgba(168, 120, 30, .6);
+    padding: .95rem 1.7rem; border-radius: var(--r-pill); box-shadow: 0 6px 18px -6px rgba(28, 116, 172, .6);
     transition: transform .16s ease, box-shadow .16s ease; }
   .buy-btn :global(svg) { width: 16px; height: 16px; transition: transform .16s ease; }
-  .buy-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(168, 120, 30, .6); }
+  .buy-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(28, 116, 172, .6); }
   .buy-btn:hover :global(svg) { transform: translateX(3px); }
   .buy-note { margin: 14px auto 0; font-size: 12.5px; line-height: 1.65; color: var(--lp-sub); max-width: 42ch; }
 
@@ -195,7 +195,7 @@ const back =
   .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0 8px; align-items: stretch; }
   .plan-card { position: relative; background: var(--lp-card); border-radius: 20px; padding: 26px 22px 24px; text-align: center;
     display: flex; flex-direction: column;
-    box-shadow: 0 20px 48px -26px rgba(55, 42, 20, .42), 0 3px 10px -4px rgba(40, 32, 18, .12); }
+    box-shadow: 0 20px 48px -26px rgba(26, 34, 48, .42), 0 3px 10px -4px rgba(20, 26, 38, .12); }
   .plan-label { font-family: var(--lp-round); font-weight: 800; font-size: 13.5px; color: var(--lp-accent-ink); letter-spacing: -.01em; margin-bottom: 12px; }
   .plan-card .buy-price { font-size: 30px; }
   .plan-card .buy-btn { width: 100%; justify-content: center; font-size: 14px; padding: .85rem 1rem; }
@@ -209,8 +209,8 @@ const back =
   /* deliver cards（回転グラデ境界線・hover 浮上） */
   .deliver-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .dcard { position: relative; background: var(--lp-card); border-radius: var(--r-card); padding: 20px 20px 18px;
-    box-shadow: 0 3px 10px -4px rgba(40, 32, 18, .12); transition: transform .22s cubic-bezier(.2, .7, .2, 1), box-shadow .22s ease; }
-  .dcard:hover { transform: translateY(-3px); box-shadow: 0 18px 38px -20px rgba(55, 42, 20, .32); }
+    box-shadow: 0 3px 10px -4px rgba(20, 26, 38, .12); transition: transform .22s cubic-bezier(.2, .7, .2, 1), box-shadow .22s ease; }
+  .dcard:hover { transform: translateY(-3px); box-shadow: 0 18px 38px -20px rgba(26, 34, 48, .32); }
   .dc-title { font-family: var(--lp-round); font-weight: 800; font-size: 15.5px; letter-spacing: -.01em; color: var(--lp-ink); line-height: 1.5; }
   .dc-body { font-size: 13.5px; color: var(--lp-sub); line-height: 1.8; margin-top: 8px; }
 
@@ -219,13 +219,13 @@ const back =
   .steps li { position: relative; background: var(--lp-card); border: 1px solid var(--lp-line); border-radius: 14px;
     padding: 16px 18px 16px 56px; font-size: 14px; line-height: 1.7; color: var(--lp-ink2); counter-increment: s;
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-  .steps li:hover { transform: translateX(3px); border-color: var(--lp-grad-a); box-shadow: 0 8px 20px -14px rgba(55, 42, 20, .4); }
+  .steps li:hover { transform: translateX(3px); border-color: var(--lp-grad-a); box-shadow: 0 8px 20px -14px rgba(26, 34, 48, .4); }
   .steps li::before { content: counter(s); position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
     width: 28px; height: 28px; border-radius: 50%; font-family: var(--lp-round); font-weight: 800; font-size: 13px; color: #fff;
     display: flex; align-items: center; justify-content: center; background: var(--lp-grad); }
 
   /* target */
-  .target { list-style: none; background: rgba(168, 120, 30, .06); border: 1px solid rgba(168, 120, 30, .16); border-radius: 16px;
+  .target { list-style: none; background: rgba(28, 116, 172, .06); border: 1px solid rgba(28, 116, 172, .16); border-radius: 16px;
     padding: 20px 24px; }
   .target li { position: relative; padding-left: 22px; margin: 8px 0; font-size: 14px; line-height: 1.7; color: var(--lp-ink2); }
   .target li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--lp-grad); }

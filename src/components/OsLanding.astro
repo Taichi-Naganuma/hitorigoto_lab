@@ -161,17 +161,17 @@ const capIcons = [
   .os-landing{ color:var(--lp-ink); }
   :global(body.os){
     background:
-      radial-gradient(56% 40% at 2% -6%, rgba(168, 120, 30,.20), transparent 56%),
-      radial-gradient(50% 36% at 100% 0%, rgba(168, 120, 30,.15), transparent 58%),
-      radial-gradient(60% 34% at 98% 104%, rgba(110,147,245,.12), transparent 60%),
-      linear-gradient(180deg,#f5f2ea 0%, #f1eee4 52%, #f5f2ea 100%);
+      radial-gradient(56% 40% at 2% -6%, rgba(28, 116, 172,.20), transparent 56%),
+      radial-gradient(50% 36% at 100% 0%, rgba(28, 116, 172,.15), transparent 58%),
+      radial-gradient(60% 34% at 98% 104%, rgba(63, 176, 216,.12), transparent 60%),
+      linear-gradient(180deg,#f4f6f9 0%, #eef1f5 52%, #f4f6f9 100%);
     background-repeat:no-repeat; background-attachment:fixed;
   }
   :global(body.os)::before{
     content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
     background-image:
-      linear-gradient(rgba(70, 55, 25,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(70, 55, 25,.05) 1px, transparent 1px);
+      linear-gradient(rgba(40, 50, 66,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(40, 50, 66,.05) 1px, transparent 1px);
     background-size:42px 42px;
     -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
             mask-image:radial-gradient(120% 90% at 50% 0%, #000 55%, transparent 100%);
@@ -191,8 +191,8 @@ const capIcons = [
     transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease,color .16s ease}
   .lp-btn.lg{font-size:15.5px;padding:.85rem 1.5rem}
   .lp-btn :global(svg){width:15px;height:15px;transition:transform .16s ease}
-  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(168, 120, 30,.55)}
-  .lp-btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(168, 120, 30,.55),0 6px 20px -8px rgba(168, 120, 30,.5)}
+  .lp-btn.primary{background:var(--lp-accent);color:#fff;box-shadow:0 4px 14px -5px rgba(28, 116, 172,.55)}
+  .lp-btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(28, 116, 172,.55),0 6px 20px -8px rgba(28, 116, 172,.5)}
   .lp-btn.primary:hover :global(svg){transform:translateX(3px)}
   .lp-btn.primary.is-soon{background:#bcd7ee;color:#fff;box-shadow:none;cursor:default}
   .lp-btn.primary.is-soon:hover{transform:none;box-shadow:none}
@@ -207,8 +207,8 @@ const capIcons = [
   .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:44px;align-items:center;padding:52px 0 40px}
   .eyebrow{position:relative;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--lp-round);font-weight:800;
     font-size:12.5px;letter-spacing:.05em;color:var(--lp-accent-ink);
-    background:rgba(168, 120, 30,.10);border:1px solid transparent;padding:.42rem .9rem;border-radius:var(--r-pill);
-    box-shadow:0 4px 14px -8px rgba(168, 120, 30,.5)}
+    background:rgba(28, 116, 172,.10);border:1px solid transparent;padding:.42rem .9rem;border-radius:var(--r-pill);
+    box-shadow:0 4px 14px -8px rgba(28, 116, 172,.5)}
   .eyebrow::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.2px;pointer-events:none;
     background:conic-gradient(from var(--a),var(--lp-grad-a),var(--lp-grad-b),var(--lp-accent),var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
@@ -229,7 +229,7 @@ const capIcons = [
   /* console = 動作イメージ（回転グラデ境界線・太さ2.7px） */
   /* 証拠帯（動作イメージ）＝憲法§1-1が許した唯一のダーク面。done=青／running=金のライブシグナル。 */
   .console{position:relative;--lp-ink:var(--d-tx);--lp-ink2:var(--d-tx2);--lp-faint:var(--d-mut);--lp-line:var(--d-bd);--lp-accent-ink:var(--d-accent);background:var(--d-sf);border-radius:20px;padding:20px 20px 16px;
-    box-shadow:0 26px 60px -30px rgba(55, 42, 20,.5),0 3px 10px -4px rgba(40, 32, 18,.12)}
+    box-shadow:0 26px 60px -30px rgba(26, 34, 48,.5),0 3px 10px -4px rgba(20, 26, 38,.12)}
   .console::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.7px;z-index:3;pointer-events:none;
     background:conic-gradient(from var(--a), var(--lp-grad-a), var(--lp-grad-b), var(--lp-accent), var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
@@ -245,8 +245,8 @@ const capIcons = [
   .con-rows li:last-child{border-bottom:none}
   .con-ico{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
   .con-ico :global(svg){width:13px;height:13px}
-  .con-rows li.done .con-ico{background:rgba(168, 120, 30,.12);color:var(--lp-accent-ink)}
-  .con-rows li.run .con-ico{background:rgba(231,174,78,.16);color:var(--d-gold)}
+  .con-rows li.done .con-ico{background:rgba(28, 116, 172,.12);color:var(--lp-accent-ink)}
+  .con-rows li.run .con-ico{background:rgba(227, 178, 78,.16);color:var(--d-gold)}
   .con-rows li.run .con-ico :global(svg){animation:borderspin 1.4s linear infinite}
   .con-text{flex:1;font-size:13.5px;color:var(--lp-ink2);line-height:1.35}
   .con-time{font-family:var(--lp-round);font-weight:700;font-size:12px;color:var(--lp-faint);white-space:nowrap}
@@ -263,17 +263,17 @@ const capIcons = [
 
   .features .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
   .capcard{position:relative;background:var(--lp-card);border-radius:var(--r-card);padding:22px 22px 20px;
-    box-shadow:0 3px 10px -4px rgba(40, 32, 18,.12);transition:transform .24s cubic-bezier(.2,.7,.2,1),box-shadow .24s ease}
+    box-shadow:0 3px 10px -4px rgba(20, 26, 38,.12);transition:transform .24s cubic-bezier(.2,.7,.2,1),box-shadow .24s ease}
   .capcard::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.5px;z-index:3;pointer-events:none;opacity:.55;
     background:conic-gradient(from calc(var(--a) + var(--i,0)*40deg), var(--lp-grad-a), var(--lp-grad-b), var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
             mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
     animation:borderspin 9s linear infinite;transition:opacity .28s ease}
-  .capcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(55, 42, 20,.34)}
+  .capcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(26, 34, 48,.34)}
   .capcard:hover::before{opacity:1}
   .cap-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
   .cap-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(160deg,rgba(110,147,245,.18),rgba(168, 120, 30,.18));color:#5a5ad0;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+    background:linear-gradient(160deg,rgba(63, 176, 216,.18),rgba(28, 116, 172,.18));color:#5a5ad0;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
   .capcard:hover .cap-ico{transform:scale(1.08) rotate(-4deg)}
   .cap-ico :global(svg){width:22px;height:22px}
   .cap-num{font-family:var(--lp-round);font-weight:800;font-size:13px;
@@ -290,7 +290,7 @@ const capIcons = [
   .steps li{position:relative;background:var(--lp-card);border:1px solid var(--lp-line);border-radius:14px;
     padding:15px 18px 15px 54px;font-size:14px;line-height:1.6;color:var(--lp-ink2);counter-increment:s;
     transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
-  .steps li:hover{transform:translateX(3px);border-color:var(--lp-grad-a);box-shadow:0 8px 20px -14px rgba(55, 42, 20,.4)}
+  .steps li:hover{transform:translateX(3px);border-color:var(--lp-grad-a);box-shadow:0 8px 20px -14px rgba(26, 34, 48,.4)}
   .steps li::before{content:counter(s);position:absolute;left:15px;top:50%;transform:translateY(-50%);
     width:26px;height:26px;border-radius:50%;font-family:var(--lp-round);font-weight:800;font-size:13px;color:#fff;
     display:flex;align-items:center;justify-content:center;background:var(--lp-grad)}
@@ -307,7 +307,7 @@ const capIcons = [
 
   .proof-card{background:var(--lp-soft);border:1px solid var(--lp-line);border-radius:16px;padding:22px 24px;margin-top:20px;max-width:720px}
   .proof-caveat{font-family:var(--lp-round);font-weight:700;font-size:12.5px;color:var(--lp-accent-ink);
-    background:rgba(168, 120, 30,.08);border:1px solid rgba(168, 120, 30,.2);border-radius:10px;padding:8px 12px;line-height:1.55}
+    background:rgba(28, 116, 172,.08);border:1px solid rgba(28, 116, 172,.2);border-radius:10px;padding:8px 12px;line-height:1.55}
   .proof-body{font-size:14px;color:var(--lp-ink2);line-height:1.8;margin-top:14px}
   .proof-points{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
   .proof-points li{position:relative;padding-left:20px;font-size:12.5px;line-height:1.6;color:var(--lp-sub)}
@@ -326,7 +326,7 @@ const capIcons = [
   .faq dd{font-size:14px;color:var(--lp-sub);margin-top:5px;line-height:1.7}
 
   .closing{position:relative;margin-top:72px;margin-bottom:8px;text-align:center;background:var(--lp-card);
-    border-radius:22px;padding:44px 24px;box-shadow:0 24px 56px -32px rgba(55, 42, 20,.46),0 3px 10px -4px rgba(40, 32, 18,.12);overflow:hidden}
+    border-radius:22px;padding:44px 24px;box-shadow:0 24px 56px -32px rgba(26, 34, 48,.46),0 3px 10px -4px rgba(20, 26, 38,.12);overflow:hidden}
   .closing::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.7px;pointer-events:none;
     background:conic-gradient(from var(--a),var(--lp-grad-a),var(--lp-grad-b),var(--lp-accent),var(--lp-grad-a));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;

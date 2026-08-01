@@ -37,12 +37,12 @@ test("A: 実 tokens.css は block 0", () => {
 });
 
 test("A2: accent 多色化で block", () => {
-  const css = read("src/styles/tokens.css").replace("--accent: #a8781e", "--accent: #ff3300");
+  const css = read("src/styles/tokens.css").replace("--accent: #1c74ac", "--accent: #ff3300");
   assert.ok(ids(checkTokens(css)).includes("A2"));
 });
 
 test("A3: ダーク顔化で block", () => {
-  const css = read("src/styles/tokens.css").replace("--bg: #f5f2ea", "--bg: #101014");
+  const css = read("src/styles/tokens.css").replace("--bg: #f4f6f9", "--bg: #101014");
   assert.ok(ids(checkTokens(css)).includes("A3"));
 });
 

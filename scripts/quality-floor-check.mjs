@@ -27,7 +27,7 @@ export const BASELINE_TOKEN_KEYS = [
   "--d-bg", "--d-sf", "--d-sf2", "--d-bd", "--d-tx", "--d-tx2", "--d-mut", "--d-accent", "--d-gold", "--rust", "--rust-soft", "--d-rust",
 ];
 // A2 憲法固定色（§1-2）。
-export const SANCTIONED = { "--accent": "#a8781e", "--edge-cyan": "#c9a24e", "--edge-purple": "#a8781e" };
+export const SANCTIONED = { "--accent": "#1c74ac", "--edge-cyan": "#3fb0d8", "--edge-purple": "#1c74ac" };
 // A3 全面ライト（§1-1）＝相対輝度がこの床以上。
 export const LIGHT_KEYS = ["--bg", "--card", "--lp-card", "--soft", "--lp-soft"];
 export const LIGHT_LUMINANCE_FLOOR = 0.85;
