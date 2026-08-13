@@ -1,0 +1,86 @@
+{
+  "locale": "en",
+  "title": "Mioca Loan Plan Draft — the numbers checked by machine | Hitorigoto Lab",
+  "description": "A draft (PDF) that follows the Japan Finance Corporation \"business plan\" form, plus a repayment-consistent cash-flow table (CSV), delivered as fast as same day. Debt service coverage, own-funds ratio, and all 8 sections are checked by machine.",
+  "ogTitle": "Mioca Loan Plan Draft — numbers already checked by machine",
+  "ogDescription": "A draft in the Japan Finance Corporation form plus a repayment-consistent cash-flow table. Coverage ratio, own-funds ratio, and the 8 required sections are machine-verified before delivery.",
+  "name": "Mioca Loan Plan Draft",
+  "headline": "How many days<br>until your interview?",
+  "lead": "We deliver a <b>draft (PDF)</b> that follows the Japan Finance Corporation \"business plan\" form, together with a repayment-consistent <b>cash-flow table (CSV)</b> — as fast as same day. <b>The numbers are machine-checked</b>: debt service coverage, own-funds ratio, and whether all 8 sections are filled. This is not a promise that your loan will be approved. What we do is check and align the numbers and the form — the ground your interview stands on — mechanically.",
+  "price": 22000,
+  "currency": "JPY",
+  "priceDisplay": "¥22,000",
+  "priceNote": "(tax incl.)",
+  "cta": "Order the Mioca full draft",
+  "ctaNote": "Payment is handled on Stripe's secure checkout. Your card details never touch our servers. After payment you'll be taken to a form for the details we need.",
+  "stripeLink": "https://buy.stripe.com/3cI4gAc8Zal1ayPgxl5Ne07",
+  "planLabel": "1. Full draft (all 8 sections + cash-flow table)",
+  "plan2": {
+    "label": "2. Numbers check (light)",
+    "price": 1980,
+    "priceDisplay": "¥1,980",
+    "priceNote": "(tax incl.)",
+    "cta": "Order the Mioca numbers check",
+    "ctaNote": "From six inputs — own funds, amount sought, repayment years, expected monthly revenue, cost ratio, and monthly expenses — the machine reports your debt service coverage, own-funds ratio, and what is left after repayment. After payment you'll be taken to the input form. The result carries straight over into the full draft.",
+    "stripeLink": "https://buy.stripe.com/6oUcN60qh8cTdL1a8X5Ne06"
+  },
+  "card": {
+    "title": "📄 Mioca Loan Plan Draft",
+    "blurb": "A draft (PDF) in the Japan Finance Corporation form and a repayment-consistent cash-flow table (CSV). Coverage ratio, own-funds ratio, and the 8 sections are machine-checked before delivery.",
+    "cta": "See details →",
+    "price": "From ¥1,980 (tax incl.)"
+  },
+  "deliver": [
+    {
+      "title": "📄 Draft of all 8 sections (PDF)",
+      "body": "Why you are starting / your background / products and services / customers and suppliers / employees / existing borrowings / funds needed and how they are raised / the business outlook — a draft with all 8 sections filled. Blank fields and filler text are removed by machine check."
+    },
+    {
+      "title": "📊 Repayment-consistent cash-flow table (CSV)",
+      "body": "A cash-flow table checked against the repayment plan. Open it in Excel and take it straight to the interview."
+    },
+    {
+      "title": "🔍 Machine check of the numbers",
+      "body": "Debt service coverage (guide: 1.2), own-funds ratio (guide: 10%), and what is left after repayment are confirmed by machine. We do not bend numbers to encourage you. Where a figure falls short of the guide, we tell you plainly."
+    },
+    {
+      "title": "✏️ Two revisions included",
+      "body": "Within 14 days of delivery, we make up to two revisions free of charge, within the scope of what you declared (the count is provisional)."
+    }
+  ],
+  "steps": [
+    "Choose a plan and purchase (full draft ¥22,000 / numbers check ¥1,980)",
+    "After payment, fill in the form you are taken to with your business and its numbers",
+    "As fast as same day (it depends on the content), the deliverables arrive at the email address you gave"
+  ],
+  "target": [
+    "You are about to apply for a Japan Finance Corporation startup loan",
+    "You are not confident about the numbers in your plan (repayment schedule, own funds)",
+    "Your interview date is close and you need a draft quickly",
+    "You first want to know only whether your numbers clear the guides (numbers check)"
+  ],
+  "faq": [
+    {
+      "q": "If I submit this, will my loan be approved?",
+      "a": "No. The decision is made by Japan Finance Corporation's own review, and this service does not guarantee it. What we help with is the ground your interview stands on — checking and aligning the numbers and the form, mechanically."
+    },
+    {
+      "q": "Will you prepare or file the documents on my behalf?",
+      "a": "No. This service supports the drafting of a business plan. You submit it yourself. We do not prepare or file documents for submission to public offices on your behalf, and we do not handle tax or visa documents."
+    },
+    {
+      "q": "How do the numbers check (¥1,980) and the full draft (¥22,000) differ?",
+      "a": "The numbers check is the light version: from six inputs, the machine confirms your debt service coverage, own-funds ratio, and what is left after repayment. The full draft delivers a draft (PDF) with all 8 sections filled plus a repayment-consistent cash-flow table (CSV). The result of the check carries straight over into the full draft."
+    },
+    {
+      "q": "Can I ask for revisions?",
+      "a": "Within 14 days of delivery we make up to two revisions free of charge, within the scope of what you declared. Adding new facts (a change of business, for example) may fall outside that scope. Just reply to the delivery email."
+    },
+    {
+      "q": "What if it doesn't arrive?",
+      "a": "Please check your spam folder first. If it still hasn't arrived, contact us and we will confirm and resend."
+    }
+  ],
+  "aiNote": "This service supports the drafting of a business plan. You submit it yourself. We do not prepare or file documents for submission to public offices on your behalf, and we do not handle tax or visa documents. Deliverables are generated using AI and are based on the information you provide. We do not guarantee approval of a loan or any other outcome. Operated by Hitorigoto Lab / Mioca.",
+  "draft": true
+}
