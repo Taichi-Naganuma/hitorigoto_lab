@@ -1,66 +1,20 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// 決済リンク（checkout）の第二段ゲート＝Stripe(buy.stripe.com) か Lemon Squeezy(*.lemonsqueezy.com) の
-// ホスト済み checkout URL のみ許可（多provider化・CK-6）。現行 stripeLink は buy.stripe.com ゆえ従来どおり通る。
-const payLinkSchema = z
-  .string()
-  .url()
-  .refine(
-    (u) =>
-      /^https:\/\/buy\.stripe\.com\//.test(u) ||
-      /^https:\/\/[a-z0-9-]+\.lemonsqueezy\.com\//.test(u),
-    { message: 'checkout URL は buy.stripe.com または *.lemonsqueezy.com である必要があります' },
-  );
+import { productSchema } from './content/products.schema.mjs';
 
 // products: one JSON per product per locale at products/<locale>/<slug>.json
 // The Zod schema doubles as the validation gate for AI-generated LPs (第二段):
 // a malformed entry fails `astro build` loudly rather than shipping a broken page.
+//
+// schema の本体は ./content/products.schema.mjs へ切り出した（2026-08-13）。理由は
+// **生成する側が PR を出す前に同じ検査を掛けられるようにする**ため——このファイルは
+// `astro:content` を import するので素の Node からは読めず、CLI から使えなかった。
+// 定義は1つのまま（ここが読むのも、scripts/validate-product-content.mjs が読むのも
+// 同じ module・同じ `astro/zod`）。schema の意味は変えていない。
 const products = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/products' }),
-  schema: z.object({
-    locale: z.enum(['ja', 'en']),
-    title: z.string(), // <title>
-    description: z.string(), // meta description
-    ogTitle: z.string().optional(), // og:title (falls back to title)
-    ogDescription: z.string().optional(), // og:description (falls back to description)
-    name: z.string().optional(), // 商品名（設計室シリーズ）— hero eyebrow / 導線ラベル用（無ければ card.title から導出）
-    headline: z.string(), // h1 (AB target, 第五段) — inline <br>/<b> allowed
-    lead: z.string(), // hero paragraph — inline <b> allowed
-    price: z.number().int().positive(),
-    currency: z.enum(['JPY', 'USD']),
-    priceDisplay: z.string(), // main amount, e.g. "¥1,480" / "$29"
-    priceNote: z.string().optional(), // small note, e.g. "（税込）" / "(USD)"
-    cta: z.string(), // button label (AB target)
-    ctaNote: z.string(),
-    stripeLink: payLinkSchema, // gate（Stripe or Lemon Squeezy・名は歴史的に stripeLink）
-    payProvider: z.enum(['stripe', 'lemonsqueezy']).optional(), // 決済provider（省略時は URL ホストで判別）
-    // 任意の第2プラン（例: mioca=フルドラフト＋数字診断を1ページに）。単一プラン商品は両方省略＝価格ボックス1つ（従来どおり）。
-    planLabel: z.string().optional(), // 複数プラン時に主プライスの上に出すラベル
-    plan2: z
-      .object({
-        label: z.string(),
-        price: z.number().int().positive(),
-        priceDisplay: z.string(),
-        priceNote: z.string().optional(),
-        cta: z.string(),
-        ctaNote: z.string(),
-        stripeLink: payLinkSchema, // gate（Stripe or Lemon Squeezy）
-      })
-      .optional(),
-    card: z.object({
-      title: z.string(),
-      blurb: z.string(),
-      cta: z.string(),
-      price: z.string(),
-    }),
-    deliver: z.array(z.object({ title: z.string(), body: z.string() })),
-    steps: z.array(z.string()),
-    target: z.array(z.string()),
-    faq: z.array(z.object({ q: z.string(), a: z.string() })),
-    aiNote: z.string(),
-    draft: z.boolean().default(false),
-  }),
+  schema: productSchema,
 });
 
 const home = defineCollection({
