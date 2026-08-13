@@ -10,7 +10,9 @@
     "astro": "astro",
     "deploy": "astro build && npx --yes wrangler deploy",
     "quality-floor": "node scripts/quality-floor-check.mjs",
-    "test:quality-floor": "node --test test/quality-floor.test.mjs"
+    "test:quality-floor": "node --test test/quality-floor.test.mjs",
+    "validate:product-content": "node scripts/validate-product-content.mjs",
+    "test:product-content": "node --test test/product-content-contract.test.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",
