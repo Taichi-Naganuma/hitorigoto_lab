@@ -6,6 +6,9 @@ const locale = 'ja';
 const homeUrl = getRelativeLocaleUrl(locale, '/');
 const title = 'ShipProof — Mananect';
 const description = 'AIで速く作ったコードから「まだ証明できていないこと」を機械が洗い出し、A4数枚で。直していないものは、直していないと書きます。点数は付けません。10分・無料。ShipProof by Mananect.';
+const requestEmail = 'mailto:bookstore1308@gmail.com'
+  + `?subject=${encodeURIComponent('ShipProof 無料診断の依頼')}`
+  + `&body=${encodeURIComponent('次の納品予定日（未定でも可）：\r\nアプリの概要（機密情報を含まない範囲で）：')}`;
 ---
 
 <BaseLayout locale={locale} variant="product" title={title} description={description} ogTitle="ShipProof — Mananect" ogDescription={description} showFooter={true}>
@@ -103,8 +106,8 @@ const description = 'AIで速く作ったコードから「まだ証明できて
 
     <section id="request" class="final fx-rise">
       <h2>同じことを、御社のリポジトリで。</h2>
-      <p>対象リポジトリの読み取り権限、または ZIP をいただくだけ。次の納品で困りそうな箇所を、A4数枚でお返しします。営業目的の打ち合わせのお願いではありません。</p>
-      <a class="btn solid big" href="mailto:bookstore1308@gmail.com?subject=ShipProof%20無料診断の依頼&body=対象リポジトリのURL（または%20ZIP）と、次の納品予定を教えてください。">無料で診断を依頼 <span aria-hidden="true">→</span></a>
+      <p>次の納品予定日と、差し支えない範囲でアプリの概要をメールでお知らせください。御社の環境内で診断する手順をご案内し、次の納品で困りそうな箇所をA4数枚にまとめてお返しします。</p>
+      <a class="btn solid big" href={requestEmail}>メールで無料診断を依頼 <span aria-hidden="true">→</span></a>
       <p class="parent">ShipProof は <b>Mananect</b> の最初の製品です。私たちは <span class="g1">Mioca — AI Operating Company</span>（AIが会社の運用を回す OS）を作っています。</p>
     </section>
   </div>
