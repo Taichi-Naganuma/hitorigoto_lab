@@ -3,6 +3,9 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const locale = 'en';
+const requestEmail = 'mailto:bookstore1308@gmail.com'
+  + `?subject=${encodeURIComponent('ShipProof free diagnosis request')}`
+  + `&body=${encodeURIComponent('Next delivery date (or TBD):\r\nBrief, non-confidential description of the app:')}`;
 const homeUrl = getRelativeLocaleUrl(locale, '/');
 const title = 'ShipProof — Mananect';
 const description = 'A machine surfaces what your fast, AI-written code still can’t prove, and hands it back on a few pages. What we didn’t fix, we write down as not fixed. No score. 10 minutes, free. ShipProof by Mananect.';
@@ -64,8 +67,9 @@ const description = 'A machine surfaces what your fast, AI-written code still ca
 
       <div class="proof">
         <span class="pk">A sample you can verify</span>
-        <p class="pt">The numbers above are illustrative. The actual sample we diagnosed is public — code, history and the diff are all open to inspect. Nothing hidden.</p>
+        <p class="pt">The numbers above are illustrative. In a rerun on both revisions of the public demo, both builds passed, unit tests increased from 16 to 66, and documented API operations went from 4 of 13 to 13 of 13. We did not verify the app in production.</p>
         <div class="plinks">
+          <a class="pl" href="/shipproof-taskflow-sample.html">Sample report (Japanese)<span aria-hidden="true">&nbsp;↗</span></a>
           <a class="pl" href="https://github.com/Taichi-Naganuma/taskboard-before-after" target="_blank" rel="noopener">Sample repository<span aria-hidden="true">&nbsp;↗</span></a>
           <a class="pl" href="https://github.com/Taichi-Naganuma/taskboard-before-after/compare/main...after" target="_blank" rel="noopener">Before ↔ After diff<span aria-hidden="true">&nbsp;↗</span></a>
           <a class="pl" href="https://github.com/Taichi-Naganuma/taskboard-before-after/pull/1" target="_blank" rel="noopener">The pull request<span aria-hidden="true">&nbsp;↗</span></a>
@@ -103,8 +107,8 @@ const description = 'A machine surfaces what your fast, AI-written code still ca
 
     <section id="request" class="final fx-rise">
       <h2>The same thing, on your repository.</h2>
-      <p>Just read access to the target repo, or a ZIP. We return the spots likely to trip up your next handover, on a few pages. This is not a request for a sales meeting.</p>
-      <a class="btn solid big" href="mailto:bookstore1308@gmail.com?subject=ShipProof%20free%20diagnosis%20request&body=Please%20share%20the%20target%20repo%20URL%20(or%20a%20ZIP)%20and%20your%20next%20delivery%20date.">Request a free diagnosis <span aria-hidden="true">→</span></a>
+      <p>Email us your next delivery date and a brief, non-confidential description of the app. We’ll guide you through running the diagnosis in your own environment and send back a short report on what could hold up the handover.</p>
+      <a class="btn solid big" href={requestEmail}>Email us for a free diagnosis <span aria-hidden="true">→</span></a>
       <p class="parent">ShipProof is the first product of <b>Mananect</b>. We’re building <span class="g1">Mioca — an AI Operating Company</span> (an OS where AI runs a company’s operations).</p>
     </section>
   </div>
